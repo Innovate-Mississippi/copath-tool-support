@@ -1,0 +1,1914 @@
+{
+  "_meta": {
+    "source": "Innovate Mississippi Airtable (appEXKLwQ5oSAorxH)",
+    "generated": "2026-03-30",
+    "version": "2.0",
+    "description": "Master data file for the InnovateMS Founder Toolkit. Contains all industries, CoPath stages, programs, IP types, investment sources, service categories, and budget benchmarks. Edit this file to update all tools simultaneously.",
+    "tables_sourced": [
+      "CoPath Stages (tblrDnZx0Qv7CVKHN)",
+      "Reference Table (tblTPuWfw5wThBfIx)",
+      "Programs (tblnfjq6SANriVzIy)"
+    ]
+  },
+  "industries": [
+    {
+      "id": "agtech",
+      "name": "AgTech",
+      "airtable_name": "AgTech",
+      "naics": [
+        "111",
+        "112",
+        "115"
+      ],
+      "description": "Agriculture-focused startups, including precision farming, smart irrigation, and ag robotics.",
+      "tam_usd_b": 22,
+      "cagr_pct": 12,
+      "ms_tam_m": 340,
+      "ms_context": "Mississippi is the 4th-largest agricultural state by acreage. The Delta region has massive row crop concentration (corn, soy, cotton, rice). Strong opportunity for precision irrigation, drone crop monitoring, yield analytics, and supply chain traceability.",
+      "ms_anchors": [
+        "Mississippi Delta row crop operations",
+        "Mississippi State Extension Service",
+        "Southern AgCredit",
+        "USDA Rural Development Mississippi"
+      ],
+      "customer_segments": [
+        "Row crop farmers (corn, soy, cotton, rice)",
+        "Ag cooperatives and co-ops",
+        "Farm equipment dealers",
+        "USDA and state extension offices",
+        "Agri-food processors"
+      ],
+      "common_problems": [
+        "Water management and drought risk",
+        "Input cost optimization (fertilizer, pesticide)",
+        "Crop disease early detection",
+        "Yield prediction and financial planning",
+        "Rural broadband access for IoT sensors"
+      ],
+      "key_competitors": [
+        "John Deere Precision Ag",
+        "Climate Corporation",
+        "Trimble Agriculture",
+        "AgriForce"
+      ],
+      "pitch_angles": "How do you currently track field performance across multiple acres? What is your biggest input cost and how do you manage it today? What data do you wish you had at planting time?",
+      "budget_notes": "AgTech hardware prototypes and farm pilots are expensive. Budget for equipment, travel to farms, and a 12-18 month sales cycle with co-ops and large operations.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "USDA SBIR",
+        "NSF",
+        "DOE"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "ai_ml",
+      "name": "AI & ML",
+      "airtable_name": "AI & ML etc.",
+      "naics": [
+        "541511",
+        "541512",
+        "519130"
+      ],
+      "description": "Startups leveraging artificial intelligence, machine learning, and automation solutions.",
+      "tam_usd_b": 200,
+      "cagr_pct": 35,
+      "ms_tam_m": 180,
+      "ms_context": "Mississippi companies increasingly need AI for back-office automation, rural healthcare delivery, and public sector efficiency. Significant opportunity building vertical AI for underserved sectors where national platforms underserve specific Mississippi needs.",
+      "ms_anchors": [
+        "Mississippi Department of Revenue",
+        "University of Mississippi Center for Applied Data Analytics",
+        "Mississippi Band of Choctaw Indians (tech adoption)"
+      ],
+      "customer_segments": [
+        "Healthcare providers (especially rural)",
+        "State and local government agencies",
+        "Mid-market manufacturers",
+        "Agricultural operations",
+        "Financial services SMBs"
+      ],
+      "common_problems": [
+        "Manual data processing at scale",
+        "Predictive analytics for operational decisions",
+        "Document understanding and extraction",
+        "Customer service automation",
+        "Fraud detection for smaller institutions"
+      ],
+      "key_competitors": [
+        "Microsoft Azure AI",
+        "Google Cloud AI",
+        "AWS SageMaker",
+        "OpenAI API-based startups"
+      ],
+      "pitch_angles": "What manual processes cost your team the most time each week? Where do you make critical decisions based on incomplete or delayed data? What would you automate first if you had the resources?",
+      "budget_notes": "AI/ML startups can bootstrap farther with cloud credits (AWS Activate, GCP for Startups). Major cost is engineering talent. Consider remote-first teams to access talent beyond Mississippi.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "NSF",
+        "DOD",
+        "DARPA"
+      ],
+      "sales_cycle_months": 3
+    },
+    {
+      "id": "biotech",
+      "name": "BioTech",
+      "airtable_name": "BioTech",
+      "naics": [
+        "325411",
+        "325412",
+        "541714"
+      ],
+      "description": "Companies working on medical research, genetics, pharmaceuticals, and biotech innovations.",
+      "tam_usd_b": 500,
+      "cagr_pct": 8,
+      "ms_tam_m": 95,
+      "ms_context": "University of Mississippi Medical Center (UMMC) is a major research anchor with active commercialization programs. Opportunity in rural healthcare biotech applications, diagnostics for high-prevalence MS conditions (diabetes, heart disease), and pharmaceutical access innovations.",
+      "ms_anchors": [
+        "UMMC Office of Technology Management",
+        "Mississippi INBRE Program",
+        "MississippiSTEM"
+      ],
+      "customer_segments": [
+        "Academic medical centers (UMMC)",
+        "Rural hospital systems",
+        "Pharmaceutical companies",
+        "Clinical research organizations",
+        "Mississippi Division of Medicaid"
+      ],
+      "common_problems": [
+        "Drug access in rural communities",
+        "Clinical trial recruitment in diverse populations",
+        "Diagnostic tool accessibility",
+        "Research commercialization pathways",
+        "FDA regulatory compliance navigation"
+      ],
+      "key_competitors": [
+        "Illumina",
+        "Thermo Fisher Scientific",
+        "Bio-Rad",
+        "Regional diagnostics companies"
+      ],
+      "pitch_angles": "What research workflows are most time-intensive for your team? How do you access the patient populations you need for studies? What is your biggest barrier from lab discovery to commercialization?",
+      "budget_notes": "BioTech has the longest PoC timelines and highest regulatory costs. Budget generously for FDA pathway planning, IP filing, and clinical trial design early. SBIR Phase I ($300K) is often the right first capital raise.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "NIH SBIR",
+        "NSF",
+        "BARDA"
+      ],
+      "sales_cycle_months": 18
+    },
+    {
+      "id": "cleantech",
+      "name": "CleanTech",
+      "airtable_name": "CleanTech & Sustainability",
+      "naics": [
+        "221111",
+        "221114",
+        "237130"
+      ],
+      "description": "Renewable energy, circular economy, and sustainability-driven innovations.",
+      "tam_usd_b": 300,
+      "cagr_pct": 22,
+      "ms_tam_m": 120,
+      "ms_context": "Mississippi has Tier 1 solar irradiance but limited renewable deployment. Significant opportunity in utility-scale solar, EV charging infrastructure for rural corridors, and energy efficiency tools for large agricultural and industrial operations.",
+      "ms_anchors": [
+        "Entergy Mississippi",
+        "Cooperative Energy (utility)",
+        "Mississippi Development Authority Energy Division",
+        "Mississippi Power"
+      ],
+      "customer_segments": [
+        "Municipalities and utilities",
+        "Industrial facilities",
+        "Agricultural operations",
+        "Real estate developers",
+        "Mississippi State Energy Office"
+      ],
+      "common_problems": [
+        "Energy cost management for rural businesses",
+        "Grid reliability in rural areas",
+        "Solar installation barriers (financing, permitting)",
+        "Carbon reporting requirements",
+        "Utility-scale deployment challenges"
+      ],
+      "key_competitors": [
+        "SunPower",
+        "Enphase",
+        "SolarEdge",
+        "Regional clean energy co-ops"
+      ],
+      "pitch_angles": "What percentage of your operating costs are energy today? Have you explored renewable options and what stopped you? What would make switching to clean energy easier for your operation?",
+      "budget_notes": "CleanTech hardware and infrastructure has high upfront capital requirements. Explore DOE grants, USDA REAP program, and utility partnership pilots to reduce early capital needs.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOE SBIR",
+        "USDA REAP",
+        "EPA SBIR"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "climatetech",
+      "name": "Climate Tech",
+      "airtable_name": "Climate Tech",
+      "naics": [
+        "541330",
+        "541620",
+        "541690"
+      ],
+      "description": "Innovations focused on sustainability, carbon capture, and environmental impact reduction.",
+      "tam_usd_b": 35,
+      "cagr_pct": 28,
+      "ms_tam_m": 65,
+      "ms_context": "Gulf Coast vulnerability to climate change makes Mississippi a natural market for climate adaptation tools. Strong opportunity in flood risk modeling, coastal resilience tech, and carbon credit market access for Mississippi's 17M+ acres of farmland.",
+      "ms_anchors": [
+        "NOAA National Data Buoy Center at Stennis",
+        "Mississippi Emergency Management Agency (MEMA)",
+        "Mississippi Forestry Commission",
+        "Gulf Coast Community Foundation"
+      ],
+      "customer_segments": [
+        "Gulf Coast municipalities",
+        "Agricultural insurance providers",
+        "Army Corps of Engineers contractors",
+        "Environmental compliance firms",
+        "State emergency management"
+      ],
+      "common_problems": [
+        "Flood risk modeling and mitigation",
+        "Carbon credit market access for farmers",
+        "ESG reporting for mid-market companies",
+        "Disaster preparedness and response tech",
+        "Coastal erosion monitoring"
+      ],
+      "key_competitors": [
+        "Jupiter Intelligence",
+        "Gro Intelligence",
+        "The Climate Corporation",
+        "Regional environmental consulting firms"
+      ],
+      "pitch_angles": "How are climate events affecting your operations or clients today? What do your customers ask about regarding sustainability compliance? How do you currently assess climate-related risk to your assets?",
+      "budget_notes": "Climate Tech pilots often require environmental monitoring hardware and regulatory validation. Budget for field testing in Mississippi's extreme weather and Gulf Coast operating environment.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "NOAA SBIR",
+        "DOE",
+        "EPA SBIR"
+      ],
+      "sales_cycle_months": 9
+    },
+    {
+      "id": "consumer_products",
+      "name": "Consumer Products & Technology",
+      "airtable_name": "Consumer Products & Technology",
+      "naics": [
+        "423620",
+        "454110",
+        "441110"
+      ],
+      "description": "Consumer-facing hardware, software, and e-commerce solutions.",
+      "tam_usd_b": 450,
+      "cagr_pct": 9,
+      "ms_tam_m": 890,
+      "ms_context": "Mississippi has a growing entrepreneurial base in consumer products. E-commerce enablement for local brands represents a large underserved opportunity, particularly for Mississippi-made products reaching national audiences through digital channels.",
+      "ms_anchors": [
+        "Mississippi Manufacturers Association",
+        "Dillard's regional buyer network",
+        "Gulf Coast tourism retail",
+        "Mississippi-Made brand programs"
+      ],
+      "customer_segments": [
+        "D2C e-commerce brands",
+        "Local retail stores",
+        "Regional grocery chains",
+        "Sporting goods retailers",
+        "Tourism and hospitality operators"
+      ],
+      "common_problems": [
+        "D2C customer acquisition cost",
+        "Inventory management for small brands",
+        "Retail placement and distribution",
+        "Brand building on limited budgets",
+        "E-commerce fulfillment in rural areas"
+      ],
+      "key_competitors": [
+        "Shopify ecosystem apps",
+        "Amazon Marketplace",
+        "Regional distributors",
+        "Category-specific platforms"
+      ],
+      "pitch_angles": "How do your best customers find you today? What is your biggest challenge getting products in front of online buyers? Where do you lose customers in the purchase journey?",
+      "budget_notes": "Consumer product startups need to budget for inventory, packaging, and customer acquisition costs. Validate unit economics before scaling ad spend.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 1
+    },
+    {
+      "id": "cybersecurity",
+      "name": "Cyber Security",
+      "airtable_name": "Cyber Security",
+      "naics": [
+        "541512",
+        "541519",
+        "561621"
+      ],
+      "description": "Startups tackling data security, identity protection, and threat intelligence.",
+      "tam_usd_b": 200,
+      "cagr_pct": 14,
+      "ms_tam_m": 110,
+      "ms_context": "Mississippi state agencies, rural healthcare systems, and critical infrastructure face growing cyber threats with limited IT budgets. Strong opportunity for affordable SMB-focused cybersecurity and HIPAA/FISMA compliance tools tailored to Mississippi market needs.",
+      "ms_anchors": [
+        "Mississippi Department of Information Technology Services (ITS)",
+        "Mississippi State National Guard Cyber Unit",
+        "Keesler AFB Cyber Training Center"
+      ],
+      "customer_segments": [
+        "State and local government agencies",
+        "Healthcare systems",
+        "Community banks and credit unions",
+        "Energy utilities",
+        "Mid-market manufacturing firms"
+      ],
+      "common_problems": [
+        "Ransomware vulnerability in underfunded organizations",
+        "HIPAA/FISMA/CMMC compliance",
+        "Security talent shortage in rural areas",
+        "Legacy system vulnerabilities",
+        "Phishing and social engineering training"
+      ],
+      "key_competitors": [
+        "CrowdStrike",
+        "Palo Alto Networks",
+        "SentinelOne",
+        "Regional MSSPs"
+      ],
+      "pitch_angles": "What is your biggest cybersecurity concern right now? Have you had a security incident or near-miss in the past 24 months? What security tools do you currently use and what gaps remain?",
+      "budget_notes": "Cybersecurity SaaS can be capital-efficient with recurring revenue. Invest in SOC 2 or FedRAMP compliance early if targeting government or healthcare — it is a mandatory sales prerequisite.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOD SBIR",
+        "DHS SBIR",
+        "DARPA"
+      ],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "datatech",
+      "name": "Datatech",
+      "airtable_name": "Datatech",
+      "naics": [
+        "519130",
+        "541511",
+        "518210"
+      ],
+      "description": "Big data, analytics, data infrastructure, and AI-driven data solutions.",
+      "tam_usd_b": 100,
+      "cagr_pct": 18,
+      "ms_tam_m": 85,
+      "ms_context": "Mississippi's public sector, healthcare, and agriculture generate massive datasets that are largely siloed and underutilized. Opportunity in data infrastructure, reporting automation, and decision intelligence for resource-constrained organizations that lack in-house data teams.",
+      "ms_anchors": [
+        "Mississippi State University Data Science Program",
+        "Mississippi SBDC data programs",
+        "Mississippi Department of Health data division"
+      ],
+      "customer_segments": [
+        "State and county government agencies",
+        "Hospital and healthcare networks",
+        "Agricultural operations",
+        "Economic development organizations",
+        "CDFIs and community lenders"
+      ],
+      "common_problems": [
+        "Siloed data across departments and systems",
+        "Manual reporting and compliance tracking",
+        "Lack of real-time operational dashboards",
+        "Data quality and integration challenges",
+        "Predictive analytics for resource allocation"
+      ],
+      "key_competitors": [
+        "Tableau/Salesforce",
+        "Microsoft Power BI",
+        "Esri (GIS)",
+        "Regional data consultancies"
+      ],
+      "pitch_angles": "How long does it take your team to produce a standard report? What decisions do you make without data that you wish you had? Where is your organization's data stored and who can currently access it?",
+      "budget_notes": "Datatech products often require significant integration work with legacy systems. Budget for a longer pre-revenue period and consider a consulting-led entry to fund early development.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "NSF",
+        "NIH",
+        "DOD SBIR"
+      ],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "defensetech",
+      "name": "Defense Tech",
+      "airtable_name": "Defense Tech (including Aerospace & Defense, Automotive, Chemical Manufacturing)",
+      "naics": [
+        "336411",
+        "336413",
+        "541330"
+      ],
+      "description": "Includes aerospace, defense, chemical manufacturing, and advanced automotive technology.",
+      "tam_usd_b": 900,
+      "cagr_pct": 6,
+      "ms_tam_m": 240,
+      "ms_context": "Mississippi has significant defense presence: Keesler AFB, Camp Shelby, Columbus AFB, and Ingalls Shipbuilding (largest US Navy surface combatant manufacturer). SBIR/STTR is the well-established funding pathway. DoD procurement moves slowly — plan for 18-36 month sales cycles.",
+      "ms_anchors": [
+        "Huntington Ingalls Industries (Pascagoula)",
+        "Keesler AFB (Biloxi)",
+        "Camp Shelby",
+        "Columbus AFB",
+        "Naval Air Station Meridian"
+      ],
+      "customer_segments": [
+        "US Department of Defense (DoD)",
+        "Prime defense contractors (Ingalls, Raytheon, L3Harris)",
+        "Mississippi National Guard",
+        "NASA Stennis Space Center",
+        "DHS and law enforcement"
+      ],
+      "common_problems": [
+        "Autonomous systems and drone surveillance",
+        "Shipbuilding and maintenance innovation",
+        "Secure communications infrastructure",
+        "Predictive maintenance for military assets",
+        "Supply chain resilience for defense manufacturing"
+      ],
+      "key_competitors": [
+        "L3Harris",
+        "Raytheon",
+        "Northrop Grumman",
+        "Defense tech SBIR startups"
+      ],
+      "pitch_angles": "What procurement pathway would your DoD customer use to buy your product? Have you engaged a program officer at a relevant military branch? Which SBIR/STTR topic areas align with your technology?",
+      "budget_notes": "Defense startups must navigate complex procurement pathways. SBIR Phase I ($300K non-dilutive) is typically the best first capital source. Budget for security clearances and compliance requirements early.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOD SBIR",
+        "DARPA",
+        "Army SBIR",
+        "Navy SBIR",
+        "Air Force SBIR"
+      ],
+      "sales_cycle_months": 24
+    },
+    {
+      "id": "edtech",
+      "name": "Education Technologies",
+      "airtable_name": "Education Technologies (including Early Childhood Education, K-12 Education, Higher Education)",
+      "naics": [
+        "611110",
+        "611210",
+        "611699"
+      ],
+      "description": "Innovations in early childhood, K-12, higher education, and corporate learning.",
+      "tam_usd_b": 350,
+      "cagr_pct": 16,
+      "ms_tam_m": 175,
+      "ms_context": "Mississippi ranks near the bottom nationally in education outcomes, creating urgency for EdTech solutions. K-12 literacy, rural school connectivity, community college workforce development, and adult re-skilling represent major underserved opportunities with strong federal and state funding support.",
+      "ms_anchors": [
+        "Mississippi Department of Education (MDE)",
+        "Mississippi Community College Board",
+        "Mississippi Public Broadcasting",
+        "C Spire Education Initiative"
+      ],
+      "customer_segments": [
+        "Mississippi Department of Education (MDE)",
+        "K-12 school districts (152 in MS)",
+        "Community colleges (15 in MS)",
+        "Workforce development programs",
+        "Employers seeking to upskill workers"
+      ],
+      "common_problems": [
+        "Reading and math proficiency gaps",
+        "Rural broadband and device access for learning",
+        "Teacher recruitment and retention tools",
+        "Workforce pipeline misalignment with employers",
+        "Adult literacy and GED completion rates"
+      ],
+      "key_competitors": [
+        "Khan Academy",
+        "IXL Learning",
+        "Curriculum Associates",
+        "Regional curriculum vendors"
+      ],
+      "pitch_angles": "What is the biggest learning gap you see in your students or workforce trainees? How do teachers identify who is falling behind and how early? What would a 10% improvement in outcomes be worth to your community?",
+      "budget_notes": "EdTech sales cycles into school districts are slow and budget-dependent, often tied to federal Title I and Title II funding cycles. Consider B2C or B2SMB entry before selling into large institutional buyers.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOEd SBIR",
+        "NSF",
+        "Institute of Education Sciences"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "fintech",
+      "name": "FinTech",
+      "airtable_name": "FinTech",
+      "naics": [
+        "522110",
+        "522190",
+        "523910"
+      ],
+      "description": "Financial technology startups, including payments, lending, and decentralized finance.",
+      "tam_usd_b": 300,
+      "cagr_pct": 20,
+      "ms_tam_m": 130,
+      "ms_context": "Mississippi has among the highest rates of unbanked and underbanked residents (~25%). Strong opportunity in financial inclusion technology, small business lending tools for CDFIs, and rural payments infrastructure. Multiple active CDFIs operating in the state.",
+      "ms_anchors": [
+        "Hope Credit Union (Jackson)",
+        "BankPlus",
+        "Trustmark National Bank",
+        "Mississippi CDFI Network",
+        "Southern Bancorp"
+      ],
+      "customer_segments": [
+        "Unbanked and underbanked consumers",
+        "Community Development Financial Institutions (CDFIs)",
+        "Community banks and credit unions",
+        "Small business owners",
+        "Agricultural lenders and farm credit"
+      ],
+      "common_problems": [
+        "Access to small business credit in rural communities",
+        "Financial literacy and planning tools",
+        "Loan application and decisioning technology for CDFIs",
+        "Mobile payment infrastructure in rural areas",
+        "Farm credit and crop insurance accessibility"
+      ],
+      "key_competitors": [
+        "Square/Block",
+        "Chime",
+        "Kabbage/American Express",
+        "Community bank software vendors"
+      ],
+      "pitch_angles": "What is the biggest barrier your customers face in accessing financial services? How do you evaluate creditworthiness for non-traditional borrowers today? What would make your loan process 50% faster?",
+      "budget_notes": "FinTech requires significant compliance and licensing investment (money transmitter licenses, FinCEN registration, state banking regulations). Budget $50K-$150K for legal and compliance before launch.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 9
+    },
+    {
+      "id": "food_agritech",
+      "name": "Food & AgriTech",
+      "airtable_name": "Food & AgriTech",
+      "naics": [
+        "311",
+        "312",
+        "424400"
+      ],
+      "description": "Expanding AgTech to include food innovation, alternative proteins, and supply chain optimization.",
+      "tam_usd_b": 25,
+      "cagr_pct": 11,
+      "ms_tam_m": 310,
+      "ms_context": "Mississippi has world-class catfish aquaculture (largest in US), sweet potato production, poultry processing, and a growing artisan food scene. Opportunities in food safety traceability, cold chain optimization, and locally-sourced food supply chain technology serving Delta operations.",
+      "ms_anchors": [
+        "Mississippi Catfish Institute",
+        "Mississippi Poultry Association",
+        "Sanderson Farms (Laurel)",
+        "Mississippi Sweet Potato Council"
+      ],
+      "customer_segments": [
+        "Mississippi catfish and aquaculture operations",
+        "Poultry processors (Tyson, Sanderson Farms)",
+        "Sweet potato and vegetable growers",
+        "Specialty food producers and artisan brands",
+        "Regional grocery and foodservice distributors"
+      ],
+      "common_problems": [
+        "Food safety traceability and recall management",
+        "Cold chain monitoring and logistics",
+        "Shelf-life extension technology",
+        "Small producer market access",
+        "Aquaculture yield optimization"
+      ],
+      "key_competitors": [
+        "Sysco/US Foods tech platforms",
+        "FoodLogiQ",
+        "IBM Food Trust",
+        "Regional food distributors"
+      ],
+      "pitch_angles": "Where in your supply chain do you have the most waste or spoilage today? How do you track food safety from source to table? What would make it easier for local producers to access your distribution channel?",
+      "budget_notes": "Food tech requires rigorous food safety compliance investment. Budget for FSMA compliance, USDA relationships, and cold chain logistics pilot costs. Aquaculture tech has strong USDA grant support.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "USDA SBIR",
+        "NSF",
+        "NIFA grants"
+      ],
+      "sales_cycle_months": 9
+    },
+    {
+      "id": "govtech",
+      "name": "GovTech & Civic Innovation",
+      "airtable_name": "GovTech & Civic Innovation",
+      "naics": [
+        "921110",
+        "921130",
+        "541512"
+      ],
+      "description": "Public sector solutions, smart city initiatives, and civic engagement platforms.",
+      "tam_usd_b": 100,
+      "cagr_pct": 12,
+      "ms_tam_m": 220,
+      "ms_context": "Mississippi has 82 counties and hundreds of municipalities, many with limited IT budgets and legacy systems. Strong procurement opportunity via MDHS, MDOT, MDE, and county government channels. State ITS contract vehicles simplify procurement significantly.",
+      "ms_anchors": [
+        "Mississippi Department of Information Technology Services (ITS)",
+        "Mississippi Department of Human Services (MDHS)",
+        "Mississippi Development Authority (MDA)",
+        "Mississippi Secretary of State"
+      ],
+      "customer_segments": [
+        "Mississippi Department of Human Services (MDHS)",
+        "Mississippi Department of Transportation (MDOT)",
+        "County governments and tax assessors",
+        "Municipal utilities (water, waste, electric)",
+        "Public libraries and community organizations"
+      ],
+      "common_problems": [
+        "Citizen services portal modernization",
+        "Benefits administration and eligibility verification",
+        "Infrastructure inspection and maintenance tracking",
+        "Court and records management digitization",
+        "Rural emergency services coordination"
+      ],
+      "key_competitors": [
+        "Tyler Technologies",
+        "NIC/TransAct",
+        "Microsoft Dynamics 365 Gov",
+        "Regional GovTech integrators"
+      ],
+      "pitch_angles": "What citizen service request takes the longest to process in your agency? Where do you still rely on paper forms or fax machines? What procurement pathway would your agency use to buy a solution like this?",
+      "budget_notes": "GovTech sales are slow and require SLED procurement expertise. Pilot programs with one agency often lead to statewide contracts. Budget for 18-24 month sales cycles.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 18
+    },
+    {
+      "id": "healthtech",
+      "name": "Health Tech",
+      "airtable_name": "Health Tech (including Telehealth, Rural Healthcare, Healthcare Accessibility)",
+      "naics": [
+        "621111",
+        "621610",
+        "541511"
+      ],
+      "description": "Startups in telehealth, rural healthcare, medical devices, and healthcare accessibility.",
+      "tam_usd_b": 160,
+      "cagr_pct": 18,
+      "ms_tam_m": 390,
+      "ms_context": "Mississippi has the highest rates of chronic disease in the nation (diabetes, heart disease, obesity). 47 of 82 counties are Health Professional Shortage Areas. Urgent need for telehealth, remote monitoring, and rural primary care access. Mississippi Division of Medicaid is a major buyer.",
+      "ms_anchors": [
+        "University of Mississippi Medical Center (UMMC)",
+        "Mississippi Division of Medicaid",
+        "Mississippi Rural Health Association",
+        "C Spire health initiatives",
+        "Delta Health Alliance"
+      ],
+      "customer_segments": [
+        "Rural critical access hospitals (34 in MS)",
+        "Mississippi Division of Medicaid",
+        "FQHC community health centers",
+        "Primary care practices serving rural communities",
+        "Blue Cross Blue Shield Mississippi"
+      ],
+      "common_problems": [
+        "Access to specialty care in rural areas",
+        "Chronic disease management (diabetes, hypertension)",
+        "Mental health service delivery gaps",
+        "Social determinants of health screening",
+        "EHR interoperability and data exchange"
+      ],
+      "key_competitors": [
+        "Teladoc/Livongo",
+        "American Well",
+        "Hims/Hers",
+        "Regional health IT vendors"
+      ],
+      "pitch_angles": "How long does a patient wait to see a specialist in your system? How do you monitor patients with chronic conditions between visits? What would it take to serve 20% more patients without adding staff?",
+      "budget_notes": "Health Tech requires HIPAA compliance investment from day one. Budget $30K-$80K for legal and security infrastructure before selling to healthcare organizations. Medicaid reimbursement pathways are worth modeling early.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "NIH SBIR",
+        "AHRQ",
+        "CMS Innovation Center"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "hr_workforce",
+      "name": "HR & Workforce Tech",
+      "airtable_name": "HR & Workforce Tech",
+      "naics": [
+        "561310",
+        "561320",
+        "611430"
+      ],
+      "description": "Hiring platforms, upskilling solutions, and AI-driven workforce management tools.",
+      "tam_usd_b": 35,
+      "cagr_pct": 14,
+      "ms_tam_m": 90,
+      "ms_context": "Mississippi faces significant workforce challenges: low labor force participation, skills gaps in manufacturing and healthcare, and high turnover. Strong opportunity in workforce development platforms, apprenticeship management tools, and employer-facing hiring technology.",
+      "ms_anchors": [
+        "Mississippi Department of Employment Security (MDES)",
+        "Mississippi Works",
+        "Toyota Motor Manufacturing Mississippi (workforce training)",
+        "Mississippi Community College Board"
+      ],
+      "customer_segments": [
+        "Mississippi Department of Employment Security (MDES)",
+        "Community colleges and workforce development boards",
+        "Manufacturing employers (Toyota, Nissan, Ingalls)",
+        "Healthcare systems with high turnover",
+        "Small businesses struggling with hiring"
+      ],
+      "common_problems": [
+        "Manufacturing skills pipeline (welding, CNC, robotics)",
+        "Healthcare worker shortage and burnout",
+        "Re-entry employment pathways",
+        "Rural labor market matching",
+        "Apprenticeship program management at scale"
+      ],
+      "key_competitors": [
+        "Workday",
+        "ADP",
+        "iCIMS",
+        "Local workforce training providers"
+      ],
+      "pitch_angles": "What is your biggest hiring challenge right now? How long does it take to fill a critical open position? What skills are hardest to find in your local labor market?",
+      "budget_notes": "HR Tech selling to enterprises has long sales cycles. Consider a PLG motion targeting individual managers or teams before selling enterprise-wide to HR departments.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "legaltech",
+      "name": "LegalTech",
+      "airtable_name": "LegalTech",
+      "naics": [
+        "541110",
+        "541190",
+        "541511"
+      ],
+      "description": "AI-powered contract management, legal automation, and compliance solutions.",
+      "tam_usd_b": 25,
+      "cagr_pct": 10,
+      "ms_tam_m": 55,
+      "ms_context": "Mississippi has significant legal access gaps — rural residents and small businesses often cannot afford attorneys. Opportunity in legal self-help tools, compliance automation for small businesses, and practice management software for solo and small-firm attorneys who make up the majority of the state bar.",
+      "ms_anchors": [
+        "Mississippi Bar Association",
+        "Mississippi Access to Justice Commission",
+        "Mississippi Volunteer Lawyers Project"
+      ],
+      "customer_segments": [
+        "Mississippi Bar Association members",
+        "Small business owners needing compliance help",
+        "Non-profits and community organizations",
+        "Real estate professionals",
+        "Mississippi Access to Justice Commission"
+      ],
+      "common_problems": [
+        "Legal access for low-income rural residents",
+        "Small business contract and compliance management",
+        "Court filing and records management",
+        "Estate planning accessibility",
+        "Employment law compliance for small employers"
+      ],
+      "key_competitors": [
+        "LegalZoom",
+        "Rocket Lawyer",
+        "Clio",
+        "Regional law firm software"
+      ],
+      "pitch_angles": "What legal tasks do your clients handle without an attorney today? Where do you see the most compliance mistakes from small businesses? What would reduce time spent on routine document work?",
+      "budget_notes": "LegalTech products must navigate unauthorized practice of law boundaries. Budget for regulatory counsel early and consider partnering with the MS Bar Association for distribution.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 3
+    },
+    {
+      "id": "logistics",
+      "name": "Logistics & Supply Chain",
+      "airtable_name": "Logistics & Supply Chain",
+      "naics": [
+        "484110",
+        "493110",
+        "488510"
+      ],
+      "description": "Freight tech, warehouse automation, and AI-driven supply chain optimization.",
+      "tam_usd_b": 600,
+      "cagr_pct": 8,
+      "ms_tam_m": 450,
+      "ms_context": "Mississippi sits on critical US freight corridors: I-20, I-55, the Mississippi River, and Gulf Coast ports. Toyota, Nissan, and Amazon have major logistics operations in-state. Strong demand for last-mile rural delivery solutions and fleet management technology.",
+      "ms_anchors": [
+        "Port of Gulfport",
+        "Toyota Motor Manufacturing Mississippi (Blue Springs)",
+        "Amazon Distribution Center (Ridgeland)",
+        "Nissan North America (Canton)"
+      ],
+      "customer_segments": [
+        "Toyota Motor Manufacturing Mississippi",
+        "Nissan North America (Canton)",
+        "Gulf Coast port operators",
+        "Regional trucking and fleet companies",
+        "Amazon distribution center operators"
+      ],
+      "common_problems": [
+        "Last-mile delivery in rural/low-density areas",
+        "Fleet maintenance prediction and management",
+        "Port logistics and drayage efficiency",
+        "Supply chain visibility for manufacturers",
+        "Driver recruitment and retention"
+      ],
+      "key_competitors": [
+        "FedEx/UPS tech platforms",
+        "Project44",
+        "Flexport",
+        "Regional 3PLs"
+      ],
+      "pitch_angles": "What is the biggest inefficiency in your current supply chain? Where do shipments most often go wrong or get delayed? What data would help you make better logistics decisions today?",
+      "budget_notes": "Logistics tech pilots require access to actual fleet data and operations. Plan for extended pre-revenue periods while doing paid pilots with carriers or shippers to validate the core product.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "manufacturing",
+      "name": "Manufacturing & Construction",
+      "airtable_name": "Manufacturing & Construction",
+      "naics": [
+        "331",
+        "332",
+        "333",
+        "236",
+        "237"
+      ],
+      "description": "Industrial innovations, automation, and smart construction technology.",
+      "tam_usd_b": 280,
+      "cagr_pct": 7,
+      "ms_tam_m": 520,
+      "ms_context": "Mississippi has a strong manufacturing base: automotive (Toyota, Nissan), shipbuilding (Ingalls), aerospace (Rolls-Royce), and timber. Industry 4.0 adoption is early-stage, creating opportunity for automation, predictive maintenance, and digital twin solutions serving large anchor employers.",
+      "ms_anchors": [
+        "Toyota Motor Manufacturing Mississippi",
+        "Huntington Ingalls Industries (Pascagoula)",
+        "Rolls-Royce Crosspointe (Pearl)",
+        "PACCAR (Batesville)",
+        "Mississippi Manufacturers Association"
+      ],
+      "customer_segments": [
+        "Toyota Motor Manufacturing (Blue Springs)",
+        "Huntington Ingalls Industries",
+        "Rolls-Royce aerospace (Pearl)",
+        "Mid-market timber and paper mills",
+        "Mississippi Development Authority industrial clients"
+      ],
+      "common_problems": [
+        "Predictive maintenance for heavy equipment",
+        "Quality control and defect detection",
+        "Worker safety monitoring and compliance",
+        "Energy efficiency in manufacturing operations",
+        "Supply chain traceability for automotive tier suppliers"
+      ],
+      "key_competitors": [
+        "Siemens MindSphere",
+        "PTC ThingWorx",
+        "Rockwell Automation",
+        "Regional industrial IoT vendors"
+      ],
+      "pitch_angles": "What was your most expensive unplanned downtime event in the last year? How do you currently identify quality issues on the production line? What manual inspection or compliance process takes the most time each week?",
+      "budget_notes": "Manufacturing tech often requires on-site installation and integration with legacy OT systems. Budget for extended pilot programs (3-6 months) and dedicated customer success resources during deployment.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOD SBIR",
+        "NIST MEP",
+        "DOE AMO"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "media_content",
+      "name": "Media & Content Tech",
+      "airtable_name": "Media & Content Tech",
+      "naics": [
+        "511110",
+        "515120",
+        "519130"
+      ],
+      "description": "Digital publishing, AI-generated media, and VR/AR experiences.",
+      "tam_usd_b": 150,
+      "cagr_pct": 11,
+      "ms_tam_m": 70,
+      "ms_context": "Mississippi has a rich cultural tradition (blues music, civil rights history, literary heritage) with underdeveloped digital infrastructure. Opportunity in cultural heritage digitization, local news sustainability tools, and creator economy platforms for Mississippi artists and storytellers.",
+      "ms_anchors": [
+        "Mississippi Public Broadcasting",
+        "Mississippi Arts Commission",
+        "B.B. King Museum and Delta Interpretive Center",
+        "Oxford Film Festival",
+        "Clarion Ledger"
+      ],
+      "customer_segments": [
+        "Local news organizations (print and digital)",
+        "Cultural heritage organizations and museums",
+        "State tourism and travel brands",
+        "University media programs (USM, Ole Miss, JSU)",
+        "Content creators and local influencers"
+      ],
+      "common_problems": [
+        "Local news sustainability and monetization",
+        "Cultural heritage digital preservation",
+        "Audience engagement and subscription models",
+        "Content production for under-resourced organizations",
+        "Tourism content and experience marketing"
+      ],
+      "key_competitors": [
+        "Substack",
+        "Ghost",
+        "Squarespace",
+        "Regional media companies"
+      ],
+      "pitch_angles": "How do you currently monetize your content or audience? What content would your audience pay for that you do not produce today? How do you compete with free national media for local audience attention?",
+      "budget_notes": "Media tech products often depend on content rights and licensing. Budget for legal clarity on IP and content agreements early. Distribution partnerships with existing MS media brands can accelerate growth.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 3
+    },
+    {
+      "id": "mobility",
+      "name": "Mobility & Transportation",
+      "airtable_name": "Mobility & Transportation",
+      "naics": [
+        "488210",
+        "485999",
+        "532111"
+      ],
+      "description": "EVs, autonomous vehicles, logistics tech, and alternative transportation solutions.",
+      "tam_usd_b": 900,
+      "cagr_pct": 15,
+      "ms_tam_m": 180,
+      "ms_context": "Mississippi has low EV adoption and limited charging infrastructure, creating first-mover opportunity. Rural transit is dramatically underserved — 40% of rural Mississippians lack reliable transportation to healthcare, employment, or education.",
+      "ms_anchors": [
+        "Mississippi Department of Transportation (MDOT)",
+        "Nissan North America Canton (EV manufacturing)",
+        "Mississippi Gulf Coast Transit Authority",
+        "Entergy Mississippi (EV infrastructure programs)"
+      ],
+      "customer_segments": [
+        "Mississippi DOT (MDOT)",
+        "Rural public transit authorities",
+        "Nissan North America (EV manufacturing)",
+        "Gulf Coast port operators",
+        "Corporate fleet managers (state agencies, utilities)"
+      ],
+      "common_problems": [
+        "Rural transit access for elderly and disabled residents",
+        "EV charging infrastructure in rural corridors",
+        "Port logistics and drayage efficiency",
+        "School bus routing optimization",
+        "Healthcare transportation coordination for rural patients"
+      ],
+      "key_competitors": [
+        "Uber/Lyft (urban only)",
+        "Route4Me",
+        "Toyota Connected Services",
+        "Regional transit software vendors"
+      ],
+      "pitch_angles": "How do rural residents without cars access healthcare or employment in your area? What is the biggest logistics challenge for your fleet operation? How many miles does your operation drive per year?",
+      "budget_notes": "Mobility startups often require regulatory engagement with MDOT, public transit authorities, or utilities. Budget for compliance, permitting, and the long procurement cycles of public sector customers.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "DOT SBIR",
+        "DOE SBIR",
+        "FTA programs"
+      ],
+      "sales_cycle_months": 12
+    },
+    {
+      "id": "ocean_tech",
+      "name": "Ocean Technologies",
+      "airtable_name": "Ocean Technologies",
+      "naics": [
+        "336611",
+        "488330",
+        "541360"
+      ],
+      "description": "Maritime, naval engineering, and deep-sea exploration tech.",
+      "tam_usd_b": 170,
+      "cagr_pct": 9,
+      "ms_tam_m": 145,
+      "ms_context": "Mississippi's Gulf Coast is home to Ingalls Shipbuilding (largest US Navy surface combatant manufacturer), NOAA's National Data Buoy Center at Stennis Space Center, and Gulf of Mexico offshore energy infrastructure. Strong DoD and energy tech market.",
+      "ms_anchors": [
+        "Huntington Ingalls Industries (Pascagoula)",
+        "NOAA National Data Buoy Center (Stennis)",
+        "Port of Gulfport",
+        "US Coast Guard Sector Mobile",
+        "Gulf of Mexico offshore energy operators"
+      ],
+      "customer_segments": [
+        "Huntington Ingalls Industries",
+        "NOAA National Data Buoy Center",
+        "Offshore oil and gas operators",
+        "US Coast Guard (Sector Mobile)",
+        "Port of Gulfport"
+      ],
+      "common_problems": [
+        "Hull inspection and maintenance automation",
+        "Underwater sensor networks and monitoring",
+        "Marine navigation and route optimization",
+        "Oil spill detection and response tech",
+        "Aquaculture monitoring systems"
+      ],
+      "key_competitors": [
+        "Teledyne Marine",
+        "Kongsberg Maritime",
+        "Fugro",
+        "Regional offshore tech firms"
+      ],
+      "pitch_angles": "How do you currently perform underwater inspection tasks? What environmental data would help you make better operational decisions? What is the biggest safety risk in your maritime operations today?",
+      "budget_notes": "Ocean tech hardware development is expensive and requires specialized testing infrastructure. Ingalls and NOAA/Stennis partnerships can provide access to testing facilities and initial contracts.",
+      "sbir_eligible": true,
+      "sbir_agencies": [
+        "Navy SBIR",
+        "NOAA SBIR",
+        "DOE SBIR"
+      ],
+      "sales_cycle_months": 18
+    },
+    {
+      "id": "proptech",
+      "name": "PropTech & Real Estate Innovation",
+      "airtable_name": "PropTech & Real Estate Innovation",
+      "naics": [
+        "531110",
+        "531210",
+        "541191"
+      ],
+      "description": "Smart buildings, digital real estate platforms, and property management tech.",
+      "tam_usd_b": 25,
+      "cagr_pct": 12,
+      "ms_tam_m": 95,
+      "ms_context": "Mississippi faces a housing shortage alongside high vacancy rates in smaller cities. Opportunity in affordable housing development tools, rural property market transparency, and property management automation for the state's large base of independent landlords.",
+      "ms_anchors": [
+        "Mississippi Home Corporation (MHC)",
+        "Mississippi Association of Realtors",
+        "Jackson Housing Authority",
+        "Mississippi Development Authority (housing programs)"
+      ],
+      "customer_segments": [
+        "Mississippi Home Corporation (MHC)",
+        "Independent residential landlords",
+        "Commercial real estate managers",
+        "Community development corporations",
+        "Municipal planning departments"
+      ],
+      "common_problems": [
+        "Affordable housing development and financing",
+        "Blight remediation and vacancy tracking",
+        "Property management automation for small portfolios",
+        "Rural real estate market data access",
+        "Fair housing compliance tools"
+      ],
+      "key_competitors": [
+        "Zillow/Trulia",
+        "AppFolio",
+        "Buildium",
+        "Regional real estate platforms"
+      ],
+      "pitch_angles": "How do you currently track and manage vacant properties in your portfolio? What is the biggest time sink in your property management process? How do small landlords in Mississippi find qualified tenants today?",
+      "budget_notes": "PropTech products serving real estate professionals benefit from MLS partnership and NAR compliance. Budget for licensing and data agreements with real estate data providers.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 3
+    },
+    {
+      "id": "retail_ecommerce",
+      "name": "Retail & E-Commerce",
+      "airtable_name": "Retail & E-Commerce",
+      "naics": [
+        "441",
+        "444",
+        "452",
+        "454110"
+      ],
+      "description": "Digital marketplaces, direct-to-consumer brands, and retail tech.",
+      "tam_usd_b": 1100,
+      "cagr_pct": 10,
+      "ms_tam_m": 760,
+      "ms_context": "Mississippi retail has been disrupted by e-commerce, leaving many rural retail corridors struggling. Opportunity in local e-commerce infrastructure, marketplace aggregation for Mississippi-made products, and omnichannel solutions for downtown merchants.",
+      "ms_anchors": [
+        "Main Street Mississippi program",
+        "Mississippi Retail Association",
+        "Oxford Square merchants",
+        "Gulf Coast casino retail operations"
+      ],
+      "customer_segments": [
+        "Mississippi-made product brands",
+        "Downtown and main street retail merchants",
+        "Regional grocery and specialty retailers",
+        "Tourism-driven retail (Gulf Coast, Oxford, Natchez)",
+        "Mississippi Manufactured Products Directory participants"
+      ],
+      "common_problems": [
+        "Small brand e-commerce setup and operations",
+        "Local product discovery and marketplace access",
+        "Rural retail traffic and customer acquisition",
+        "Inventory management for multi-channel sellers",
+        "Same-day delivery in non-metro areas"
+      ],
+      "key_competitors": [
+        "Shopify",
+        "Etsy",
+        "Amazon Marketplace",
+        "WooCommerce ecosystem"
+      ],
+      "pitch_angles": "What percentage of your sales happen online vs. in-store today? What is stopping you from selling to customers outside your immediate area? How do you compete with Amazon for local customer attention?",
+      "budget_notes": "Retail tech selling to small merchants has high churn risk. Focus on solving one specific pain point really well and build switching costs through data and integrations before expanding scope.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 1
+    },
+    {
+      "id": "saas",
+      "name": "SaaS",
+      "airtable_name": "SaaS",
+      "naics": [
+        "511210",
+        "541511",
+        "541519"
+      ],
+      "description": "Software-as-a-Service solutions across industries.",
+      "tam_usd_b": 250,
+      "cagr_pct": 18,
+      "ms_tam_m": 215,
+      "ms_context": "Massive opportunity to build vertical SaaS for Mississippi's dominant industries: agriculture, healthcare, government, and manufacturing — where national platforms underserve specific needs. Lower customer acquisition cost than national competitors because you understand the local context.",
+      "ms_anchors": [
+        "Mississippi SBDC (Small Business Development Center)",
+        "Innovate Mississippi portfolio",
+        "C Spire partner ecosystem",
+        "Mississippi Development Authority digital programs"
+      ],
+      "customer_segments": [
+        "Mid-market businesses in any vertical",
+        "Healthcare organizations (HIPAA-compliant tools)",
+        "State and local government (via ITS contracts)",
+        "Agricultural operations and co-ops",
+        "Non-profits and community organizations"
+      ],
+      "common_problems": [
+        "Workflow automation for paper-heavy processes",
+        "CRM and customer management for non-sales teams",
+        "Reporting and compliance documentation automation",
+        "Multi-location coordination tools",
+        "Integration between legacy systems"
+      ],
+      "key_competitors": [
+        "Salesforce",
+        "HubSpot",
+        "Zoho",
+        "Vertical SaaS incumbents"
+      ],
+      "pitch_angles": "What software do you use today that you wish did more? What process in your business still runs on spreadsheets or paper? How much time per week does your team spend on tasks that could be automated?",
+      "budget_notes": "SaaS has the most predictable unit economics of any model. Nail down CAC, LTV, and churn before scaling. ARR milestones of $10K, $100K, $1M are key investor checkpoints in the CoPath journey.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 3
+    },
+    {
+      "id": "sports_entertainment",
+      "name": "Sports & Entertainment Tech",
+      "airtable_name": "Sports & Entertainment Tech",
+      "naics": [
+        "711211",
+        "711310",
+        "713940"
+      ],
+      "description": "Esports, fan engagement, sports analytics, and streaming platforms.",
+      "tam_usd_b": 50,
+      "cagr_pct": 13,
+      "ms_tam_m": 110,
+      "ms_context": "Mississippi is deeply invested in college football (Ole Miss, MSU, Southern Miss, Jackson State) with massive fan bases. Strong opportunity in NIL compliance technology, fan engagement apps, and youth sports management platforms for the state's dense network of youth leagues.",
+      "ms_anchors": [
+        "Ole Miss Athletics",
+        "Mississippi State Athletics",
+        "Jackson State Athletics (HBCU)",
+        "Mississippi High School Activities Association (MHSAA)"
+      ],
+      "customer_segments": [
+        "University athletic programs (Ole Miss, MSU, JSU, USM)",
+        "High school athletic associations",
+        "Youth sports leagues and organizations",
+        "Minor league sports franchises",
+        "Outdoor recreation businesses (hunting, fishing)"
+      ],
+      "common_problems": [
+        "NIL compliance and athlete compensation tracking",
+        "Youth sports registration and scheduling",
+        "Fan engagement beyond game day",
+        "Outdoor recreation booking and guide services",
+        "Sports analytics for high school programs"
+      ],
+      "key_competitors": [
+        "Hudl",
+        "SportsEngine",
+        "Front Rush",
+        "INFLCR (NIL platform)"
+      ],
+      "pitch_angles": "How do you currently manage communications with fans, athletes, or parents? What is the most manual process in running your athletic program? How are you thinking about NIL opportunities for your athletes?",
+      "budget_notes": "Sports tech has seasonal revenue patterns tied to athletic calendars. Plan cash flow around these cycles and build annual contract structures that smooth revenue.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "web3",
+      "name": "Web3",
+      "airtable_name": "Web3",
+      "naics": [
+        "523910",
+        "519130",
+        "522390"
+      ],
+      "description": "Blockchain-based startups, including NFTs, decentralized apps, and crypto solutions.",
+      "tam_usd_b": 67,
+      "cagr_pct": 25,
+      "ms_tam_m": 28,
+      "ms_context": "Web3 adoption in Mississippi is early-stage, but there is real potential in supply chain traceability (agriculture, timber, seafood) and digital identity solutions for underbanked populations. Approach with strong use-case specificity — solutions in search of problems face tough investor scrutiny.",
+      "ms_anchors": [
+        "Mississippi timber industry (traceability)",
+        "Gulf Coast seafood processors",
+        "Mississippi catfish industry (provenance)",
+        "Southern Bancorp (financial inclusion)"
+      ],
+      "customer_segments": [
+        "Agricultural supply chain players",
+        "Gulf Coast seafood and fisheries industry",
+        "Timber and forestry operators",
+        "Community development organizations",
+        "Financial inclusion organizations"
+      ],
+      "common_problems": [
+        "Supply chain provenance and traceability",
+        "Digital identity for underserved populations",
+        "Tokenized community investment (opportunity zones)",
+        "Fraud reduction in government benefits systems",
+        "Artist and creator IP protection"
+      ],
+      "key_competitors": [
+        "IBM Food Trust",
+        "VeChain",
+        "Coinbase Commerce",
+        "Industry-specific blockchain platforms"
+      ],
+      "pitch_angles": "How do you currently prove where your product came from? Where do you see fraud or trust issues in your supply chain? What would tokenized ownership or community investment mean for your business model?",
+      "budget_notes": "Web3 startups must budget for smart contract audits ($20K-$100K), regulatory counsel on token classification, and community building. Infrastructure costs vary widely by chain choice.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": 6
+    },
+    {
+      "id": "other",
+      "name": "Other Industry",
+      "airtable_name": "Other Industry",
+      "naics": [
+        "999990"
+      ],
+      "description": "Startups that do not fit into the above categories but offer innovative solutions.",
+      "tam_usd_b": null,
+      "cagr_pct": null,
+      "ms_tam_m": null,
+      "ms_context": "Mississippi welcomes innovative ventures across all industries. If your company does not fit neatly into a category above, InnovateMS can still help. Contact us to discuss how your venture maps to our CoPath framework and available programs.",
+      "ms_anchors": [],
+      "customer_segments": [
+        "Varies by business model"
+      ],
+      "common_problems": [
+        "Validating an entirely new market category",
+        "Finding comparable benchmarks and TAM data",
+        "Educating investors on a novel category"
+      ],
+      "key_competitors": [],
+      "pitch_angles": "Who are the customers who experience this problem most acutely? What are they doing today instead of using your product? How would they discover and evaluate a solution like yours?",
+      "budget_notes": "Without comparable market data, budget conservatively and focus on reaching your first paying customer as quickly as possible. Proof of payment is the most important early signal.",
+      "sbir_eligible": false,
+      "sbir_agencies": [],
+      "sales_cycle_months": null
+    }
+  ],
+  "copath_stages": [
+    {
+      "id": "stage0",
+      "num": 0,
+      "short": "Stage 0",
+      "name": "Awareness & Lead Capture",
+      "label": "Stage 0 — Awareness & Lead Capture",
+      "tagline": "You have an idea — let us confirm the problem is real.",
+      "description": "Initial founder engagement and basic information gathering. You are exploring whether your idea is worth pursuing.",
+      "investment_focus": "Personal savings, friends and family, small grants",
+      "revenue_range": "Pre-Revenue",
+      "priorities": [
+        "Talk to 10+ potential customers before building anything",
+        "Define the problem you are solving in one clear sentence",
+        "Identify who experiences this problem most acutely",
+        "Resist the urge to build — your job right now is to listen",
+        "Document every customer conversation, even informal ones"
+      ],
+      "tool_tips": {
+        "discovery": "You are at the very beginning — perfect time to talk to customers. Your only job is to listen, not pitch. Keep your solution idea to yourself for now.",
+        "mvp": "Too early for feature prioritization. Run at least 10 customer discovery interviews before scoping your first build.",
+        "budget": "Budget for exploration only: $0-$5K for customer discovery, basic tools, and your first prototype experiment.",
+        "plan": "Write a simple problem and solution hypothesis — not a full business plan. One page maximum.",
+        "competitive": "Map the landscape to understand what alternatives your customer already uses today."
+      },
+      "key_milestones": [
+        "Complete 10+ customer discovery interviews",
+        "Validate problem statement with multiple people saying the same thing",
+        "Identify initial target customer segment clearly"
+      ],
+      "airtable_internal_stage": "Stage 0: Awareness and Lead Capture"
+    },
+    {
+      "id": "stage1",
+      "num": 1,
+      "short": "Stage 1",
+      "name": "Intake & Triage",
+      "label": "Stage 1 — Intake & Triage",
+      "tagline": "You have confirmed the problem — now confirm the market.",
+      "description": "Formal engagement with InnovateMS. Triage to understand fit, readiness, and next steps in the CoPath journey.",
+      "investment_focus": "Friends and family, accelerator and incubator programs, early grants",
+      "revenue_range": "Pre-Revenue to $0-$50K",
+      "priorities": [
+        "Document findings from customer discovery conversations",
+        "Identify your beachhead (most specific) market segment",
+        "Assess team strength and identify key gaps",
+        "Determine if you have a technology, service, or product business",
+        "Commit to a problem worth solving before committing to a solution"
+      ],
+      "tool_tips": {
+        "discovery": "You have had some informal conversations. Now get structured. This guide helps you go deeper than small talk and start building real evidence.",
+        "mvp": "List the minimum set of features your first customer would need to say I need this now. Nothing more.",
+        "budget": "Budget for PoC work: typically $5K-$25K depending on industry. Do not hire before you have a paying customer.",
+        "plan": "Your one-pager should clearly articulate the problem, solution, and target customer. Keep it to one page.",
+        "competitive": "Who are your top 3 competitors? Why would a customer choose you over them today?"
+      },
+      "key_milestones": [
+        "Define target customer clearly in one sentence",
+        "Validate solution concept with 5+ customers",
+        "Map competitive landscape with real competitors"
+      ],
+      "airtable_internal_stage": "Stage 1: Intake & Triage"
+    },
+    {
+      "id": "stage2",
+      "num": 2,
+      "short": "Stage 2",
+      "name": "Proof of Concept",
+      "label": "Stage 2 — Proof of Concept",
+      "tagline": "You have validated the idea — now build the proof.",
+      "description": "Build a functional prototype and test with real customers. Confirm the core value proposition works in the real world.",
+      "investment_focus": "Grants, InvestMS Seed Fund, angel investors, CoBuilders and FoundersPlus accelerators",
+      "revenue_range": "$0-$50K ARR",
+      "priorities": [
+        "Build a working prototype — not perfect, just working",
+        "Get your first paying customers or signed letters of intent",
+        "Begin legal entity formation (LLC or C-Corp)",
+        "Document your IP strategy (what do you own?)",
+        "Define your revenue model and price point clearly"
+      ],
+      "tool_tips": {
+        "discovery": "You are building something. Resist the urge to show it first — start every interview understanding the problem deeply, then introduce your solution at the very end.",
+        "mvp": "Use the Impact vs. Effort matrix to ruthlessly cut scope. Ship the core value loop first, everything else is distraction.",
+        "budget": "PoC budgets range $10K-$75K. Include dev, legal formation, and first customer acquisition costs.",
+        "plan": "You have data to back up your claims now. This is the time for a real investor-ready one-pager.",
+        "competitive": "How does your prototype compare on the dimensions your customers care most about? Ask them directly."
+      },
+      "key_milestones": [
+        "Working prototype complete and in customers hands",
+        "5-10 paying customers or signed LOIs",
+        "Legal entity formed",
+        "IP strategy documented"
+      ],
+      "airtable_internal_stage": "Stage 2: Proof of Concept (PoC)"
+    },
+    {
+      "id": "stage3",
+      "num": 3,
+      "short": "Stage 3",
+      "name": "Pre-Seed",
+      "label": "Stage 3 — Pre-Seed",
+      "tagline": "You have proof — now build the growth machine.",
+      "description": "Refine the MVP, prove repeatable customer acquisition, and prepare for your first formal fundraise.",
+      "investment_focus": "InvestMS programs, angel investors via Mississippi Angel Network, seed funds, crowdfunding",
+      "revenue_range": "$0-$250K ARR",
+      "priorities": [
+        "Achieve repeatable customer acquisition — prove it is not just luck",
+        "Prove your revenue model with real paying customers",
+        "Build 3-year financial projections with monthly detail for year one",
+        "Prepare investor pitch deck (problem, solution, market, traction, team, ask)",
+        "Formalize team equity, vesting schedules, and roles"
+      ],
+      "tool_tips": {
+        "discovery": "Focus on retention and expansion. Why do customers stay? What would make them leave? This is now your most important question.",
+        "mvp": "Build Next features that drive retention and expansion revenue, not features that attract new customers.",
+        "budget": "Pre-seed operating budgets run $75K-$500K per year. Model your monthly burn rate carefully and know exactly how many months of runway you have.",
+        "plan": "Investors want traction data. Include ARR, customer count, and month-over-month growth rate in your one-pager.",
+        "competitive": "Define your defensible moat. Why cannot competitors copy your model in 6 months? Be honest."
+      },
+      "key_milestones": [
+        "$10K-$100K ARR with paying customers",
+        "Unit economics defined (CAC, LTV, payback period)",
+        "Pitch deck complete and practiced",
+        "Financial model built out to 36 months",
+        "Cap table clean and understood"
+      ],
+      "airtable_internal_stage": "Stage 3: Pre-Seed"
+    },
+    {
+      "id": "stage4",
+      "num": 4,
+      "short": "Stage 4",
+      "name": "Seed Round",
+      "label": "Stage 4 — Seed Round",
+      "tagline": "You have traction — now scale the growth engine.",
+      "description": "Raise seed capital, scale the team, and prove scalable growth metrics that justify a Series A.",
+      "investment_focus": "Seed funds, Mississippi Angel Network, InvestMS Angel Pitch events, SBIR/STTR",
+      "revenue_range": "$100K-$1M ARR",
+      "priorities": [
+        "Close seed round ($250K-$2M) with clear milestone plan",
+        "Build core team with sector-specific domain hires",
+        "Establish repeatable sales process with CRM and documented playbook",
+        "Set up board of directors and investor relations cadence",
+        "Expand to additional customer segments with validated ICP"
+      ],
+      "tool_tips": {
+        "discovery": "Never stop talking to customers. Your biggest scale-up risk is assuming early customers represent the full market.",
+        "mvp": "Roadmap features that unlock enterprise deals and expansion revenue from existing customers.",
+        "budget": "Seed-funded budgets run $500K-$2M per year. Hire aggressively against proven unit economics, not optimism.",
+        "plan": "Update your one-pager quarterly with current traction data for investor updates and new investor conversations.",
+        "competitive": "Competitive intelligence becomes strategic now. Know your competitors roadmaps and weaknesses, not just their current products."
+      },
+      "key_milestones": [
+        "$100K-$1M ARR with strong growth rate",
+        "Seed round closed with clean terms",
+        "Core team of 3-8 hired",
+        "Board of advisors formalized"
+      ],
+      "airtable_internal_stage": "Stage 4: Seed Round"
+    },
+    {
+      "id": "stage5",
+      "num": 5,
+      "short": "Stage 5",
+      "name": "Series A / VC Funding",
+      "label": "Stage 5 — Series A / VC Funding",
+      "tagline": "You are growing — now prove you can dominate the category.",
+      "description": "Institutional venture capital funding to accelerate growth, expand markets, and build defensible category leadership.",
+      "investment_focus": "Venture capital, family offices, Mississippi Innovation Fund, institutional investors",
+      "revenue_range": "$1M+ ARR",
+      "priorities": [
+        "Raise Series A ($2M-$15M) with clear use of funds",
+        "Hire executive team — VP Sales, CTO, or CFO depending on bottleneck",
+        "Formalize board of directors with independent members",
+        "Expand to new geographies or verticals with validated playbook",
+        "Develop partnership and channel strategy for non-linear growth"
+      ],
+      "tool_tips": {
+        "discovery": "At this stage, competitive positioning and market size become critical questions. Use interviews to stress-test your market thesis with enterprise customers.",
+        "mvp": "Platform thinking — features that enable ecosystem integrations, partner channels, and developer extensibility.",
+        "budget": "Series A burn runs $2M-$8M per year. Hire for scale, not just execution. Every hire should have a clear 18-month impact thesis.",
+        "plan": "Narrative matters at Series A — story, traction, vision, and team carry equal weight. Investors back the founder who can become the category leader.",
+        "competitive": "Own your category narrative. Investors back the founder who can convince them this company will be the category leader in 5 years."
+      },
+      "key_milestones": [
+        "$1M+ ARR with strong growth rate and improving margins",
+        "Series A closed",
+        "Executive team complete",
+        "Board of directors with independent members formalized"
+      ],
+      "airtable_internal_stage": "Stage 5: Series A/VC Funding"
+    }
+  ],
+  "ip_types": [
+    {
+      "id": "none",
+      "name": "No Intellectual Property",
+      "description": "No IP protection developed or claimed. Common at Stage 0-1."
+    },
+    {
+      "id": "trade_secret",
+      "name": "Trade Secret",
+      "description": "Confidential business info protected by secrecy — formulas, processes, customer lists."
+    },
+    {
+      "id": "copyright",
+      "name": "Copyrights",
+      "description": "Protects original works of authorship: software code, written materials, creative content."
+    },
+    {
+      "id": "open_source",
+      "name": "Open Source Licensing",
+      "description": "Software code made available under open-source license (MIT, GPL, Apache)."
+    },
+    {
+      "id": "defensive_pub",
+      "name": "Defensive Publication",
+      "description": "Intentionally published invention details to prevent others from patenting it."
+    },
+    {
+      "id": "provisional",
+      "name": "Provisional Patent",
+      "description": "12-month placeholder before filing a full non-provisional patent application. Establishes priority date."
+    },
+    {
+      "id": "design_patent",
+      "name": "Design Patent",
+      "description": "Protects ornamental design of a functional item — product shapes, user interfaces."
+    },
+    {
+      "id": "full_pending",
+      "name": "Full Patent Pending",
+      "description": "Full non-provisional patent application submitted, awaiting USPTO approval."
+    },
+    {
+      "id": "patented",
+      "name": "Patented",
+      "description": "Granted patent legally protecting the invention from unauthorized use."
+    }
+  ],
+  "investment_sources": [
+    {
+      "id": "personal",
+      "name": "Personal Savings",
+      "typical_range": "$1K-$50K",
+      "stage": "stage0",
+      "dilutive": false,
+      "description": "The most common first capital. Skin in the game signals commitment to future investors."
+    },
+    {
+      "id": "friends_family",
+      "name": "Friends & Family",
+      "typical_range": "$5K-$100K",
+      "stage": "stage0",
+      "dilutive": true,
+      "description": "Personal network capital. Simple terms, high trust. Use SAFEs to avoid complex early cap table."
+    },
+    {
+      "id": "grants",
+      "name": "Grants (Government & Foundation)",
+      "typical_range": "$5K-$500K",
+      "stage": "stage1",
+      "dilutive": false,
+      "description": "Non-dilutive government and foundation grants. InnovateMS can help identify Mississippi-specific opportunities."
+    },
+    {
+      "id": "accelerator",
+      "name": "Accelerator / Incubator",
+      "typical_range": "$25K-$150K",
+      "stage": "stage1",
+      "dilutive": true,
+      "description": "Program-based investment with mentoring. CoBuilders and FoundersPlus are InnovateMS flagship programs."
+    },
+    {
+      "id": "sbir_sttr",
+      "name": "SBIR / STTR (Federal R&D Grants)",
+      "typical_range": "$314K-$2M",
+      "stage": "stage2",
+      "dilutive": false,
+      "description": "Non-dilutive federal R&D grants for eligible science and tech sectors. Phase I averages $314K. InnovateMS has SBIR resources."
+    },
+    {
+      "id": "crowdfunding",
+      "name": "Crowdfunding",
+      "typical_range": "$10K-$1M",
+      "stage": "stage2",
+      "dilutive": true,
+      "description": "Platforms like Kickstarter, Indiegogo, or Republic. Good for consumer products and community-driven businesses."
+    },
+    {
+      "id": "angel",
+      "name": "Angel Investors",
+      "typical_range": "$25K-$500K",
+      "stage": "stage3",
+      "dilutive": true,
+      "description": "Individual accredited investors. InnovateMS Angel Pitch events connect founders to local and regional angels."
+    },
+    {
+      "id": "invest_ms",
+      "name": "InvestMS (SSBCI)",
+      "typical_range": "$100K-$2M",
+      "stage": "stage3",
+      "dilutive": true,
+      "description": "Mississippi State Small Business Credit Initiative capital. Managed by InnovateMS for startup ventures."
+    },
+    {
+      "id": "ms_seed_fund",
+      "name": "Mississippi Seed Fund",
+      "typical_range": "$25K-$250K",
+      "stage": "stage2",
+      "dilutive": true,
+      "description": "InnovateMS-managed seed fund for early-stage Mississippi companies."
+    },
+    {
+      "id": "private_capital",
+      "name": "Private Capital (Family Offices)",
+      "typical_range": "$100K-$2M",
+      "stage": "stage3",
+      "dilutive": true,
+      "description": "Family offices and private equity groups with regional Mississippi interest."
+    },
+    {
+      "id": "debt",
+      "name": "Debt (SBA / CDFI Loans)",
+      "typical_range": "$50K-$500K",
+      "stage": "stage3",
+      "dilutive": false,
+      "description": "SBA loans, CDFI loans, or revenue-based financing. Good for capital-light businesses with demonstrated revenue."
+    },
+    {
+      "id": "venture_capital",
+      "name": "Venture Capital",
+      "typical_range": "$500K-$20M+",
+      "stage": "stage4",
+      "dilutive": true,
+      "description": "Institutional venture funds. InvestMS and regional VCs active in Mississippi tech ecosystem."
+    }
+  ],
+  "programs": [
+    {
+      "id": "foundersplus",
+      "name": "FoundersPlus Accelerator",
+      "active": true,
+      "url": "https://www.innovate.ms/foundersplus/",
+      "description": "InnovateMS flagship accelerator for early-stage Mississippi founders. Equity and non-dilutive support.",
+      "stage_fit": [
+        "stage1",
+        "stage2",
+        "stage3"
+      ],
+      "type": "accelerator"
+    },
+    {
+      "id": "cobuilders",
+      "name": "CoBuilders Accelerator",
+      "active": true,
+      "url": "https://cobuilders.ms",
+      "description": "Cohort-based accelerator for Mississippi tech startups. Applications open annually with rolling intake.",
+      "stage_fit": [
+        "stage2",
+        "stage3"
+      ],
+      "type": "accelerator"
+    },
+    {
+      "id": "ms_seed_fund",
+      "name": "Mississippi Seed Fund",
+      "active": true,
+      "url": "https://www.innovate.ms/mississippi-seed-fund/",
+      "description": "Non-dilutive and low-dilution capital for Mississippi early-stage companies. Managed by InnovateMS.",
+      "stage_fit": [
+        "stage2",
+        "stage3"
+      ],
+      "type": "capital"
+    },
+    {
+      "id": "invest_ms",
+      "name": "InvestMS (SSBCI)",
+      "active": true,
+      "url": "https://www.innovate.ms/ssbci/",
+      "description": "State Small Business Credit Initiative venture capital for Mississippi startups. Federal-state partnership.",
+      "stage_fit": [
+        "stage3",
+        "stage4"
+      ],
+      "type": "capital"
+    },
+    {
+      "id": "angel_network",
+      "name": "Mississippi Angel Investor Network",
+      "active": true,
+      "url": "https://www.innovate.ms/mississippi-angel-network/",
+      "description": "Network of Mississippi accredited investors. InnovateMS facilitates pitch events and introductions.",
+      "stage_fit": [
+        "stage3",
+        "stage4"
+      ],
+      "type": "capital"
+    },
+    {
+      "id": "sbir_sttr",
+      "name": "SBIR / STTR Resources",
+      "active": true,
+      "url": "https://www.innovate.ms/mississippi-sbir-sttr-resources/",
+      "description": "Federal non-dilutive R&D funding support for science and tech startups. InnovateMS provides application assistance.",
+      "stage_fit": [
+        "stage2",
+        "stage3",
+        "stage4"
+      ],
+      "type": "grants"
+    },
+    {
+      "id": "partner_network",
+      "name": "Partner & Service Provider Network",
+      "active": true,
+      "url": "https://www.innovate.ms/",
+      "description": "Curated network of vetted Mississippi service providers across legal, tech, marketing, and operations.",
+      "stage_fit": [
+        "stage0",
+        "stage1",
+        "stage2",
+        "stage3",
+        "stage4",
+        "stage5"
+      ],
+      "type": "services"
+    },
+    {
+      "id": "mentorship",
+      "name": "Mentorship Network",
+      "active": true,
+      "url": "https://www.innovate.ms/",
+      "description": "Experienced mentors across industries matched to InnovateMS portfolio companies based on sector and stage.",
+      "stage_fit": [
+        "stage0",
+        "stage1",
+        "stage2",
+        "stage3"
+      ],
+      "type": "mentorship"
+    },
+    {
+      "id": "gulf_blue",
+      "name": "Gulf Blue Navigator",
+      "active": true,
+      "url": "https://www.gulfbluenavigator.org/",
+      "description": "USM Research Foundation program for late-stage startups. Four-month blended program with access to research, light manufacturing, and funding.",
+      "stage_fit": [
+        "stage3",
+        "stage4"
+      ],
+      "type": "accelerator"
+    }
+  ],
+  "service_categories": [
+    {
+      "id": "business_ops",
+      "name": "Business Operations",
+      "digital": "Business modeling, market analysis tools, digital growth strategies",
+      "physical": "Operational scaling advice, supply chain setup, facility optimization"
+    },
+    {
+      "id": "product_dev",
+      "name": "Product Development",
+      "digital": "Software prototyping, UX/UI design, wireframing, mockups",
+      "physical": "Hardware prototyping, 3D printing, product testing"
+    },
+    {
+      "id": "branding_marketing",
+      "name": "Branding & Marketing",
+      "digital": "Logo design, digital content creation, social media marketing, SEO",
+      "physical": "Packaging design, physical promotional materials, trade show booth setup"
+    },
+    {
+      "id": "software_dev",
+      "name": "Software Development",
+      "digital": "Custom app creation, API integrations, SaaS optimization",
+      "physical": "None"
+    },
+    {
+      "id": "data_analytics",
+      "name": "Data & Analytics",
+      "digital": "Analytics platforms, AI/ML tools, data visualization software",
+      "physical": "None"
+    },
+    {
+      "id": "financial_mgmt",
+      "name": "Financial Management",
+      "digital": "Accounting software, tax tools, financial modeling applications",
+      "physical": "On-site financial audits, inventory valuations, operational cost assessments"
+    },
+    {
+      "id": "legal_compliance",
+      "name": "Legal & Compliance",
+      "digital": "Contract drafting software, IP registration platforms, compliance management",
+      "physical": "In-person legal consultations, patent filing, regulatory testing"
+    },
+    {
+      "id": "sales_cs",
+      "name": "Sales & Customer Success",
+      "digital": "CRM setup, sales automation, customer success training",
+      "physical": "In-person sales strategy workshops, on-site customer engagement"
+    },
+    {
+      "id": "talent_hr",
+      "name": "Talent Acquisition & HR",
+      "digital": "Recruitment platforms, remote team management tools, HR software",
+      "physical": "On-site HR consultations, staffing events, employee onboarding support"
+    },
+    {
+      "id": "training_dev",
+      "name": "Training & Development",
+      "digital": "Online courses, virtual workshops, coding bootcamps",
+      "physical": "In-person training sessions, coworking meetups, maker lab tutorials"
+    },
+    {
+      "id": "tech_infra",
+      "name": "Technology Infrastructure",
+      "digital": "Cloud hosting, IT support, cybersecurity services",
+      "physical": "Network hardware setup, server installations, maintenance"
+    },
+    {
+      "id": "ecommerce",
+      "name": "E-commerce Platforms",
+      "digital": "Online store setup, payment gateway integration, marketplace optimization",
+      "physical": "Physical product photography, packaging for e-commerce"
+    },
+    {
+      "id": "manufacturing_asst",
+      "name": "Manufacturing Assistance",
+      "digital": "CAD development, automation testing",
+      "physical": "Hardware prototyping, 3D printing, product testing"
+    },
+    {
+      "id": "community",
+      "name": "Community Building",
+      "digital": "Virtual meetups, online collaboration tools, forums",
+      "physical": "Networking events, peer learning sessions, trade shows"
+    },
+    {
+      "id": "public_funding",
+      "name": "Public Funding",
+      "digital": "Grant portal navigation, compliance tools",
+      "physical": "Assistance with site inspections, documentation for grants"
+    },
+    {
+      "id": "env_impact",
+      "name": "Environmental & Social Impact",
+      "digital": "Carbon footprint calculators, sustainability certifications, ESG reporting",
+      "physical": "Sustainable material sourcing, physical certification tests"
+    },
+    {
+      "id": "logistics_fulfill",
+      "name": "Logistics & Fulfillment",
+      "digital": "Inventory tracking software, order management platforms",
+      "physical": "Warehousing, shipping, supply chain logistics"
+    },
+    {
+      "id": "intl_expansion",
+      "name": "International Expansion",
+      "digital": "Digital market entry research, cross-border e-commerce tools, compliance",
+      "physical": "Trade logistics, regulatory testing, product distribution networks"
+    }
+  ],
+  "revenue_milestones": [
+    {
+      "id": "pre_revenue",
+      "label": "Pre-Revenue",
+      "description": "No paying customers yet. Focus entirely on customer discovery.",
+      "stage_fit": [
+        "stage0",
+        "stage1",
+        "stage2"
+      ]
+    },
+    {
+      "id": "0_50k",
+      "label": "$0 - $50K ARR",
+      "description": "First paying customers. Validating willingness to pay.",
+      "stage_fit": [
+        "stage2",
+        "stage3"
+      ]
+    },
+    {
+      "id": "50k_250k",
+      "label": "$50K - $250K ARR",
+      "description": "Early traction. Starting to prove the model is repeatable.",
+      "stage_fit": [
+        "stage3"
+      ]
+    },
+    {
+      "id": "250k_1m",
+      "label": "$250K - $1M ARR",
+      "description": "Real traction. Pre-seed or seed funding territory.",
+      "stage_fit": [
+        "stage3",
+        "stage4"
+      ]
+    },
+    {
+      "id": "above_1m",
+      "label": "Above $1M ARR",
+      "description": "Seed or Series A territory. Scaling the growth machine.",
+      "stage_fit": [
+        "stage4",
+        "stage5"
+      ]
+    }
+  ]
+}
