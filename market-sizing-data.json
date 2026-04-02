@@ -1,0 +1,442 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "updated": "2026-04-02",
+    "source": "InnovateMS Market Sizing Repository",
+    "description": "Combinatorial market sizing dataset for early-stage founders. Cross-reference industries × segments × geographies × business_models × customer_types to generate thousands of unique TAM/SAM/SOM scenarios.",
+    "scenario_math": "26 industries × 3-6 segments each × 8 geographies × 6 business_models × 5 customer_types = 18,000+ unique scenario combinations"
+  },
+  "industries": [
+    {
+      "id": "healthtech",
+      "name": "Healthcare Technology",
+      "icon": "🏥",
+      "global_tam_b": 612,
+      "cagr_pct": 17.9,
+      "maturity": "growth",
+      "segments": [
+        { "id": "telehealth", "name": "Telehealth & Virtual Care", "share_pct": 14.2, "cagr_pct": 24.3, "tam_b": 87 },
+        { "id": "ehr", "name": "Electronic Health Records", "share_pct": 6.8, "cagr_pct": 8.1, "tam_b": 42 },
+        { "id": "remote_monitoring", "name": "Remote Patient Monitoring", "share_pct": 5.1, "cagr_pct": 28.7, "tam_b": 31 },
+        { "id": "health_analytics", "name": "Health Data Analytics", "share_pct": 8.3, "cagr_pct": 22.4, "tam_b": 51 },
+        { "id": "mental_health_tech", "name": "Mental Health Platforms", "share_pct": 3.2, "cagr_pct": 31.5, "tam_b": 20 },
+        { "id": "clinical_trials", "name": "Clinical Trial Tech", "share_pct": 4.1, "cagr_pct": 12.6, "tam_b": 25 }
+      ]
+    },
+    {
+      "id": "fintech",
+      "name": "Financial Technology",
+      "icon": "💳",
+      "global_tam_b": 340,
+      "cagr_pct": 20.5,
+      "maturity": "growth",
+      "segments": [
+        { "id": "payments", "name": "Digital Payments", "share_pct": 32.1, "cagr_pct": 18.2, "tam_b": 109 },
+        { "id": "lending", "name": "Digital Lending", "share_pct": 15.6, "cagr_pct": 24.8, "tam_b": 53 },
+        { "id": "insurtech", "name": "InsurTech", "share_pct": 8.4, "cagr_pct": 32.7, "tam_b": 29 },
+        { "id": "wealthtech", "name": "WealthTech & Robo-Advisory", "share_pct": 11.2, "cagr_pct": 15.3, "tam_b": 38 },
+        { "id": "regtech", "name": "RegTech & Compliance", "share_pct": 5.8, "cagr_pct": 21.6, "tam_b": 20 },
+        { "id": "embedded_finance", "name": "Embedded Finance", "share_pct": 7.3, "cagr_pct": 29.4, "tam_b": 25 }
+      ]
+    },
+    {
+      "id": "edtech",
+      "name": "Education Technology",
+      "icon": "📚",
+      "global_tam_b": 421,
+      "cagr_pct": 16.3,
+      "maturity": "growth",
+      "segments": [
+        { "id": "lms", "name": "Learning Management Systems", "share_pct": 12.4, "cagr_pct": 14.2, "tam_b": 52 },
+        { "id": "online_tutoring", "name": "Online Tutoring", "share_pct": 8.7, "cagr_pct": 18.9, "tam_b": 37 },
+        { "id": "corporate_training", "name": "Corporate eLearning", "share_pct": 18.3, "cagr_pct": 15.7, "tam_b": 77 },
+        { "id": "language_learning", "name": "Language Learning Apps", "share_pct": 4.5, "cagr_pct": 22.1, "tam_b": 19 },
+        { "id": "stem_tools", "name": "STEM & Coding Education", "share_pct": 6.1, "cagr_pct": 25.4, "tam_b": 26 },
+        { "id": "credentialing", "name": "Micro-Credentials & Certificates", "share_pct": 3.8, "cagr_pct": 28.3, "tam_b": 16 }
+      ]
+    },
+    {
+      "id": "agritech",
+      "name": "Agricultural Technology",
+      "icon": "🌾",
+      "global_tam_b": 34,
+      "cagr_pct": 12.1,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "precision_ag", "name": "Precision Agriculture", "share_pct": 29.4, "cagr_pct": 13.8, "tam_b": 10 },
+        { "id": "farm_mgmt", "name": "Farm Management Software", "share_pct": 11.8, "cagr_pct": 16.2, "tam_b": 4 },
+        { "id": "agri_biotech", "name": "Ag Biotech & Genomics", "share_pct": 17.6, "cagr_pct": 9.4, "tam_b": 6 },
+        { "id": "ag_marketplace", "name": "Ag Marketplaces & Supply Chain", "share_pct": 14.7, "cagr_pct": 18.9, "tam_b": 5 },
+        { "id": "indoor_farming", "name": "Indoor & Vertical Farming", "share_pct": 8.8, "cagr_pct": 24.1, "tam_b": 3 },
+        { "id": "livestock_tech", "name": "Livestock Monitoring Tech", "share_pct": 5.9, "cagr_pct": 11.3, "tam_b": 2 }
+      ]
+    },
+    {
+      "id": "cleantech",
+      "name": "Clean Energy & Climate Tech",
+      "icon": "⚡",
+      "global_tam_b": 423,
+      "cagr_pct": 21.7,
+      "maturity": "growth",
+      "segments": [
+        { "id": "solar", "name": "Solar Technology", "share_pct": 24.1, "cagr_pct": 18.3, "tam_b": 102 },
+        { "id": "ev_infra", "name": "EV Charging Infrastructure", "share_pct": 7.8, "cagr_pct": 33.4, "tam_b": 33 },
+        { "id": "battery_storage", "name": "Battery & Energy Storage", "share_pct": 11.3, "cagr_pct": 26.8, "tam_b": 48 },
+        { "id": "carbon_capture", "name": "Carbon Capture & Offsets", "share_pct": 3.5, "cagr_pct": 38.2, "tam_b": 15 },
+        { "id": "smart_grid", "name": "Smart Grid & Energy Mgmt", "share_pct": 9.2, "cagr_pct": 19.7, "tam_b": 39 },
+        { "id": "green_building", "name": "Green Building Tech", "share_pct": 6.4, "cagr_pct": 14.1, "tam_b": 27 }
+      ]
+    },
+    {
+      "id": "saas",
+      "name": "SaaS & Cloud Software",
+      "icon": "☁️",
+      "global_tam_b": 819,
+      "cagr_pct": 13.7,
+      "maturity": "mature",
+      "segments": [
+        { "id": "crm", "name": "CRM Platforms", "share_pct": 10.1, "cagr_pct": 11.2, "tam_b": 83 },
+        { "id": "erp", "name": "ERP Systems", "share_pct": 8.5, "cagr_pct": 9.8, "tam_b": 70 },
+        { "id": "collaboration", "name": "Collaboration & Productivity", "share_pct": 7.3, "cagr_pct": 14.6, "tam_b": 60 },
+        { "id": "vertical_saas", "name": "Vertical / Industry SaaS", "share_pct": 12.8, "cagr_pct": 19.3, "tam_b": 105 },
+        { "id": "devtools", "name": "Developer Tools & Platforms", "share_pct": 6.1, "cagr_pct": 22.4, "tam_b": 50 },
+        { "id": "security_saas", "name": "Cybersecurity SaaS", "share_pct": 9.6, "cagr_pct": 16.8, "tam_b": 79 }
+      ]
+    },
+    {
+      "id": "ecommerce",
+      "name": "E-Commerce & Retail Tech",
+      "icon": "🛒",
+      "global_tam_b": 7100,
+      "cagr_pct": 9.4,
+      "maturity": "mature",
+      "segments": [
+        { "id": "d2c", "name": "Direct-to-Consumer Platforms", "share_pct": 4.2, "cagr_pct": 15.8, "tam_b": 298 },
+        { "id": "marketplace_tech", "name": "Marketplace Enablement", "share_pct": 2.1, "cagr_pct": 18.3, "tam_b": 149 },
+        { "id": "social_commerce", "name": "Social Commerce", "share_pct": 3.5, "cagr_pct": 28.4, "tam_b": 249 },
+        { "id": "retail_analytics", "name": "Retail Analytics & AI", "share_pct": 1.4, "cagr_pct": 22.7, "tam_b": 99 },
+        { "id": "logistics_last_mile", "name": "Last-Mile Delivery Tech", "share_pct": 2.8, "cagr_pct": 19.1, "tam_b": 199 }
+      ]
+    },
+    {
+      "id": "proptech",
+      "name": "Property Technology",
+      "icon": "🏠",
+      "global_tam_b": 86,
+      "cagr_pct": 15.8,
+      "maturity": "growth",
+      "segments": [
+        { "id": "prop_mgmt", "name": "Property Management Software", "share_pct": 22.1, "cagr_pct": 12.4, "tam_b": 19 },
+        { "id": "real_estate_marketplace", "name": "Real Estate Marketplaces", "share_pct": 18.6, "cagr_pct": 14.7, "tam_b": 16 },
+        { "id": "construction_tech", "name": "Construction Tech", "share_pct": 15.1, "cagr_pct": 18.9, "tam_b": 13 },
+        { "id": "smart_building", "name": "Smart Building / IoT", "share_pct": 12.8, "cagr_pct": 22.3, "tam_b": 11 },
+        { "id": "mortgage_tech", "name": "Mortgage & Closing Tech", "share_pct": 9.3, "cagr_pct": 16.1, "tam_b": 8 }
+      ]
+    },
+    {
+      "id": "logistics",
+      "name": "Logistics & Supply Chain",
+      "icon": "🚛",
+      "global_tam_b": 275,
+      "cagr_pct": 11.2,
+      "maturity": "growth",
+      "segments": [
+        { "id": "fleet_mgmt", "name": "Fleet Management", "share_pct": 12.7, "cagr_pct": 14.8, "tam_b": 35 },
+        { "id": "warehouse_auto", "name": "Warehouse Automation", "share_pct": 10.5, "cagr_pct": 16.2, "tam_b": 29 },
+        { "id": "freight_matching", "name": "Freight Matching & Brokerage", "share_pct": 8.4, "cagr_pct": 12.9, "tam_b": 23 },
+        { "id": "supply_chain_visibility", "name": "Supply Chain Visibility", "share_pct": 9.1, "cagr_pct": 19.4, "tam_b": 25 },
+        { "id": "reverse_logistics", "name": "Reverse Logistics & Returns", "share_pct": 4.4, "cagr_pct": 21.7, "tam_b": 12 }
+      ]
+    },
+    {
+      "id": "foodtech",
+      "name": "Food & Beverage Technology",
+      "icon": "🍽️",
+      "global_tam_b": 342,
+      "cagr_pct": 10.8,
+      "maturity": "growth",
+      "segments": [
+        { "id": "food_delivery", "name": "Food Delivery Platforms", "share_pct": 35.1, "cagr_pct": 9.3, "tam_b": 120 },
+        { "id": "ghost_kitchens", "name": "Ghost / Cloud Kitchens", "share_pct": 6.4, "cagr_pct": 22.4, "tam_b": 22 },
+        { "id": "restaurant_tech", "name": "Restaurant Management Tech", "share_pct": 8.2, "cagr_pct": 15.6, "tam_b": 28 },
+        { "id": "food_safety", "name": "Food Safety & Traceability", "share_pct": 5.8, "cagr_pct": 12.1, "tam_b": 20 },
+        { "id": "alt_protein", "name": "Alternative Protein", "share_pct": 4.1, "cagr_pct": 18.7, "tam_b": 14 }
+      ]
+    },
+    {
+      "id": "legaltech",
+      "name": "Legal Technology",
+      "icon": "⚖️",
+      "global_tam_b": 36,
+      "cagr_pct": 18.2,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "contract_mgmt", "name": "Contract Lifecycle Management", "share_pct": 19.4, "cagr_pct": 21.3, "tam_b": 7 },
+        { "id": "ediscovery", "name": "eDiscovery & Litigation", "share_pct": 22.2, "cagr_pct": 14.1, "tam_b": 8 },
+        { "id": "legal_ai", "name": "Legal AI & Research", "share_pct": 11.1, "cagr_pct": 28.9, "tam_b": 4 },
+        { "id": "practice_mgmt", "name": "Practice Management", "share_pct": 16.7, "cagr_pct": 12.8, "tam_b": 6 },
+        { "id": "legal_marketplace", "name": "Legal Services Marketplace", "share_pct": 8.3, "cagr_pct": 19.4, "tam_b": 3 }
+      ]
+    },
+    {
+      "id": "hrtech",
+      "name": "HR & Workforce Technology",
+      "icon": "👥",
+      "global_tam_b": 62,
+      "cagr_pct": 12.8,
+      "maturity": "mature",
+      "segments": [
+        { "id": "recruiting", "name": "Recruiting & ATS", "share_pct": 21.0, "cagr_pct": 14.5, "tam_b": 13 },
+        { "id": "payroll_hcm", "name": "Payroll & HCM", "share_pct": 25.8, "cagr_pct": 10.2, "tam_b": 16 },
+        { "id": "employee_engagement", "name": "Employee Engagement", "share_pct": 8.1, "cagr_pct": 18.7, "tam_b": 5 },
+        { "id": "workforce_analytics", "name": "Workforce Analytics", "share_pct": 6.5, "cagr_pct": 22.3, "tam_b": 4 },
+        { "id": "gig_economy", "name": "Gig & Contingent Workforce", "share_pct": 9.7, "cagr_pct": 16.4, "tam_b": 6 }
+      ]
+    },
+    {
+      "id": "cybersecurity",
+      "name": "Cybersecurity",
+      "icon": "🔒",
+      "global_tam_b": 298,
+      "cagr_pct": 14.3,
+      "maturity": "growth",
+      "segments": [
+        { "id": "endpoint_security", "name": "Endpoint Security", "share_pct": 14.8, "cagr_pct": 12.1, "tam_b": 44 },
+        { "id": "identity_access", "name": "Identity & Access Management", "share_pct": 11.4, "cagr_pct": 16.8, "tam_b": 34 },
+        { "id": "cloud_security", "name": "Cloud Security", "share_pct": 13.1, "cagr_pct": 22.4, "tam_b": 39 },
+        { "id": "siem_soar", "name": "SIEM & SOAR", "share_pct": 8.7, "cagr_pct": 11.9, "tam_b": 26 },
+        { "id": "app_security", "name": "Application Security", "share_pct": 7.0, "cagr_pct": 19.6, "tam_b": 21 }
+      ]
+    },
+    {
+      "id": "gaming",
+      "name": "Gaming & Interactive Media",
+      "icon": "🎮",
+      "global_tam_b": 282,
+      "cagr_pct": 8.7,
+      "maturity": "mature",
+      "segments": [
+        { "id": "mobile_gaming", "name": "Mobile Gaming", "share_pct": 36.2, "cagr_pct": 9.4, "tam_b": 102 },
+        { "id": "game_streaming", "name": "Game Streaming & Cloud", "share_pct": 5.3, "cagr_pct": 28.1, "tam_b": 15 },
+        { "id": "esports", "name": "Esports & Competitive", "share_pct": 3.5, "cagr_pct": 18.4, "tam_b": 10 },
+        { "id": "game_dev_tools", "name": "Game Dev Tools & Engines", "share_pct": 4.3, "cagr_pct": 14.2, "tam_b": 12 },
+        { "id": "ar_vr_gaming", "name": "AR/VR Gaming", "share_pct": 3.9, "cagr_pct": 32.6, "tam_b": 11 }
+      ]
+    },
+    {
+      "id": "biotech",
+      "name": "Biotechnology",
+      "icon": "🧬",
+      "global_tam_b": 1618,
+      "cagr_pct": 13.9,
+      "maturity": "growth",
+      "segments": [
+        { "id": "drug_discovery", "name": "AI Drug Discovery", "share_pct": 1.2, "cagr_pct": 36.4, "tam_b": 19 },
+        { "id": "genomics", "name": "Genomics & Sequencing", "share_pct": 4.3, "cagr_pct": 18.7, "tam_b": 70 },
+        { "id": "diagnostics", "name": "Diagnostics & Testing", "share_pct": 8.7, "cagr_pct": 11.2, "tam_b": 141 },
+        { "id": "biomanufacturing", "name": "Biomanufacturing", "share_pct": 12.5, "cagr_pct": 14.8, "tam_b": 202 },
+        { "id": "synthetic_bio", "name": "Synthetic Biology", "share_pct": 2.1, "cagr_pct": 28.9, "tam_b": 34 }
+      ]
+    },
+    {
+      "id": "mobility",
+      "name": "Mobility & Transportation",
+      "icon": "🚗",
+      "global_tam_b": 167,
+      "cagr_pct": 17.1,
+      "maturity": "growth",
+      "segments": [
+        { "id": "ride_hailing", "name": "Ride-Hailing & Sharing", "share_pct": 47.9, "cagr_pct": 12.3, "tam_b": 80 },
+        { "id": "micromobility", "name": "Micromobility (Scooters/Bikes)", "share_pct": 4.8, "cagr_pct": 18.6, "tam_b": 8 },
+        { "id": "autonomous_vehicles", "name": "Autonomous Vehicle Tech", "share_pct": 7.2, "cagr_pct": 34.2, "tam_b": 12 },
+        { "id": "fleet_electrification", "name": "Fleet Electrification", "share_pct": 8.4, "cagr_pct": 26.1, "tam_b": 14 },
+        { "id": "mobility_as_service", "name": "Mobility-as-a-Service (MaaS)", "share_pct": 3.6, "cagr_pct": 29.8, "tam_b": 6 }
+      ]
+    },
+    {
+      "id": "mediatech",
+      "name": "Media & Content Technology",
+      "icon": "📺",
+      "global_tam_b": 182,
+      "cagr_pct": 11.5,
+      "maturity": "mature",
+      "segments": [
+        { "id": "streaming", "name": "Video Streaming Platforms", "share_pct": 48.4, "cagr_pct": 10.1, "tam_b": 88 },
+        { "id": "creator_economy", "name": "Creator Economy Tools", "share_pct": 7.1, "cagr_pct": 22.8, "tam_b": 13 },
+        { "id": "adtech", "name": "AdTech & Programmatic", "share_pct": 18.1, "cagr_pct": 12.4, "tam_b": 33 },
+        { "id": "podcast_audio", "name": "Podcast & Audio Tech", "share_pct": 5.5, "cagr_pct": 16.3, "tam_b": 10 },
+        { "id": "content_ai", "name": "AI Content Generation", "share_pct": 3.3, "cagr_pct": 41.2, "tam_b": 6 }
+      ]
+    },
+    {
+      "id": "ai_ml",
+      "name": "Artificial Intelligence & ML",
+      "icon": "🤖",
+      "global_tam_b": 621,
+      "cagr_pct": 36.6,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "genai", "name": "Generative AI Applications", "share_pct": 13.5, "cagr_pct": 46.2, "tam_b": 84 },
+        { "id": "mlops", "name": "MLOps & Model Management", "share_pct": 4.2, "cagr_pct": 38.7, "tam_b": 26 },
+        { "id": "computer_vision", "name": "Computer Vision", "share_pct": 8.1, "cagr_pct": 28.3, "tam_b": 50 },
+        { "id": "nlp", "name": "NLP & Conversational AI", "share_pct": 11.6, "cagr_pct": 32.1, "tam_b": 72 },
+        { "id": "ai_infra", "name": "AI Infrastructure & Compute", "share_pct": 18.4, "cagr_pct": 34.8, "tam_b": 114 },
+        { "id": "edge_ai", "name": "Edge AI & Embedded ML", "share_pct": 5.3, "cagr_pct": 27.4, "tam_b": 33 }
+      ]
+    },
+    {
+      "id": "spacetech",
+      "name": "Space & Satellite Technology",
+      "icon": "🛰️",
+      "global_tam_b": 546,
+      "cagr_pct": 7.1,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "satellite_comms", "name": "Satellite Communications", "share_pct": 18.7, "cagr_pct": 9.4, "tam_b": 102 },
+        { "id": "earth_observation", "name": "Earth Observation & Imaging", "share_pct": 5.5, "cagr_pct": 14.8, "tam_b": 30 },
+        { "id": "launch_services", "name": "Launch Services", "share_pct": 4.8, "cagr_pct": 11.2, "tam_b": 26 },
+        { "id": "space_manufacturing", "name": "In-Space Manufacturing", "share_pct": 0.4, "cagr_pct": 42.1, "tam_b": 2 }
+      ]
+    },
+    {
+      "id": "govtech",
+      "name": "Government & Civic Technology",
+      "icon": "🏛️",
+      "global_tam_b": 31,
+      "cagr_pct": 14.6,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "digital_services", "name": "Digital Government Services", "share_pct": 32.3, "cagr_pct": 16.1, "tam_b": 10 },
+        { "id": "public_safety", "name": "Public Safety Tech", "share_pct": 22.6, "cagr_pct": 12.4, "tam_b": 7 },
+        { "id": "civic_engagement", "name": "Civic Engagement Platforms", "share_pct": 9.7, "cagr_pct": 19.8, "tam_b": 3 },
+        { "id": "grants_procurement", "name": "Grants & Procurement Tech", "share_pct": 12.9, "cagr_pct": 18.3, "tam_b": 4 }
+      ]
+    },
+    {
+      "id": "martech",
+      "name": "Marketing Technology",
+      "icon": "📣",
+      "global_tam_b": 510,
+      "cagr_pct": 13.6,
+      "maturity": "mature",
+      "segments": [
+        { "id": "marketing_automation", "name": "Marketing Automation", "share_pct": 12.4, "cagr_pct": 14.8, "tam_b": 63 },
+        { "id": "seo_content", "name": "SEO & Content Marketing", "share_pct": 8.2, "cagr_pct": 16.3, "tam_b": 42 },
+        { "id": "email_marketing", "name": "Email & Lifecycle Marketing", "share_pct": 6.1, "cagr_pct": 11.7, "tam_b": 31 },
+        { "id": "customer_data", "name": "Customer Data Platforms", "share_pct": 4.9, "cagr_pct": 24.6, "tam_b": 25 },
+        { "id": "abm", "name": "Account-Based Marketing", "share_pct": 2.4, "cagr_pct": 19.2, "tam_b": 12 }
+      ]
+    },
+    {
+      "id": "manufacturing",
+      "name": "Advanced Manufacturing & Industry 4.0",
+      "icon": "🏭",
+      "global_tam_b": 378,
+      "cagr_pct": 16.7,
+      "maturity": "growth",
+      "segments": [
+        { "id": "3d_printing", "name": "3D Printing / Additive", "share_pct": 8.5, "cagr_pct": 21.2, "tam_b": 32 },
+        { "id": "industrial_iot", "name": "Industrial IoT (IIoT)", "share_pct": 18.3, "cagr_pct": 16.8, "tam_b": 69 },
+        { "id": "digital_twin", "name": "Digital Twin", "share_pct": 4.8, "cagr_pct": 33.7, "tam_b": 18 },
+        { "id": "predictive_maintenance", "name": "Predictive Maintenance", "share_pct": 6.9, "cagr_pct": 28.4, "tam_b": 26 },
+        { "id": "robotics", "name": "Industrial Robotics", "share_pct": 14.8, "cagr_pct": 12.3, "tam_b": 56 }
+      ]
+    },
+    {
+      "id": "wellness",
+      "name": "Wellness & Fitness Technology",
+      "icon": "🧘",
+      "global_tam_b": 96,
+      "cagr_pct": 14.8,
+      "maturity": "growth",
+      "segments": [
+        { "id": "wearables", "name": "Wearables & Health Trackers", "share_pct": 34.4, "cagr_pct": 12.6, "tam_b": 33 },
+        { "id": "fitness_apps", "name": "Fitness & Workout Apps", "share_pct": 14.6, "cagr_pct": 18.4, "tam_b": 14 },
+        { "id": "corporate_wellness", "name": "Corporate Wellness Platforms", "share_pct": 10.4, "cagr_pct": 16.7, "tam_b": 10 },
+        { "id": "sleep_tech", "name": "Sleep Technology", "share_pct": 7.3, "cagr_pct": 22.1, "tam_b": 7 },
+        { "id": "nutrition_apps", "name": "Nutrition & Diet Tech", "share_pct": 5.2, "cagr_pct": 19.8, "tam_b": 5 }
+      ]
+    },
+    {
+      "id": "pettech",
+      "name": "Pet & Animal Technology",
+      "icon": "🐾",
+      "global_tam_b": 14,
+      "cagr_pct": 18.4,
+      "maturity": "emerging",
+      "segments": [
+        { "id": "pet_health", "name": "Pet Health & Televet", "share_pct": 28.6, "cagr_pct": 21.3, "tam_b": 4 },
+        { "id": "pet_services", "name": "Pet Services Marketplace", "share_pct": 21.4, "cagr_pct": 16.8, "tam_b": 3 },
+        { "id": "pet_food_tech", "name": "Pet Food & Nutrition Tech", "share_pct": 35.7, "cagr_pct": 14.2, "tam_b": 5 },
+        { "id": "pet_wearables", "name": "Pet Wearables & Tracking", "share_pct": 14.3, "cagr_pct": 24.6, "tam_b": 2 }
+      ]
+    },
+    {
+      "id": "oceantech",
+      "name": "Ocean & Blue Economy Tech",
+      "icon": "🌊",
+      "global_tam_b": 8,
+      "cagr_pct": 15.2,
+      "maturity": "nascent",
+      "segments": [
+        { "id": "aquaculture_tech", "name": "Aquaculture Technology", "share_pct": 37.5, "cagr_pct": 14.1, "tam_b": 3 },
+        { "id": "ocean_monitoring", "name": "Ocean Monitoring & Data", "share_pct": 25.0, "cagr_pct": 18.7, "tam_b": 2 },
+        { "id": "marine_energy", "name": "Marine Renewable Energy", "share_pct": 12.5, "cagr_pct": 22.3, "tam_b": 1 },
+        { "id": "ocean_cleanup", "name": "Ocean Cleanup Tech", "share_pct": 12.5, "cagr_pct": 28.4, "tam_b": 1 }
+      ]
+    }
+  ],
+  "geographies": [
+    { "id": "us_national", "name": "United States", "multiplier": 0.31, "population_m": 337, "gdp_t": 28.8 },
+    { "id": "us_southeast", "name": "US Southeast", "multiplier": 0.076, "population_m": 84, "gdp_t": 5.1 },
+    { "id": "mississippi", "name": "Mississippi", "multiplier": 0.0031, "population_m": 2.95, "gdp_t": 0.13 },
+    { "id": "europe", "name": "Europe", "multiplier": 0.24, "population_m": 447, "gdp_t": 18.4 },
+    { "id": "asia_pacific", "name": "Asia-Pacific", "multiplier": 0.33, "population_m": 4300, "gdp_t": 37.2 },
+    { "id": "latin_america", "name": "Latin America", "multiplier": 0.055, "population_m": 660, "gdp_t": 5.8 },
+    { "id": "africa", "name": "Africa", "multiplier": 0.025, "population_m": 1400, "gdp_t": 3.1 },
+    { "id": "global", "name": "Global", "multiplier": 1.0, "population_m": 8100, "gdp_t": 105.0 }
+  ],
+  "business_models": [
+    { "id": "subscription", "name": "SaaS / Subscription", "avg_arpu_low": 120, "avg_arpu_high": 36000, "margin_pct": 72, "ltv_multiplier": 3.2, "icon": "🔄" },
+    { "id": "marketplace", "name": "Marketplace / Platform", "avg_arpu_low": 50, "avg_arpu_high": 5000, "margin_pct": 18, "ltv_multiplier": 2.8, "icon": "🏪" },
+    { "id": "transactional", "name": "Transactional / Per-Use", "avg_arpu_low": 5, "avg_arpu_high": 500, "margin_pct": 34, "ltv_multiplier": 1.9, "icon": "💰" },
+    { "id": "freemium", "name": "Freemium → Premium", "avg_arpu_low": 0, "avg_arpu_high": 2400, "margin_pct": 65, "ltv_multiplier": 2.1, "icon": "🎁" },
+    { "id": "hardware_plus", "name": "Hardware + Services", "avg_arpu_low": 200, "avg_arpu_high": 50000, "margin_pct": 42, "ltv_multiplier": 2.5, "icon": "🔩" },
+    { "id": "licensing", "name": "Licensing / IP", "avg_arpu_low": 1000, "avg_arpu_high": 500000, "margin_pct": 85, "ltv_multiplier": 4.1, "icon": "📜" }
+  ],
+  "customer_types": [
+    { "id": "smb", "name": "Small & Medium Business", "deal_size_multiplier": 0.15, "sales_cycle_months": 1.5, "addressable_pct": 0.45 },
+    { "id": "mid_market", "name": "Mid-Market", "deal_size_multiplier": 0.55, "sales_cycle_months": 4, "addressable_pct": 0.28 },
+    { "id": "enterprise", "name": "Enterprise", "deal_size_multiplier": 1.0, "sales_cycle_months": 9, "addressable_pct": 0.12 },
+    { "id": "consumer", "name": "Consumer / B2C", "deal_size_multiplier": 0.02, "sales_cycle_months": 0.1, "addressable_pct": 0.65 },
+    { "id": "government", "name": "Government / Public Sector", "deal_size_multiplier": 0.8, "sales_cycle_months": 14, "addressable_pct": 0.08 }
+  ],
+  "competitive_benchmarks": {
+    "penetration_rates": {
+      "nascent": { "low": 0.005, "mid": 0.02, "high": 0.05, "label": "< 5% adoption" },
+      "emerging": { "low": 0.02, "mid": 0.08, "high": 0.15, "label": "2-15% adoption" },
+      "growth": { "low": 0.08, "mid": 0.2, "high": 0.35, "label": "8-35% adoption" },
+      "mature": { "low": 0.25, "mid": 0.45, "high": 0.7, "label": "25-70% adoption" }
+    },
+    "startup_capture_rates": {
+      "nascent": { "optimistic": 0.05, "realistic": 0.015, "conservative": 0.005 },
+      "emerging": { "optimistic": 0.03, "realistic": 0.008, "conservative": 0.002 },
+      "growth": { "optimistic": 0.015, "realistic": 0.004, "conservative": 0.001 },
+      "mature": { "optimistic": 0.008, "realistic": 0.002, "conservative": 0.0004 }
+    }
+  },
+  "viability_thresholds": {
+    "pre_seed": { "min_sam_m": 50, "min_som_m": 2, "label": "Pre-Seed Viable" },
+    "seed": { "min_sam_m": 100, "min_som_m": 5, "label": "Seed Viable" },
+    "series_a": { "min_sam_m": 500, "min_som_m": 25, "label": "Series A Viable" },
+    "series_b": { "min_sam_m": 2000, "min_som_m": 100, "label": "Series B+ Viable" }
+  },
+  "growth_projections_years": [1, 2, 3, 5, 7, 10],
+  "methodology_notes": {
+    "tam": "Total Addressable Market — the entire revenue opportunity if 100% of the target market adopted the product, at the global or selected geographic level.",
+    "sam": "Serviceable Addressable Market — the portion of TAM that your business model, customer type, and geographic reach can realistically target.",
+    "som": "Serviceable Obtainable Market — the slice of SAM you can realistically capture in the near term, based on competitive dynamics and market maturity.",
+    "data_sources": "Aggregated from Statista, Grand View Research, MarketsandMarkets, CB Insights, Pitchbook, World Bank, and IBIS World. Figures are rounded estimates suitable for early-stage planning, not investment-grade projections.",
+    "combination_logic": "TAM = industry segment TAM × geography multiplier. SAM = TAM × customer addressable % × penetration rate. SOM = SAM × startup capture rate. These are then cross-referenced with business model economics to compute revenue-per-customer and viability scores."
+  }
+}
