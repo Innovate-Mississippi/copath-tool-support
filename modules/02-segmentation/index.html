@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute Segmentation | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .segment-card { background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin-bottom: 16px; position: relative; }
+        .segment-card h3 { font-size: 16px; margin-bottom: 4px; display: flex; justify-content: space-between; }
+        .segment-score { font-family: var(--font-mono); font-size: 18px; color: var(--im-navy); background: var(--paper); padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border-color); }
+        .jtbd-text { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; font-style: italic; }
+        .attr-bars { display: flex; gap: 8px; margin-bottom: 12px; }
+        .attr-bar { flex: 1; font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--paper); padding: 4px 8px; border-radius: 4px; text-align: center; }
+        .bar-u { background: var(--im-red); }
+        .bar-a { background: var(--im-amber); }
+        .bar-b { background: var(--im-green); }
+        .kill-stamp { position: absolute; top: 16px; right: 16px; color: var(--im-red); border: 2px solid var(--im-red); font-weight: 800; padding: 4px 8px; transform: rotate(15deg); border-radius: 4px; display: none; }
+        .killed .kill-stamp { display: block; }
+        .killed { opacity: 0.6; }
+
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Attribute Segmentation</h1>
+        <p class="text-muted">The "Priority Matrix." Define your segments by their Jobs-to-be-Done, then ruthlessly rank them to find your beachhead market.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div>
+            <div class="copath-card no-print">
+                <h2>Define a Segment</h2>
+                <p class="text-muted mb-4">Forget broad demographics. Define exactly what this specific group is trying to achieve (their "Job").</p>
+
+                <label>Segment Name (e.g., Independent Rural Dentists)</label>
+                <input type="text" id="seg-name" maxlength="60" placeholder="Specific niche..." style="margin-bottom: 16px;">
+
+                <label>Functional Job (What are they trying to do?)</label>
+                <input type="text" id="seg-func" maxlength="120" placeholder="e.g., Process Medicaid claims without hiring extra staff..." style="margin-bottom: 16px;">
+
+                <div class="form-grid">
+                    <div>
+                        <label>Urgency (1-10)</label>
+                        <input type="number" id="seg-urgency" min="1" max="10" placeholder="10 = Hair on fire">
+                    </div>
+                    <div>
+                        <label>Budget Authority (1-10)</label>
+                        <input type="number" id="seg-budget" min="1" max="10" placeholder="10 = They sign the checks">
+                    </div>
+                </div>
+
+                <label>Accessibility (1-10)</label>
+                <select id="seg-access" style="margin-bottom: 16px;">
+                    <option value="10">10 - I have their direct phone number</option>
+                    <option value="7">7 - I can get a warm intro this week</option>
+                    <option value="4">4 - Cold outreach only (LinkedIn/Email)</option>
+                    <option value="1">1 - 3+ degrees of separation. No path.</option>
+                </select>
+
+                <button class="btn-primary" onclick="addSegment()">Score & Add Segment</button>
+            </div>
+
+            <div class="copath-card no-print" style="padding: 24px; background: var(--im-navy); color: white;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: white;">Consulting Guidance</h3>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7);"><strong>Why multi-factor scoring?</strong><br>A segment with massive budget (10) and high urgency (10) is worthless if you have zero accessibility (1). Multiplying these attributes prevents founders from chasing "perfect" markets they cannot reach. Focus on the path of least resistance first.</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="copath-card">
+                <h2>Priority Matrix</h2>
+                <div id="segment-list">
+                    <p class="text-muted" style="font-size: 13px; font-style: italic;" id="empty-state">Add your first segment to see the priority ranking...</p>
+                </div>
+            </div>
+
+            <div id="alert-kill" class="alert-box alert-danger">
+                <strong>Segment Killed: Access Blocked</strong><br>
+                You have targeted a segment with an Accessibility score below 4. You have no realistic path to these buyers. Put this segment on ice until you recruit an inside champion or advisor.
+            </div>
+
+            <div id="alert-compare" class="alert-box alert-success">
+                <strong>Beachhead Identified</strong><br>
+                <span id="compare-text"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 02: Attribute Segmentation</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '02_segmentation';
+    let segments = [];
+
+    function init() {
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) segments = draft.data;
+        renderMatrix();
+    }
+
+    function addSegment() {
+        const nameInput = document.getElementById('seg-name');
+        const funcInput = document.getElementById('seg-func');
+        const urgInput = document.getElementById('seg-urgency');
+        const budInput = document.getElementById('seg-budget');
+        const accInput = document.getElementById('seg-access');
+
+        if (!nameInput.value.trim() || !funcInput.value.trim() || !urgInput.value || !budInput.value) {
+            alert('Please complete all fields to properly define the segment.');
+            return;
+        }
+
+        const u = parseInt(urgInput.value);
+        const b = parseInt(budInput.value);
+        const a = parseInt(accInput.value);
+        const score = u * b * a;
+
+        const entry = {
+            id: Date.now(),
+            name: nameInput.value.trim(),
+            job: funcInput.value.trim(),
+            u, b, a,
+            score,
+            isKilled: a < 4
+        };
+
+        segments.push(entry);
+        segments.sort((x, y) => y.score - x.score);
+        CoPathCore.saveDraft(MODULE_ID, segments);
+
+        nameInput.value = ''; funcInput.value = ''; urgInput.value = ''; budInput.value = ''; accInput.value = '10';
+        renderMatrix();
+    }
+
+    function deleteSegment(id) {
+        segments = segments.filter(s => s.id !== id);
+        CoPathCore.saveDraft(MODULE_ID, segments);
+        renderMatrix();
+    }
+
+    function renderMatrix() {
+        const listContainer = document.getElementById('segment-list');
+        const emptyState = document.getElementById('empty-state');
+        const alertKill = document.getElementById('alert-kill');
+        const alertCompare = document.getElementById('alert-compare');
+
+        listContainer.innerHTML = '';
+        alertKill.style.display = 'none';
+        alertCompare.style.display = 'none';
+
+        if (segments.length === 0) {
+            if (emptyState) listContainer.appendChild(emptyState);
+            return;
+        }
+
+        let hasKilled = false;
+
+        segments.forEach(seg => {
+            if (seg.isKilled) hasKilled = true;
+            const div = document.createElement('div');
+            div.className = `segment-card ${seg.isKilled ? 'killed' : ''}`;
+            div.innerHTML = `
+                <div class="kill-stamp">NON-VIABLE</div>
+                <h3>${seg.name} <span class="segment-score">${seg.score}</span></h3>
+                <div class="jtbd-text">"Needs to: ${seg.job}"</div>
+                <div class="attr-bars">
+                    <div class="attr-bar bar-u">Urgency: ${seg.u}</div>
+                    <div class="attr-bar bar-a">Access: ${seg.a}</div>
+                    <div class="attr-bar bar-b">Budget: ${seg.b}</div>
+                </div>
+                <button class="no-print" onclick="deleteSegment(${seg.id})" style="color:var(--text-muted); background:none; border:none; cursor:pointer; font-size:11px; text-decoration:underline;">Remove</button>
+            `;
+            listContainer.appendChild(div);
+        });
+
+        if (hasKilled) alertKill.style.display = 'block';
+
+        const viableSegments = segments.filter(s => !s.isKilled);
+        if (viableSegments.length >= 2) {
+            const top = viableSegments[0];
+            const runnerUp = viableSegments[1];
+            const ratio = (top.score / runnerUp.score).toFixed(1);
+            if (ratio >= 1.2) {
+                document.getElementById('compare-text').innerHTML =
+                    `Your data shows that <strong>${top.name}</strong> is <strong>${ratio}x more viable</strong> as a starting market than ${runnerUp.name}. Ignore everything else and focus 100% of your energy here.`;
+                alertCompare.style.display = 'block';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

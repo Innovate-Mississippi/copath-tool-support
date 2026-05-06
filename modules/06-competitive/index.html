@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Analysis | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 24px; }
+        .matrix-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+        .matrix-table th, .matrix-table td { padding: 12px; text-align: center; border: 1px solid var(--border-color); }
+        .matrix-table th { background: var(--bg-color); font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; color: var(--im-navy-mid); }
+        .matrix-table td:first-child { text-align: left; font-weight: 700; background: var(--paper); }
+        .matrix-table .col-you { background: #E6F9EF; font-weight: 700; color: var(--im-green); border-left: 2px solid var(--im-green); border-right: 2px solid var(--im-green); }
+        .feature-input-group { margin-bottom: 12px; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); }
+
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .matrix-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+
+        @media print { .print-only { display: inline !important; } }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Competitive Analysis</h1>
+        <p class="text-muted">The "Moat Builder." Map your true competitive landscape, starting with the hardest competitor to beat: the Status Quo.</p>
+    </div>
+
+    <div id="draft-alert" class="alert-box alert-success no-print" style="margin-bottom: 24px; padding: 12px;">
+        <strong>Session Restored:</strong> Your previous competitive data has been loaded.
+    </div>
+
+    <div class="dashboard-grid">
+        <div>
+            <div class="copath-card no-print">
+                <h2>1. Industry & Incumbents</h2>
+                <p class="text-muted mb-4">Select your sector to auto-load established giants. You can overwrite these if needed.</p>
+
+                <label>Target Industry</label>
+                <select id="industry-select" onchange="loadIncumbents()" style="margin-bottom: 16px;">
+                    <option value="" disabled selected>Select Industry...</option>
+                </select>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Competitor 1 (Giant)</label>
+                        <input type="text" id="comp-1" maxlength="40" oninput="updateMatrix()" placeholder="e.g., Salesforce">
+                    </div>
+                    <div>
+                        <label>Competitor 2 (Niche)</label>
+                        <input type="text" id="comp-2" maxlength="40" oninput="updateMatrix()" placeholder="e.g., Niche Startup">
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+                <h2>2. Define Feature Parity</h2>
+                <p class="text-muted mb-4">What are the "Table Stakes" (Must-Haves) vs your "Unique Differentiator"?</p>
+
+                <div class="feature-input-group">
+                    <label>Must-Have Feature A (Table Stakes)</label>
+                    <input type="text" id="feat-1" maxlength="60" oninput="updateMatrix()" placeholder="e.g., Cloud Sync">
+                </div>
+                <div class="feature-input-group">
+                    <label>Must-Have Feature B (Table Stakes)</label>
+                    <input type="text" id="feat-2" maxlength="60" oninput="updateMatrix()" placeholder="e.g., Export to CSV">
+                </div>
+                <div class="feature-input-group" style="border-color: var(--im-green);">
+                    <label style="color: var(--im-green);">Your Differentiator (The Moat)</label>
+                    <input type="text" id="feat-diff" maxlength="60" oninput="updateMatrix()" placeholder="e.g., Proprietary AI Algo">
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+                <h2>3. The Status Quo Cost</h2>
+                <p class="text-muted mb-4">If they don't buy anything, what does their current manual process cost them?</p>
+                <div class="form-grid">
+                    <div>
+                        <label>Hours Wasted / Week</label>
+                        <input type="number" id="sq-hours" oninput="updateMatrix()" value="0">
+                    </div>
+                    <div>
+                        <label>Est. Cost of Errors / Mo ($)</label>
+                        <input type="number" id="sq-cost" oninput="updateMatrix()" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="copath-card no-print" style="padding: 24px; background: var(--im-navy); color: white;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: white;">Consulting Guidance</h3>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7);"><strong>Competing with Zero:</strong> "Doing nothing" or "using Excel" is your biggest competitor. If your differentiator is cool, but their current manual process only costs them 1 hour a week, the friction of adopting your software will kill the deal. You must prove the Status Quo is financially painful.</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="copath-card">
+                <h2>Competitive Matrix</h2>
+                <table class="matrix-table" id="comp-matrix">
+                    <thead>
+                        <tr>
+                            <th>Feature / Competitor</th>
+                            <th class="col-you">You</th>
+                            <th>Status Quo (Excel/Manual)</th>
+                            <th id="th-comp1">Competitor 1</th>
+                            <th id="th-comp2">Competitor 2</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div style="margin-top: 16px; text-align: right;">
+                    <button class="btn-primary no-print" onclick="window.print()">Print Matrix</button>
+                </div>
+            </div>
+
+            <div id="alert-no-moat" class="alert-box alert-danger">
+                <strong>Defensibility Warning: Below Parity</strong><br>
+                You are scoring yourself lower than competitors on "Must-Have" features. A strong differentiator cannot save you if you lack the table-stakes functionality the industry expects.
+            </div>
+
+            <div id="alert-inertia" class="alert-box alert-warning">
+                <strong>Status Quo Inertia Warning</strong><br>
+                The financial/time cost of the customer's current manual process is too low. The friction of implementing your software outweighs the pain of their current problem.
+            </div>
+
+            <div id="alert-moat-strong" class="alert-box alert-success">
+                <strong>Strong Defensible Moat</strong><br>
+                You have parity on must-haves, a clear differentiator, and the Status Quo is demonstrably painful. This is an investor-ready positioning statement.
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 06: Competitive Analysis</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '06_competitive';
+    let compData = null;
+
+    const fallbackData = {
+        incumbents: {
+            agtech: ['John Deere', 'Trimble'],
+            govtech: ['Tyler Technologies', 'CentralSquare']
+        },
+        global_friction_modifier: 7.0
+    };
+
+    async function init() {
+        const rawData = await CoPathCore.fetchData('competitive');
+        compData = rawData ? rawData : fallbackData;
+
+        // Populate industry dropdown from data file
+        const select = document.getElementById('industry-select');
+        const industries = Object.keys(compData.incumbents || {}).sort();
+        industries.forEach(key => {
+            const cleanName = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.text = cleanName;
+            select.appendChild(opt);
+        });
+
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            document.getElementById('draft-alert').style.display = 'block';
+            setTimeout(() => { document.getElementById('draft-alert').style.display = 'none'; }, 4000);
+
+            document.getElementById('industry-select').value = draft.data.industry || '';
+            document.getElementById('comp-1').value = draft.data.comp1 || '';
+            document.getElementById('comp-2').value = draft.data.comp2 || '';
+            document.getElementById('feat-1').value = draft.data.feat1 || '';
+            document.getElementById('feat-2').value = draft.data.feat2 || '';
+            document.getElementById('feat-diff').value = draft.data.featDiff || '';
+            document.getElementById('sq-hours').value = draft.data.sqHours || 0;
+            document.getElementById('sq-cost').value = draft.data.sqCost || 0;
+
+            window.matrixScores = draft.data.matrixScores || {};
+        } else {
+            window.matrixScores = {};
+        }
+
+        updateMatrix();
+    }
+
+    function loadIncumbents() {
+        const ind = document.getElementById('industry-select').value;
+        if (compData.incumbents && compData.incumbents[ind]) {
+            document.getElementById('comp-1').value = compData.incumbents[ind][0] || '';
+            document.getElementById('comp-2').value = compData.incumbents[ind][1] || '';
+        }
+        updateMatrix();
+    }
+
+    function getScoreSelect(id, defaultVal) {
+        const val = window.matrixScores[id] || defaultVal || 'No';
+        const options = ['No', 'Partial', 'Yes'];
+        let html = `<select class="no-print" onchange="scoreChanged('${id}', this.value)" style="padding: 4px; font-size: 12px;">`;
+        options.forEach(opt => {
+            html += `<option value="${opt}" ${val === opt ? 'selected' : ''}>${opt}</option>`;
+        });
+        html += `</select><span style="display:none;" class="print-only">${val}</span>`;
+        return html;
+    }
+
+    function scoreChanged(id, value) {
+        window.matrixScores[id] = value;
+        updateMatrix();
+    }
+
+    function updateMatrix() {
+        const c1 = document.getElementById('comp-1').value || 'Competitor 1';
+        const c2 = document.getElementById('comp-2').value || 'Competitor 2';
+        const f1 = document.getElementById('feat-1').value || '[Must-Have A]';
+        const f2 = document.getElementById('feat-2').value || '[Must-Have B]';
+        const fD = document.getElementById('feat-diff').value || '[Differentiator]';
+
+        const sqHours = parseFloat(document.getElementById('sq-hours').value) || 0;
+        const sqCost = parseFloat(document.getElementById('sq-cost').value) || 0;
+
+        document.getElementById('th-comp1').innerText = c1;
+        document.getElementById('th-comp2').innerText = c2;
+
+        const tbody = document.querySelector('#comp-matrix tbody');
+        tbody.innerHTML = `
+            <tr>
+                <td>${f1}</td>
+                <td class="col-you">${getScoreSelect('you_f1', 'Yes')}</td>
+                <td>No</td>
+                <td>${getScoreSelect('c1_f1', 'Yes')}</td>
+                <td>${getScoreSelect('c2_f1', 'Yes')}</td>
+            </tr>
+            <tr>
+                <td>${f2}</td>
+                <td class="col-you">${getScoreSelect('you_f2', 'Yes')}</td>
+                <td>No</td>
+                <td>${getScoreSelect('c1_f2', 'Yes')}</td>
+                <td>${getScoreSelect('c2_f2', 'Partial')}</td>
+            </tr>
+            <tr>
+                <td style="color: var(--im-green);">${fD}</td>
+                <td class="col-you">${getScoreSelect('you_fd', 'Yes')}</td>
+                <td>No</td>
+                <td>${getScoreSelect('c1_fd', 'No')}</td>
+                <td>${getScoreSelect('c2_fd', 'No')}</td>
+            </tr>
+            <tr>
+                <td>Cost of Inaction</td>
+                <td class="col-you">High ROI</td>
+                <td style="color: var(--im-red); font-weight:700;">${sqHours} hrs/wk + $${sqCost}/mo</td>
+                <td>Sunk Cost</td>
+                <td>Sunk Cost</td>
+            </tr>
+        `;
+
+        CoPathCore.saveDraft(MODULE_ID, {
+            industry: document.getElementById('industry-select').value,
+            comp1: document.getElementById('comp-1').value,
+            comp2: document.getElementById('comp-2').value,
+            feat1: document.getElementById('feat-1').value,
+            feat2: document.getElementById('feat-2').value,
+            featDiff: document.getElementById('feat-diff').value,
+            sqHours,
+            sqCost,
+            matrixScores: window.matrixScores
+        });
+
+        const alertNoMoat = document.getElementById('alert-no-moat');
+        const alertInertia = document.getElementById('alert-inertia');
+        const alertMoatStrong = document.getElementById('alert-moat-strong');
+
+        alertNoMoat.style.display = 'none';
+        alertInertia.style.display = 'none';
+        alertMoatStrong.style.display = 'none';
+
+        const youF1 = window.matrixScores['you_f1'] || 'Yes';
+        const youF2 = window.matrixScores['you_f2'] || 'Yes';
+
+        const isBelowParity = (youF1 === 'No' || youF2 === 'No');
+        const hasLowInertia = (sqHours < 5 && sqCost < 500);
+        const hasDiff = (window.matrixScores['you_fd'] || 'Yes') === 'Yes';
+
+        if (isBelowParity) {
+            alertNoMoat.style.display = 'block';
+        } else if (hasLowInertia) {
+            alertInertia.style.display = 'block';
+        } else if (hasDiff) {
+            alertMoatStrong.style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

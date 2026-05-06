@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discovery Kit | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; }
+        .grader-box { border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; margin-bottom: 16px; background: var(--paper); }
+        .feedback-item { font-size: 13px; margin-top: 8px; padding-left: 12px; border-left: 3px solid transparent; }
+        .feedback-bad { border-left-color: var(--im-red); color: var(--im-red); }
+        .feedback-good { border-left-color: var(--im-green); color: var(--im-green); }
+
+        .script-container { display: none; background: white; padding: 40px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .script-header { text-align: center; border-bottom: 3px solid var(--im-navy); padding-bottom: 16px; margin-bottom: 24px; }
+        .script-section { margin-bottom: 32px; page-break-inside: avoid; }
+        .script-section h3 { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--im-navy-mid); border-bottom: 1px solid var(--border-color); padding-bottom: 4px; margin-bottom: 12px; }
+        .q-block { margin-bottom: 24px; }
+        .q-text { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .q-notes { height: 100px; border: 1px dashed #ccc; border-radius: 4px; background: #fafafa; }
+
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            body { background: white; }
+            .dashboard-grid, .copath-header, .global-footer, .no-print { display: none !important; }
+            .script-container { display: block !important; padding: 0; border: none; }
+            .q-notes { border: 1px solid #000; background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Customer Discovery Kit</h1>
+        <p class="text-muted">The "Field Manual." Draft unbiased questions, pass the Mom Test grader, and generate a printable interview script.</p>
+    </div>
+
+    <div id="draft-alert" class="alert-box alert-success no-print" style="margin-bottom: 24px; padding: 12px;">
+        <strong>Session Restored:</strong> Your previous script data has been loaded.
+    </div>
+
+    <div class="dashboard-grid no-print">
+        <div>
+            <div class="copath-card">
+                <h2>1. Interview Context</h2>
+                <p class="text-muted mb-4">Who are you talking to and what are you trying to prove?</p>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Target Persona</label>
+                        <input type="text" id="dk-persona" maxlength="50" oninput="saveDraft()" placeholder="e.g., Rural Clinic Managers">
+                    </div>
+                    <div>
+                        <label>Core Hypothesis to Test</label>
+                        <input type="text" id="dk-hypothesis" maxlength="100" oninput="saveDraft()" placeholder="e.g., They spend 5+ hours a week on compliance.">
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+                <h2>2. Draft Your Questions</h2>
+                <p class="text-muted mb-4">Draft 3 core questions. The engine will evaluate them in real-time for bias.</p>
+
+                <label>Question 1 (Context/Current Behavior)</label>
+                <textarea id="dk-q1" oninput="evaluateQuestions()" placeholder="e.g., Walk me through the last time you..."></textarea>
+                <div id="feedback-q1" class="grader-box" style="display:none;"></div>
+
+                <label>Question 2 (Pain Exploration)</label>
+                <textarea id="dk-q2" oninput="evaluateQuestions()" placeholder="e.g., What was the hardest part about doing that?"></textarea>
+                <div id="feedback-q2" class="grader-box" style="display:none;"></div>
+
+                <label>Question 3 (Status Quo Cost)</label>
+                <textarea id="dk-q3" oninput="evaluateQuestions()" placeholder="e.g., Have you ever tried to solve this? What did it cost?"></textarea>
+                <div id="feedback-q3" class="grader-box" style="display:none;"></div>
+
+                <button class="btn-primary" style="margin-top: 16px; width: 100%;" onclick="generateScript()">Generate Printable Script &rarr;</button>
+            </div>
+        </div>
+
+        <div>
+            <div class="copath-card" style="background: var(--im-navy); color: white;">
+                <h3 style="font-size: 16px; margin-bottom: 12px; color: white;">The "Mom Test" Rules</h3>
+                <ul style="font-size: 13px; color: rgba(255,255,255,0.8); padding-left: 16px; line-height: 1.6;">
+                    <li style="margin-bottom: 8px;"><strong>Rule 1:</strong> Talk about their life, not your idea.</li>
+                    <li style="margin-bottom: 8px;"><strong>Rule 2:</strong> Ask about specifics in the past, not generics or opinions about the future.</li>
+                    <li><strong>Rule 3:</strong> Talk less, listen more.</li>
+                </ul>
+            </div>
+
+            <div class="copath-card">
+                <h3 style="font-size: 14px; margin-bottom: 8px;">Consulting FAQ: Next Moves</h3>
+
+                <p style="font-size: 12px; font-weight: 700; margin-top: 16px;">What if they complain, but haven't tried to fix it?</p>
+                <p style="font-size: 12px; color: var(--text-muted);">Then it's not a real problem. If a problem is painful enough to pay for, they will have already tried to hack together a solution (even if it's just a spreadsheet). Move on.</p>
+
+                <p style="font-size: 12px; font-weight: 700; margin-top: 16px;">What if they say "I love this, let me know when it's done"?</p>
+                <p style="font-size: 12px; color: var(--text-muted);">That is a Polite Lie. Force a commitment. Reply: <em>"We are building a pilot group next month. It requires a $500 deposit to secure your spot. Should I send you the link?"</em> Their answer to that is your actual data.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="printable-script" class="script-container">
+        <div class="script-header">
+            <div style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase;">Innovate Mississippi | CoPath</div>
+            <h1 style="font-size: 28px; margin-top: 8px;">Customer Discovery Guide</h1>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;"><strong>Target:</strong> <span id="print-persona"></span></p>
+        </div>
+
+        <div class="script-section">
+            <h3>Session Objective</h3>
+            <p style="font-size: 16px; font-style: italic;" id="print-hypothesis"></p>
+        </div>
+
+        <div class="script-section">
+            <h3>Core Questions (Do not pitch your idea yet)</h3>
+            <div class="q-block">
+                <div class="q-text" id="print-q1"></div>
+                <div class="q-notes"></div>
+            </div>
+            <div class="q-block">
+                <div class="q-text" id="print-q2"></div>
+                <div class="q-notes"></div>
+            </div>
+            <div class="q-block">
+                <div class="q-text" id="print-q3"></div>
+                <div class="q-notes"></div>
+            </div>
+        </div>
+
+        <div class="script-section" style="margin-top: 40px;">
+            <h3>Post-Interview Scorecard (Complete in car immediately after)</h3>
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ccc; width: 70%;">Did they identify a specific, past instance of this problem?</td>
+                    <td style="padding: 12px; border: 1px solid #ccc; text-align: center;">Y / N</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ccc;">Did they reveal what they currently spend (time/money) to fix it?</td>
+                    <td style="padding: 12px; border: 1px solid #ccc; text-align: center;">Y / N</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px; border: 1px solid #ccc; font-weight: 700;">Did you get a commitment? (Follow-up, Intro, or Cash)</td>
+                    <td style="padding: 12px; border: 1px solid #ccc; text-align: center;">Y / N</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '07_discovery';
+
+    const badTriggers = ['would you', 'will you', 'do you think', 'how much would you pay', 'do you like', 'what if we'];
+    const goodTriggers = ['tell me about', 'last time', 'how do you currently', 'what happened when', 'walk me through', 'why was that'];
+
+    function init() {
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            document.getElementById('draft-alert').style.display = 'block';
+            setTimeout(() => { document.getElementById('draft-alert').style.display = 'none'; }, 4000);
+
+            document.getElementById('dk-persona').value = draft.data.persona || '';
+            document.getElementById('dk-hypothesis').value = draft.data.hypothesis || '';
+            document.getElementById('dk-q1').value = draft.data.q1 || '';
+            document.getElementById('dk-q2').value = draft.data.q2 || '';
+            document.getElementById('dk-q3').value = draft.data.q3 || '';
+
+            evaluateQuestions();
+        }
+    }
+
+    function saveDraft() {
+        CoPathCore.saveDraft(MODULE_ID, {
+            persona: document.getElementById('dk-persona').value,
+            hypothesis: document.getElementById('dk-hypothesis').value,
+            q1: document.getElementById('dk-q1').value,
+            q2: document.getElementById('dk-q2').value,
+            q3: document.getElementById('dk-q3').value
+        });
+    }
+
+    function evaluateQuestions() {
+        saveDraft();
+
+        [1, 2, 3].forEach(num => {
+            const text = document.getElementById(`dk-q${num}`).value.toLowerCase();
+            const feedbackBox = document.getElementById(`feedback-q${num}`);
+
+            if (!text) {
+                feedbackBox.style.display = 'none';
+                return;
+            }
+
+            feedbackBox.style.display = 'block';
+            feedbackBox.innerHTML = '';
+
+            let hasBad = false;
+            let hasGood = false;
+
+            badTriggers.forEach(trigger => {
+                if (text.includes(trigger)) {
+                    hasBad = true;
+                    feedbackBox.innerHTML += `<div class="feedback-item feedback-bad"><strong>Bad Phrase Detected:</strong> "${trigger}". This asks for a future opinion. People will lie to be nice.</div>`;
+                }
+            });
+
+            goodTriggers.forEach(trigger => {
+                if (text.includes(trigger)) {
+                    hasGood = true;
+                    feedbackBox.innerHTML += `<div class="feedback-item feedback-good"><strong>Excellent:</strong> "${trigger}". This grounds the answer in past behavior.</div>`;
+                }
+            });
+
+            if (!hasBad && !hasGood && text.length > 10) {
+                feedbackBox.innerHTML = `<div class="feedback-item" style="color: var(--text-muted);">Neutral phrasing. Make sure you're asking about past behavior, not future hypotheticals.</div>`;
+            }
+        });
+    }
+
+    function generateScript() {
+        document.getElementById('print-persona').innerText = document.getElementById('dk-persona').value || '[No Persona Entered]';
+        document.getElementById('print-hypothesis').innerText = document.getElementById('dk-hypothesis').value || '[No Hypothesis Entered]';
+        document.getElementById('print-q1').innerText = '1. ' + (document.getElementById('dk-q1').value || '...');
+        document.getElementById('print-q2').innerText = '2. ' + (document.getElementById('dk-q2').value || '...');
+        document.getElementById('print-q3').innerText = '3. ' + (document.getElementById('dk-q3').value || '...');
+
+        const scriptDiv = document.getElementById('printable-script');
+        scriptDiv.style.display = 'block';
+        window.print();
+        scriptDiv.style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

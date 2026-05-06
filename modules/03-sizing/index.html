@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottom-Up Market Sizing | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .funnel-container { background: var(--paper); border: 1px solid var(--border-color); border-radius: 8px; padding: 24px; margin-bottom: 24px; }
+        .funnel-step { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding: 12px 0; }
+        .funnel-step:last-child { border-bottom: none; }
+        .step-label { font-size: 14px; font-weight: 700; color: var(--im-navy-mid); text-transform: uppercase; letter-spacing: 0.05em; }
+        .step-value { font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--im-navy); }
+        .revenue-box { background: var(--im-navy); color: white; border-radius: 8px; padding: 24px; text-align: center; }
+        .rev-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; margin-bottom: 8px; }
+        .rev-value { font-family: var(--font-display); font-size: 48px; font-weight: 800; color: var(--im-green-lt); line-height: 1; margin-bottom: 16px; }
+        .range-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 16px; }
+        .range-box { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 6px; }
+        .range-box-label { font-size: 10px; text-transform: uppercase; opacity: 0.7; }
+        .range-box-value { font-family: var(--font-mono); font-size: 16px; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Bottom-Up Market Sizing</h1>
+        <p class="text-muted">The "Reality Calculator." Calculate your Year 1 Serviceable Obtainable Market (SOM) by modeling a realistic sales funnel against hard local constraints.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div>
+            <div class="copath-card no-print">
+                <h2>1. Define the Market Constraint</h2>
+                <p class="text-muted mb-4">Select the specific entity you are selling to. We use verified Mississippi node counts to cap your total universe.</p>
+
+                <label>Target Node Type (Mississippi)</label>
+                <select id="node-select" onchange="checkCustomNode()" style="margin-bottom: 16px;">
+                    <option value="" disabled selected>Loading MS Nodes...</option>
+                </select>
+
+                <div id="custom-node-wrap" style="display: none; margin-bottom: 16px;">
+                    <label>Custom Total Market Size (Count)</label>
+                    <input type="number" id="custom-node-count" placeholder="e.g., 500 local businesses">
+                </div>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Annual Contract Value ($)</label>
+                        <input type="number" id="input-acv" placeholder="e.g., 5000">
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+                <h2>2. Model the Sales Funnel</h2>
+                <p class="text-muted mb-4">How many of those total nodes can you realistically reach and close in your first 12 months?</p>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Reachable Leads (%)</label>
+                        <input type="number" id="input-lead-rate" min="1" max="100" placeholder="e.g., 20%">
+                        <p style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">% you can actually contact</p>
+                    </div>
+                    <div>
+                        <label>Close Rate (%)</label>
+                        <input type="number" id="input-close-rate" min="1" max="100" placeholder="e.g., 5%">
+                        <p style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">% of leads that buy</p>
+                    </div>
+                </div>
+
+                <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="calculateFunnel()">Calculate Year 1 Run Rate</button>
+            </div>
+
+            <div class="copath-card no-print" style="padding: 24px; background: var(--im-navy); color: white;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: white;">Consulting Guidance</h3>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7);"><strong>The 1% Fallacy:</strong> Never pitch "If we just get 1% of a $10 Billion market." Investors hate this. Instead, prove you know exactly how many customers exist in your local reach (Nodes), how much it costs to acquire them, and what your actual conversion funnel looks like to hit your first $100k.</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="funnel-container">
+                <h3 style="margin-bottom: 16px; border-bottom: 2px solid var(--im-navy); padding-bottom: 8px;">The Year 1 Funnel</h3>
+                <div class="funnel-step">
+                    <div class="step-label">Total Market Nodes</div>
+                    <div class="step-value" id="out-total-nodes">0</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="step-label">Reachable Leads (Pipeline)</div>
+                    <div class="step-value" id="out-leads">0</div>
+                </div>
+                <div class="funnel-step">
+                    <div class="step-label" style="color: var(--im-green);">Customers Closed (SOM)</div>
+                    <div class="step-value" style="color: var(--im-green);" id="out-customers">0</div>
+                </div>
+            </div>
+
+            <div class="revenue-box">
+                <div class="rev-label">Expected Year 1 Revenue</div>
+                <div class="rev-value" id="out-rev-expected">$0</div>
+                <div class="range-grid">
+                    <div class="range-box">
+                        <div class="range-box-label">Worst Case (Half Close Rate)</div>
+                        <div class="range-box-value" style="color: #FCA5A5;" id="out-rev-worst">$0</div>
+                    </div>
+                    <div class="range-box">
+                        <div class="range-box-label">Best Case (1.5x Close Rate)</div>
+                        <div class="range-box-value" id="out-rev-best">$0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="alert-conversion" class="alert-box alert-danger">
+                <strong>Delusion Warning: Unrealistic Conversion</strong><br>
+                You are projecting a close rate higher than 15%. In B2B or complex sales, this is mathematically highly improbable without a warm referral network. Lower your close rate to 3-5% for cold outreach realism.
+            </div>
+
+            <div id="alert-lifestyle" class="alert-box alert-warning">
+                <strong>Scale Warning: Lifestyle Business Territory</strong><br>
+                Your Year 1 Expected Revenue is below $150,000. While this is a great start, it may not support venture-scale growth or external hiring. You must either increase your ACV or significantly expand your reachable node universe to build a venture-backed company.
+            </div>
+
+            <div id="alert-sustainable" class="alert-box alert-success">
+                <strong>Sustainable Base Identified</strong><br>
+                Your funnel metrics yield a strong, realistic base for a seed-stage company. Your conversion metrics are within reasonable industry benchmarks.
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 03: Market Sizing</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '03_sizing';
+    let msNodesData = null;
+
+    const fallbackNodes = {
+        ms_nodes: {
+            public_school_districts: 139,
+            hospitals_and_medical_centers: 96,
+            farms_and_agricultural_operations: 30800,
+            incorporated_municipalities: 299,
+            counties: 82,
+            community_colleges: 15,
+            public_universities: 8,
+            rural_critical_access_hospitals: 34
+        }
+    };
+
+    const formatMoney = (num) => '$' + num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+    async function init() {
+        const rawData = await CoPathCore.fetchData('sizing');
+        msNodesData = rawData ? rawData : fallbackNodes;
+
+        const select = document.getElementById('node-select');
+        select.innerHTML = '<option value="" disabled selected>Select a constraint...</option>';
+
+        for (const [key, value] of Object.entries(msNodesData.ms_nodes)) {
+            const cleanName = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+            const option = document.createElement('option');
+            option.value = value;
+            option.text = `Mississippi ${cleanName} (Max: ${value.toLocaleString()})`;
+            select.appendChild(option);
+        }
+        select.appendChild(new Option('Other / Custom Node Count...', 'custom'));
+
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            document.getElementById('input-acv').value = draft.data.acv || '';
+            document.getElementById('input-lead-rate').value = draft.data.leadRate || '';
+            document.getElementById('input-close-rate').value = draft.data.closeRate || '';
+            if (draft.data.nodeType === 'custom') {
+                select.value = 'custom';
+                document.getElementById('custom-node-count').value = draft.data.customCount || '';
+                checkCustomNode();
+            } else if (draft.data.nodeValue) {
+                select.value = draft.data.nodeValue;
+            }
+            if (draft.data.acv) calculateFunnel();
+        }
+    }
+
+    function checkCustomNode() {
+        const val = document.getElementById('node-select').value;
+        document.getElementById('custom-node-wrap').style.display = (val === 'custom') ? 'block' : 'none';
+    }
+
+    function calculateFunnel() {
+        const selectVal = document.getElementById('node-select').value;
+        let totalNodes = 0;
+
+        if (selectVal === 'custom') {
+            totalNodes = parseInt(document.getElementById('custom-node-count').value) || 0;
+        } else {
+            totalNodes = parseInt(selectVal) || 0;
+        }
+
+        const acv = parseFloat(document.getElementById('input-acv').value) || 0;
+        const leadRate = parseFloat(document.getElementById('input-lead-rate').value) || 0;
+        const closeRate = parseFloat(document.getElementById('input-close-rate').value) || 0;
+
+        if (totalNodes === 0 || acv === 0) {
+            alert('Please define the market nodes and ACV.');
+            return;
+        }
+
+        const leads = Math.floor(totalNodes * (leadRate / 100));
+        const customers = Math.floor(leads * (closeRate / 100));
+
+        const expectedRev = customers * acv;
+        const worstRev = Math.floor(leads * ((closeRate / 2) / 100)) * acv;
+        const bestRev = Math.floor(leads * ((closeRate * 1.5) / 100)) * acv;
+
+        document.getElementById('out-total-nodes').innerText = totalNodes.toLocaleString();
+        document.getElementById('out-leads').innerText = leads.toLocaleString();
+        document.getElementById('out-customers').innerText = customers.toLocaleString();
+        document.getElementById('out-rev-expected').innerText = formatMoney(expectedRev);
+        document.getElementById('out-rev-worst').innerText = formatMoney(worstRev);
+        document.getElementById('out-rev-best').innerText = formatMoney(bestRev);
+
+        const alertConv = document.getElementById('alert-conversion');
+        const alertLife = document.getElementById('alert-lifestyle');
+        const alertSust = document.getElementById('alert-sustainable');
+
+        alertConv.style.display = 'none';
+        alertLife.style.display = 'none';
+        alertSust.style.display = 'none';
+
+        if (closeRate > 15) {
+            alertConv.style.display = 'block';
+        } else if (expectedRev > 0 && expectedRev < 150000) {
+            alertLife.style.display = 'block';
+        } else if (expectedRev >= 150000 && closeRate <= 15) {
+            alertSust.style.display = 'block';
+        }
+
+        CoPathCore.saveDraft(MODULE_ID, {
+            nodeType: selectVal === 'custom' ? 'custom' : 'preset',
+            nodeValue: selectVal,
+            customCount: totalNodes,
+            acv,
+            leadRate,
+            closeRate
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

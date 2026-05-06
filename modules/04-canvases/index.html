@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoPath Canvases | Innovate Mississippi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .canvas-header-bar { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 16px; gap: 16px; flex-wrap: wrap; }
+        .canvas-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+        .box-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+        .canvas-box { background: var(--paper); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; }
+        .canvas-box h4 { font-size: 14px; margin-bottom: 4px; }
+        .canvas-box p { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+        .canvas-textarea { flex-grow: 1; min-height: 120px; resize: vertical; border: 1px solid var(--border-color); border-radius: 6px; padding: 12px; font-family: var(--font-sans); font-size: 13px; line-height: 1.5; background: var(--bg-color); }
+        .canvas-textarea:focus { background: var(--paper); border-color: var(--im-green); outline: none; }
+
+        .sidebar-section { background: var(--paper); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .sidebar-section h3 { font-size: 14px; margin-bottom: 12px; border-bottom: 2px solid var(--im-navy); padding-bottom: 4px; display: inline-block; }
+        .check-item { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: 12px; color: var(--text-main); }
+        .check-item input { margin-top: 3px; }
+        .reflection-list { padding-left: 16px; font-size: 12px; color: var(--text-muted); font-style: italic; }
+        .reflection-list li { margin-bottom: 8px; }
+
+        .print-btn { background: var(--im-navy); color: white; border: none; padding: 10px 16px; border-radius: 6px; font-family: var(--font-display); font-weight: 700; cursor: pointer; display: flex; gap: 8px; align-items: center; }
+        .print-btn:hover { background: var(--im-navy-mid); }
+
+        @media (max-width: 900px) {
+            .canvas-grid { grid-template-columns: 1fr; }
+            .box-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            .canvas-grid { display: block; }
+            .sidebar-section { break-inside: avoid; margin-top: 20px; }
+            .canvas-box { break-inside: avoid; margin-bottom: 16px; border: 1px solid #000; }
+            .canvas-textarea { border: none; padding: 0; background: transparent; min-height: auto; resize: none; }
+            .no-print, select, .print-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">CoPath Canvases</h1>
+        <p class="text-muted">Structured visual frameworks for discovery, synthesis, and execution. Edits auto-save locally.</p>
+    </div>
+
+    <div id="draft-alert" class="alert-box alert-success no-print" style="margin-bottom: 24px; padding: 12px;">
+        <strong>Session Restored:</strong> Your previous canvas notes have been loaded from local storage.
+    </div>
+
+    <div class="canvas-header-bar no-print">
+        <div>
+            <label>Select Workspace Framework</label>
+            <select id="canvas-selector" onchange="switchCanvas()" style="min-width: 300px;"></select>
+        </div>
+        <button class="print-btn" onclick="window.print()">Print to PDF</button>
+    </div>
+
+    <div class="canvas-grid">
+        <div>
+            <div id="canvas-title-area" style="margin-bottom: 24px;">
+                <h2 id="c-title" style="font-size: 24px;">Canvas Title</h2>
+                <p id="c-subtitle" class="text-muted"></p>
+            </div>
+            <div class="box-grid" id="canvas-boxes"></div>
+        </div>
+
+        <div>
+            <div class="sidebar-section">
+                <h3>Quality Checklist</h3>
+                <div id="canvas-checklist"></div>
+            </div>
+
+            <div class="sidebar-section" style="background: #FFFBEB; border-color: rgba(245,158,11,0.3);">
+                <h3 style="color: var(--im-amber); border-bottom-color: var(--im-amber);">What to think about</h3>
+                <ul class="reflection-list" id="canvas-reflections"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 04: CoPath Canvases</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '04_canvases';
+    let canvasData = [];
+    let currentCanvasId = null;
+    let savedState = {};
+
+    const fallbackCanvases = [
+        {
+            id: 'discovery',
+            title: 'Customer Discovery Canvas',
+            subtitle: 'Problem discovery: does the problem exist, and does it matter?',
+            boxes: [
+                { id: 'segment', title: 'Customer Segment', desc: 'Role, context, and geography.', limit: 200 },
+                { id: 'goals', title: 'Learning Goals', desc: 'What must this interview confirm?', limit: 300 },
+                { id: 'pain', title: 'Evidence of Pain', desc: 'Capture direct evidence, not interpretation.', limit: 500 },
+                { id: 'solutions', title: 'Existing Solutions', desc: 'Manual workarounds or vendors.', limit: 300 },
+                { id: 'quotes', title: 'Exact Quotes', desc: 'Verbatim phrases.', limit: 500 },
+                { id: 'decision', title: 'Next Step', desc: 'End with a hard judgment.', limit: 200 }
+            ],
+            checklist: ['Started with workflow, not my idea.', 'Asked for a specific recent example.', 'Listened for cost (time/money).'],
+            reflections: ['Is the pain tied to a recurring operational reality?', 'Who feels the pain directly vs indirectly?', 'What would convince you this segment is wrong?']
+        }
+    ];
+
+    async function init() {
+        const rawData = await CoPathCore.fetchData('canvases');
+        canvasData = rawData ? rawData.canvases : fallbackCanvases;
+
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            savedState = draft.data;
+            document.getElementById('draft-alert').style.display = 'block';
+            setTimeout(() => { document.getElementById('draft-alert').style.display = 'none'; }, 4000);
+        }
+
+        const selector = document.getElementById('canvas-selector');
+        canvasData.forEach((c) => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.text = c.title;
+            selector.appendChild(opt);
+        });
+
+        currentCanvasId = canvasData[0].id;
+        renderCanvas();
+    }
+
+    function switchCanvas() {
+        currentCanvasId = document.getElementById('canvas-selector').value;
+        renderCanvas();
+    }
+
+    function handleInput() {
+        if (!savedState[currentCanvasId]) savedState[currentCanvasId] = { texts: {}, checks: {} };
+        document.querySelectorAll('.canvas-textarea').forEach(el => {
+            savedState[currentCanvasId].texts[el.id] = el.value;
+        });
+        document.querySelectorAll('.check-item input').forEach(el => {
+            savedState[currentCanvasId].checks[el.id] = el.checked;
+        });
+        CoPathCore.saveDraft(MODULE_ID, savedState);
+    }
+
+    function renderCanvas() {
+        const canvas = canvasData.find(c => c.id === currentCanvasId);
+        const state = savedState[currentCanvasId] || { texts: {}, checks: {} };
+
+        document.getElementById('c-title').innerText = canvas.title;
+        document.getElementById('c-subtitle').innerText = canvas.subtitle;
+
+        const boxContainer = document.getElementById('canvas-boxes');
+        boxContainer.innerHTML = '';
+        canvas.boxes.forEach(box => {
+            const div = document.createElement('div');
+            div.className = 'canvas-box';
+            const textValue = state.texts[`box-${box.id}`] || '';
+            div.innerHTML = `
+                <h4>${box.title}</h4>
+                <p>${box.desc}</p>
+                <textarea id="box-${box.id}" class="canvas-textarea" maxlength="${box.limit || 500}" oninput="handleInput()" placeholder="Type here... (Max ${box.limit || 500} chars)">${textValue}</textarea>
+            `;
+            boxContainer.appendChild(div);
+        });
+
+        const checkContainer = document.getElementById('canvas-checklist');
+        checkContainer.innerHTML = '';
+        canvas.checklist.forEach((item, index) => {
+            const checkId = `chk-${index}`;
+            const isChecked = state.checks[checkId] ? 'checked' : '';
+            checkContainer.innerHTML += `
+                <label class="check-item">
+                    <input type="checkbox" id="${checkId}" onchange="handleInput()" ${isChecked}>
+                    <span>${item}</span>
+                </label>
+            `;
+        });
+
+        const refContainer = document.getElementById('canvas-reflections');
+        refContainer.innerHTML = '';
+        canvas.reflections.forEach(item => {
+            refContainer.innerHTML += `<li>${item}</li>`;
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

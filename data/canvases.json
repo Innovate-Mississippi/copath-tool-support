@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "last_updated": "2026-05-06T14:15:00Z",
+    "version": "1.0",
+    "description": "Structured discovery canvases. Each canvas defines a set of boxes (text fields), a quality checklist, and reflection prompts."
+  },
+  "canvases": [
+    {
+      "id": "discovery",
+      "title": "Customer Discovery Canvas",
+      "subtitle": "Problem discovery: does the problem exist, and does it actually matter?",
+      "boxes": [
+        { "id": "segment", "title": "Customer Segment", "desc": "Role, context, and geography of the person you're talking to.", "limit": 200 },
+        { "id": "goals", "title": "Learning Goals", "desc": "What must this interview confirm or invalidate?", "limit": 300 },
+        { "id": "pain", "title": "Evidence of Pain", "desc": "Direct evidence (what they did, when, what it cost). Not interpretation.", "limit": 500 },
+        { "id": "solutions", "title": "Existing Solutions", "desc": "Manual workarounds, spreadsheets, or vendors they currently use.", "limit": 300 },
+        { "id": "quotes", "title": "Exact Quotes", "desc": "Verbatim phrases. Avoid paraphrase.", "limit": 500 },
+        { "id": "decision", "title": "Next Step", "desc": "End with a hard judgment: pursue, pivot, kill.", "limit": 200 }
+      ],
+      "checklist": [
+        "Started with their workflow, not my idea.",
+        "Asked for a specific recent example, not opinions.",
+        "Listened for cost (time and money).",
+        "Captured at least one verbatim quote.",
+        "Got a commitment (next meeting, intro, or deposit)."
+      ],
+      "reflections": [
+        "Is the pain tied to a recurring operational reality?",
+        "Who feels the pain directly vs indirectly?",
+        "What would convince you this segment is wrong?"
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Interview Synthesis Canvas",
+      "subtitle": "Pattern recognition: what repeated across interviews, what broke your assumptions?",
+      "boxes": [
+        { "id": "patterns", "title": "Repeated Patterns", "desc": "Themes that showed up in 3+ interviews.", "limit": 500 },
+        { "id": "outliers", "title": "Contradictions", "desc": "What didn't fit? Why?", "limit": 300 },
+        { "id": "language", "title": "Customer Language", "desc": "Words and phrases to shape positioning and copy.", "limit": 300 },
+        { "id": "decision", "title": "Working Decision", "desc": "Proceed / pivot / stop. With reasons.", "limit": 200 }
+      ],
+      "checklist": [
+        "Compared notes across interviews, not just the latest one.",
+        "Separated recurring evidence from one-off anecdotes.",
+        "Used exact customer language, not my own framing."
+      ],
+      "reflections": [
+        "Which patterns are strong enough to act on?",
+        "What evidence is still too thin to trust?",
+        "What's the next experiment that would resolve the biggest unknown?"
+      ]
+    },
+    {
+      "id": "value-prop",
+      "title": "Value Proposition Canvas",
+      "subtitle": "Match what you build to what the customer is trying to get done.",
+      "boxes": [
+        { "id": "jobs", "title": "Customer Jobs", "desc": "The functional, social, or emotional jobs they hire a solution to do.", "limit": 400 },
+        { "id": "pains", "title": "Pains", "desc": "Frustrations, blockers, and risks in their current path.", "limit": 400 },
+        { "id": "gains", "title": "Gains", "desc": "Outcomes and benefits they want — required, expected, desired.", "limit": 400 },
+        { "id": "products", "title": "Products & Services", "desc": "What you offer (features, capabilities).", "limit": 400 },
+        { "id": "pain_relievers", "title": "Pain Relievers", "desc": "How your offering eliminates specific pains.", "limit": 400 },
+        { "id": "gain_creators", "title": "Gain Creators", "desc": "How your offering produces the gains they want.", "limit": 400 }
+      ],
+      "checklist": [
+        "Each pain reliever maps to a specific customer pain.",
+        "Each gain creator maps to a specific customer gain.",
+        "I can name a customer who would say 'yes' to each row."
+      ],
+      "reflections": [
+        "Which pain reliever is the strongest reason to switch from the status quo?",
+        "Which gain is a 'must-have' vs 'nice-to-have'?",
+        "Where am I solving a problem the customer doesn't actually have?"
+      ]
+    },
+    {
+      "id": "riskiest-assumption",
+      "title": "Riskiest Assumption Test",
+      "subtitle": "Find the one thing that, if wrong, kills the business — and design a cheap test for it.",
+      "boxes": [
+        { "id": "assumption", "title": "The Assumption", "desc": "State it as a falsifiable claim.", "limit": 250 },
+        { "id": "why_risky", "title": "Why It's Risky", "desc": "What collapses if this is wrong?", "limit": 300 },
+        { "id": "evidence_today", "title": "Evidence Today", "desc": "What do you know now? What's only opinion?", "limit": 300 },
+        { "id": "test", "title": "The Test", "desc": "Cheapest experiment that would invalidate it.", "limit": 300 },
+        { "id": "metric", "title": "Pass / Fail Metric", "desc": "Specific number, before you run the test.", "limit": 200 },
+        { "id": "result", "title": "Result & Decision", "desc": "What you learned. Persevere, pivot, or kill.", "limit": 300 }
+      ],
+      "checklist": [
+        "The assumption is falsifiable, not vague.",
+        "I set the pass/fail metric before running the test.",
+        "The test runs in under 2 weeks.",
+        "I know what I'll do with each possible outcome."
+      ],
+      "reflections": [
+        "Am I testing the riskiest thing, or the easiest thing to test?",
+        "What would I do tomorrow if this came back negative?"
+      ]
+    }
+  ]
+}

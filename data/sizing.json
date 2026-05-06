@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "last_updated": "2026-05-06T14:05:00Z",
+    "version": "2.0",
+    "source": "Mississippi-specific data aggregated via Census, Becker's Hospital Review, and B2B conversion benchmarks"
+  },
+  "ms_nodes": {
+    "public_school_districts": 139,
+    "hospitals_and_medical_centers": 96,
+    "rural_critical_access_hospitals": 34,
+    "farms_and_agricultural_operations": 30800,
+    "incorporated_municipalities": 299,
+    "counties": 82,
+    "community_colleges": 15,
+    "public_universities": 8
+  },
+  "benchmarks": {
+    "agtech": { "expected_ctr_percent": 1.5, "expected_lead_to_sale_percent": 2.5, "venture_acv_floor": 15000 },
+    "ai_ml": { "expected_ctr_percent": 2.8, "expected_lead_to_sale_percent": 3.0, "venture_acv_floor": 24000 },
+    "biotech": { "expected_ctr_percent": 0.5, "expected_lead_to_sale_percent": 1.0, "venture_acv_floor": 100000 },
+    "cleantech": { "expected_ctr_percent": 1.2, "expected_lead_to_sale_percent": 2.0, "venture_acv_floor": 50000 },
+    "climatetech": { "expected_ctr_percent": 1.4, "expected_lead_to_sale_percent": 2.5, "venture_acv_floor": 35000 },
+    "consumer_products": { "expected_ctr_percent": 3.5, "expected_lead_to_sale_percent": 1.8, "venture_acv_floor": 100 },
+    "cybersecurity": { "expected_ctr_percent": 1.8, "expected_lead_to_sale_percent": 2.5, "venture_acv_floor": 30000 },
+    "datatech": { "expected_ctr_percent": 2.2, "expected_lead_to_sale_percent": 3.5, "venture_acv_floor": 25000 },
+    "defensetech": { "expected_ctr_percent": 0.2, "expected_lead_to_sale_percent": 0.5, "venture_acv_floor": 250000 },
+    "edtech": { "expected_ctr_percent": 2.0, "expected_lead_to_sale_percent": 2.0, "venture_acv_floor": 12000 },
+    "fintech": { "expected_ctr_percent": 2.5, "expected_lead_to_sale_percent": 3.2, "venture_acv_floor": 18000 },
+    "food_agritech": { "expected_ctr_percent": 1.6, "expected_lead_to_sale_percent": 2.2, "venture_acv_floor": 10000 },
+    "govtech": { "expected_ctr_percent": 0.8, "expected_lead_to_sale_percent": 1.5, "venture_acv_floor": 45000 },
+    "healthtech": { "expected_ctr_percent": 1.5, "expected_lead_to_sale_percent": 2.0, "venture_acv_floor": 35000 },
+    "hr_workforce": { "expected_ctr_percent": 2.6, "expected_lead_to_sale_percent": 4.0, "venture_acv_floor": 15000 },
+    "legaltech": { "expected_ctr_percent": 2.1, "expected_lead_to_sale_percent": 3.8, "venture_acv_floor": 12000 },
+    "logistics": { "expected_ctr_percent": 1.7, "expected_lead_to_sale_percent": 2.8, "venture_acv_floor": 30000 },
+    "manufacturing": { "expected_ctr_percent": 1.1, "expected_lead_to_sale_percent": 1.8, "venture_acv_floor": 40000 },
+    "media_content": { "expected_ctr_percent": 3.2, "expected_lead_to_sale_percent": 4.5, "venture_acv_floor": 5000 },
+    "mobility": { "expected_ctr_percent": 1.9, "expected_lead_to_sale_percent": 2.5, "venture_acv_floor": 20000 },
+    "ocean_tech": { "expected_ctr_percent": 0.6, "expected_lead_to_sale_percent": 1.2, "venture_acv_floor": 75000 },
+    "proptech": { "expected_ctr_percent": 2.4, "expected_lead_to_sale_percent": 3.0, "venture_acv_floor": 10000 },
+    "retail_ecommerce": { "expected_ctr_percent": 4.0, "expected_lead_to_sale_percent": 2.2, "venture_acv_floor": 5000 },
+    "saas": { "expected_ctr_percent": 2.5, "expected_lead_to_sale_percent": 3.5, "venture_acv_floor": 12000 },
+    "sports_entertainment": { "expected_ctr_percent": 3.8, "expected_lead_to_sale_percent": 4.2, "venture_acv_floor": 8000 },
+    "web3": { "expected_ctr_percent": 2.2, "expected_lead_to_sale_percent": 2.0, "venture_acv_floor": 15000 },
+    "other": { "expected_ctr_percent": 2.0, "expected_lead_to_sale_percent": 2.5, "venture_acv_floor": 10000 }
+  },
+  "global_thresholds": {
+    "lifestyle_business_ceiling_revenue": 150000,
+    "delusion_close_rate_percent_b2b": 10.0,
+    "delusion_close_rate_percent_b2c": 5.0,
+    "danger_zone_cac_to_acv_ratio": 0.33
+  }
+}

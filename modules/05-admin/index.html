@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Command Center | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .admin-nav { display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; flex-wrap: wrap; }
+        .admin-nav button { background: none; border: none; font-family: var(--font-display); font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; border-radius: 6px; }
+        .admin-nav button.active { background: var(--im-navy); color: white; }
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+        .export-bar { background: var(--im-green-lt); padding: 16px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-top: 24px; color: var(--im-navy); font-weight: 700; gap: 16px; flex-wrap: wrap; }
+        .export-bar button { background: var(--im-navy); color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 700; font-family: var(--font-display); }
+        .export-bar button:hover { background: var(--text-main); }
+        .admin-note { background: #FFFBEB; border-left: 4px solid var(--im-amber); padding: 12px 16px; border-radius: 4px; font-size: 13px; color: var(--text-main); margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Admin Command Center</h1>
+        <p class="text-muted">Edit the gold-standard hurdle rates and benchmarks. Download and commit the JSON files to your <code>/data/</code> directory.</p>
+    </div>
+
+    <div class="admin-note">
+        <strong>How this works:</strong> This is a static site. To update the live data, download the JSON file below, replace the matching file in <code>/data/</code> in this repo, and push to GitHub. Cloudflare Pages will redeploy automatically.
+    </div>
+
+    <div class="copath-card">
+        <div class="admin-nav">
+            <button class="active" onclick="switchTab(event, 'validation')">Validation Weights</button>
+            <button onclick="switchTab(event, 'sizing')">MS Node Sizing</button>
+            <button onclick="switchTab(event, 'competitive')">Competitive Incumbents</button>
+        </div>
+
+        <div id="tab-validation" class="admin-section active">
+            <h2>Commitment Waterfall Weights</h2>
+            <p class="text-muted mb-4">Multipliers for each level of customer commitment. Powers the "Polite Lie Detector" in Module 1.</p>
+
+            <div class="form-grid">
+                <div>
+                    <label>Verbal Compliment / "Great Idea"</label>
+                    <input type="number" id="val-verbal" value="0.0" step="0.1">
+                </div>
+                <div>
+                    <label>Time Commitment (Follow-up Meeting)</label>
+                    <input type="number" id="val-time" value="3.0" step="0.1">
+                </div>
+                <div>
+                    <label>Reputation Commitment (Intro to Boss/Peer)</label>
+                    <input type="number" id="val-intro" value="8.0" step="0.1">
+                </div>
+                <div>
+                    <label>Financial Commitment (LOI / Pre-order)</label>
+                    <input type="number" id="val-loi" value="20.0" step="0.1">
+                </div>
+                <div>
+                    <label>Cash in Bank (Paid Pilot / Deposit)</label>
+                    <input type="number" id="val-cash" value="50.0" step="0.1">
+                </div>
+                <div>
+                    <label>Polite Lie Threshold (Minimum Score)</label>
+                    <input type="number" id="val-threshold" value="25.0" step="1.0">
+                </div>
+            </div>
+
+            <div class="export-bar">
+                <span>Generates validation.json</span>
+                <button onclick="exportJSON('validation')">Download validation.json</button>
+            </div>
+        </div>
+
+        <div id="tab-sizing" class="admin-section">
+            <h2>Mississippi Node Inventory</h2>
+            <p class="text-muted mb-4">Hard-coded entity counts to cap deluded TAM/SOM estimates in Module 3.</p>
+
+            <div class="form-grid">
+                <div>
+                    <label>Public School Districts</label>
+                    <input type="number" id="node-schools" value="139">
+                </div>
+                <div>
+                    <label>Hospitals & Medical Centers</label>
+                    <input type="number" id="node-hospitals" value="96">
+                </div>
+                <div>
+                    <label>Rural Critical Access Hospitals</label>
+                    <input type="number" id="node-cah" value="34">
+                </div>
+                <div>
+                    <label>Farms & Ag Operations</label>
+                    <input type="number" id="node-farms" value="30800">
+                </div>
+                <div>
+                    <label>Incorporated Municipalities</label>
+                    <input type="number" id="node-govs" value="299">
+                </div>
+                <div>
+                    <label>Counties</label>
+                    <input type="number" id="node-counties" value="82">
+                </div>
+                <div>
+                    <label>Community Colleges</label>
+                    <input type="number" id="node-cc" value="15">
+                </div>
+                <div>
+                    <label>Public Universities</label>
+                    <input type="number" id="node-univ" value="8">
+                </div>
+            </div>
+
+            <div class="export-bar">
+                <span>Generates sizing.json</span>
+                <button onclick="exportJSON('sizing')">Download sizing.json</button>
+            </div>
+        </div>
+
+        <div id="tab-competitive" class="admin-section">
+            <h2>Industry Incumbents & Friction</h2>
+            <p class="text-muted mb-4">Auto-populates the "Giant" competitors and switching costs in Module 6.</p>
+
+            <label>AgTech Giants (comma-separated)</label>
+            <input type="text" id="comp-agtech" value="John Deere Operations Center, Climate FieldView (Bayer), Trimble Agriculture" style="margin-bottom: 16px;">
+
+            <label>GovTech Giants (comma-separated)</label>
+            <input type="text" id="comp-govtech" value="Tyler Technologies, CentralSquare, Microsoft Dynamics 365 Gov" style="margin-bottom: 16px;">
+
+            <label>HealthTech Giants (comma-separated)</label>
+            <input type="text" id="comp-healthtech" value="Epic Systems, Cerner (Oracle), Meditech" style="margin-bottom: 16px;">
+
+            <label>Status Quo Switching Cost (1-10 multiplier)</label>
+            <input type="number" id="comp-friction" value="7.0" step="0.1" style="margin-bottom: 16px;">
+
+            <div class="export-bar">
+                <span>Generates a partial competitive.json (merge with full file)</span>
+                <button onclick="exportJSON('competitive')">Download competitive.json</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>CoPath Admin Command Center</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    function switchTab(ev, tabId) {
+        document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.admin-nav button').forEach(el => el.classList.remove('active'));
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+        ev.target.classList.add('active');
+    }
+
+    function downloadFile(filename, dataObj) {
+        const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(dataObj, null, 2));
+        const a = document.createElement('a');
+        a.setAttribute('href', dataStr);
+        a.setAttribute('download', filename);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    }
+
+    function exportJSON(type) {
+        const stamp = new Date().toISOString();
+        if (type === 'validation') {
+            downloadFile('validation.json', {
+                _meta: { last_updated: stamp, version: '2.0', description: 'Commitment Currency weights and validation hurdles.' },
+                weights: {
+                    verbal: parseFloat(document.getElementById('val-verbal').value),
+                    time_meeting: parseFloat(document.getElementById('val-time').value),
+                    reputation_intro: parseFloat(document.getElementById('val-intro').value),
+                    loi: parseFloat(document.getElementById('val-loi').value),
+                    cash: parseFloat(document.getElementById('val-cash').value)
+                },
+                thresholds: {
+                    polite_lie_minimum: parseFloat(document.getElementById('val-threshold').value),
+                    vitamin_pain_threshold: 7.0
+                }
+            });
+        } else if (type === 'sizing') {
+            downloadFile('sizing.json', {
+                _meta: { last_updated: stamp, source: 'MDA & Census Estimates' },
+                ms_nodes: {
+                    public_school_districts: parseInt(document.getElementById('node-schools').value),
+                    hospitals_and_medical_centers: parseInt(document.getElementById('node-hospitals').value),
+                    rural_critical_access_hospitals: parseInt(document.getElementById('node-cah').value),
+                    farms_and_agricultural_operations: parseInt(document.getElementById('node-farms').value),
+                    incorporated_municipalities: parseInt(document.getElementById('node-govs').value),
+                    counties: parseInt(document.getElementById('node-counties').value),
+                    community_colleges: parseInt(document.getElementById('node-cc').value),
+                    public_universities: parseInt(document.getElementById('node-univ').value)
+                }
+            });
+        } else if (type === 'competitive') {
+            downloadFile('competitive.json', {
+                _meta: { last_updated: stamp, note: 'Partial export. Merge with the full competitive.json in /data/.' },
+                incumbents: {
+                    agtech: document.getElementById('comp-agtech').value.split(',').map(s => s.trim()),
+                    govtech: document.getElementById('comp-govtech').value.split(',').map(s => s.trim()),
+                    healthtech: document.getElementById('comp-healthtech').value.split(',').map(s => s.trim())
+                },
+                global_friction_modifier: parseFloat(document.getElementById('comp-friction').value)
+            });
+        }
+    }
+</script>
+</body>
+</html>

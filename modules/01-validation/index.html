@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Validation | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+        .log-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 14px; }
+        .log-table th, .log-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .log-table th { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; color: var(--im-navy-mid); }
+        .score-display { font-family: var(--font-display); font-size: 48px; font-weight: 800; color: var(--im-navy); line-height: 1; margin-bottom: 8px; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+        .badge-low { background: #FEF2F2; color: var(--im-red); }
+        .badge-med { background: #FFFBEB; color: var(--im-amber); }
+        .badge-high { background: #E6F9EF; color: var(--im-green); }
+
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Market Validation</h1>
+        <p class="text-muted">The "Truth Engine." Log your interactions to calculate your empirical Commitment Score.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div>
+            <div class="copath-card no-print">
+                <h2>Log an Interaction</h2>
+                <p class="text-muted mb-4">Record your latest customer discovery interview. Be ruthlessly honest about their level of commitment.</p>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Prospect Name / Entity</label>
+                        <input type="text" id="log-name" maxlength="60" placeholder="e.g., Dr. Smith / Acme Corp">
+                    </div>
+                    <div>
+                        <label>Pain Intensity (1-10)</label>
+                        <input type="number" id="log-pain" min="1" max="10" placeholder="10 = Losing money daily">
+                    </div>
+                </div>
+
+                <label>Highest Commitment Achieved</label>
+                <select id="log-commitment" style="margin-bottom: 16px;">
+                    <option value="verbal">Verbal Compliment / "Great Idea"</option>
+                    <option value="time_meeting">Time (Scheduled Follow-up Meeting)</option>
+                    <option value="reputation_intro">Reputation (Intro to Boss or Peer)</option>
+                    <option value="loi">Financial (Signed LOI / Pre-order)</option>
+                    <option value="cash">Cash (Paid Pilot / Deposit)</option>
+                </select>
+
+                <button class="btn-primary" onclick="logInteraction()">Save Interaction</button>
+            </div>
+
+            <div class="copath-card">
+                <h2>Discovery Log</h2>
+                <table class="log-table" id="interaction-table">
+                    <thead>
+                        <tr>
+                            <th>Prospect</th>
+                            <th>Pain (1-10)</th>
+                            <th>Commitment Level</th>
+                            <th>Weighted Score</th>
+                            <th class="no-print">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="interaction-body"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <div class="copath-card" style="background: var(--im-navy); color: white;">
+                <h2 style="color: white; font-size: 16px; text-transform: uppercase; letter-spacing: 0.05em;">Total Commitment Score</h2>
+                <div class="score-display" id="total-score" style="color: var(--im-green-lt);">0.0</div>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Target Threshold: <span id="target-threshold">25.0</span></p>
+            </div>
+
+            <div id="alert-polite-lie" class="alert-box alert-danger">
+                <strong>The "Polite Lie" Warning</strong><br>
+                Your total score is below the viability threshold. You have gathered compliments, but no hard evidence. You must ask for a specific commitment of time, reputation, or money in your next interview.
+            </div>
+
+            <div id="alert-vitamin" class="alert-box alert-warning">
+                <strong>Vitamin vs. Painkiller</strong><br>
+                Your average "Pain Intensity" is below 7. You are building a "nice-to-have" product. Customers rarely pay for vitamins; they only pay for painkillers. Re-evaluate your target segment.
+            </div>
+
+            <div id="alert-success" class="alert-box alert-success">
+                <strong>Empirical Validation Achieved</strong><br>
+                You have crossed the commitment threshold with strong pain indicators. You have permission to move to the MVP Scoping phase.
+            </div>
+
+            <div class="copath-card no-print" style="margin-top: 24px; padding: 24px;">
+                <h3 style="font-size: 14px; margin-bottom: 8px;">Consulting Guidance</h3>
+                <p style="font-size: 12px; color: var(--text-muted);"><strong>Why is my score so low?</strong><br>Compliments ("I love this idea") are mathematically weighted at zero. Only actions count as data. If a customer won't introduce you to their boss or schedule a follow-up, they aren't actually experiencing the problem.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 01: Market Validation</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '01_validation';
+    let hurdleData = null;
+    let interactions = [];
+
+    // Fallback weights match the v2 commitment_currency_weights gold standard.
+    const fallbackData = {
+        weights: { verbal: 0.0, time_meeting: 3.0, reputation_intro: 8.0, loi: 20.0, cash: 50.0 },
+        thresholds: { polite_lie_minimum: 25.0, vitamin_pain_threshold: 7.0 }
+    };
+
+    async function init() {
+        hurdleData = await CoPathCore.fetchData('validation');
+        if (!hurdleData) {
+            console.warn('Using fallback validation weights. Ensure validation.json is in your data path.');
+            hurdleData = fallbackData;
+        }
+
+        document.getElementById('target-threshold').innerText = hurdleData.thresholds.polite_lie_minimum;
+
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            interactions = draft.data;
+        }
+
+        renderDashboard();
+    }
+
+    function logInteraction() {
+        const nameInput = document.getElementById('log-name');
+        const painInput = document.getElementById('log-pain');
+        const commitmentInput = document.getElementById('log-commitment');
+
+        if (!nameInput.value.trim() || !painInput.value) {
+            alert('Please provide a name and pain intensity.');
+            return;
+        }
+
+        const commitKey = commitmentInput.value;
+        const weight = hurdleData.weights[commitKey] ?? 0;
+
+        const entry = {
+            id: Date.now(),
+            name: nameInput.value.trim(),
+            pain: parseInt(painInput.value),
+            commitmentStr: commitmentInput.options[commitmentInput.selectedIndex].text,
+            score: weight
+        };
+
+        interactions.push(entry);
+        CoPathCore.saveDraft(MODULE_ID, interactions);
+
+        nameInput.value = '';
+        painInput.value = '';
+        commitmentInput.value = 'verbal';
+
+        renderDashboard();
+    }
+
+    function deleteInteraction(id) {
+        interactions = interactions.filter(i => i.id !== id);
+        CoPathCore.saveDraft(MODULE_ID, interactions);
+        renderDashboard();
+    }
+
+    function renderDashboard() {
+        const tbody = document.getElementById('interaction-body');
+        tbody.innerHTML = '';
+
+        let totalScore = 0;
+        let totalPain = 0;
+
+        interactions.forEach(item => {
+            totalScore += item.score;
+            totalPain += item.pain;
+
+            const badgeClass = item.score < 1 ? 'badge-low' : (item.score < 8 ? 'badge-med' : 'badge-high');
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${item.name}</strong></td>
+                <td>${item.pain}/10</td>
+                <td><span class="badge ${badgeClass}">${item.commitmentStr.split('(')[0]}</span></td>
+                <td><strong>${item.score.toFixed(1)}</strong></td>
+                <td class="no-print"><button onclick="deleteInteraction(${item.id})" style="color:var(--im-red); background:none; border:none; cursor:pointer;">Delete</button></td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        document.getElementById('total-score').innerText = totalScore.toFixed(1);
+
+        const alertPolite = document.getElementById('alert-polite-lie');
+        const alertVitamin = document.getElementById('alert-vitamin');
+        const alertSuccess = document.getElementById('alert-success');
+
+        alertPolite.style.display = 'none';
+        alertVitamin.style.display = 'none';
+        alertSuccess.style.display = 'none';
+
+        if (interactions.length > 0) {
+            const avgPain = totalPain / interactions.length;
+            const painThreshold = hurdleData.thresholds.vitamin_pain_threshold ?? 7.0;
+
+            if (totalScore < hurdleData.thresholds.polite_lie_minimum) {
+                alertPolite.style.display = 'block';
+            } else if (avgPain < painThreshold) {
+                alertVitamin.style.display = 'block';
+            } else {
+                alertSuccess.style.display = 'block';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

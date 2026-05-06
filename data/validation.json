@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "last_updated": "2026-05-06T14:15:00Z",
+    "version": "2.0",
+    "description": "Gold Standard Commitment Currency weights and validation hurdles for CoPath Module 01."
+  },
+  "weights": {
+    "verbal": 0.0,
+    "time_meeting": 3.0,
+    "reputation_intro": 8.0,
+    "loi": 20.0,
+    "cash": 50.0
+  },
+  "thresholds": {
+    "polite_lie_minimum": 25.0,
+    "vitamin_pain_threshold": 7.0,
+    "minimum_interviews_for_statistical_relevance": 15
+  },
+  "polite_lie_warning_message": "You have gathered compliments, but zero 'Commitment Currency'. If a customer won't introduce you to their boss or share internal data, the problem isn't painful enough.",
+  "commitment_currency_weights_full": {
+    "verbal_interest_compliment": 0.0,
+    "passive_email_waitlist": 0.5,
+    "active_time_commitment_workflow_audit": 3.0,
+    "reputation_capital_intro_to_boss": 8.0,
+    "compliance_or_data_share": 15.0,
+    "binding_loi": 20.0,
+    "cash_payment_or_deposit": 50.0
+  },
+  "industry_hurdles": {
+    "agtech": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "That sounds like a great tool for next planting season." },
+    "ai_ml": { "minimum_score_to_pass_stage_0": 30, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "We are definitely looking to implement more AI this year." },
+    "biotech": { "minimum_score_to_pass_stage_0": 40, "gold_standard_signal": "binding_loi", "common_polite_lie": "This aligns perfectly with our research goals. Keep us updated." },
+    "cleantech": { "minimum_score_to_pass_stage_0": 35, "gold_standard_signal": "binding_loi", "common_polite_lie": "We have a strong ESG mandate to adopt things like this eventually." },
+    "climatetech": { "minimum_score_to_pass_stage_0": 30, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "Sustainability is a top three priority for our board." },
+    "consumer_products": { "minimum_score_to_pass_stage_0": 100, "gold_standard_signal": "cash_payment_or_deposit", "common_polite_lie": "I would definitely buy this if it was in stores." },
+    "cybersecurity": { "minimum_score_to_pass_stage_0": 40, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "We're currently reviewing our vendor stack for next year." },
+    "datatech": { "minimum_score_to_pass_stage_0": 30, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "Our data is really messy right now, but we'd love this once it's clean." },
+    "defensetech": { "minimum_score_to_pass_stage_0": 50, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "This looks like a great fit for a Phase 1 SBIR proposal." },
+    "edtech": { "minimum_score_to_pass_stage_0": 20, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "The teachers would absolutely love using this in the classroom." },
+    "fintech": { "minimum_score_to_pass_stage_0": 35, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "We love innovation, let us run it by compliance." },
+    "food_agritech": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "We are always looking for better traceability solutions." },
+    "govtech": { "minimum_score_to_pass_stage_0": 45, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "I think this is exactly what the mayor's office wants. Try calling them." },
+    "healthtech": { "minimum_score_to_pass_stage_0": 40, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "The clinical staff thinks it's a great idea, you should talk to IT." },
+    "hr_workforce": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "Retention is our biggest issue, we'll keep this on file." },
+    "legaltech": { "minimum_score_to_pass_stage_0": 30, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "Anything that saves billable hours is a win in my book." },
+    "logistics": { "minimum_score_to_pass_stage_0": 35, "gold_standard_signal": "compliance_or_data_share", "common_polite_lie": "If it integrates with our current ERP, we'll definitely look at it." },
+    "manufacturing": { "minimum_score_to_pass_stage_0": 35, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "Downtime is our biggest cost, we'll review this in Q3." },
+    "media_content": { "minimum_score_to_pass_stage_0": 20, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "This would be amazing for our social media team to use." },
+    "mobility": { "minimum_score_to_pass_stage_0": 35, "gold_standard_signal": "binding_loi", "common_polite_lie": "We're expanding our fleet next year and will need something like this." },
+    "ocean_tech": { "minimum_score_to_pass_stage_0": 40, "gold_standard_signal": "active_time_commitment_workflow_audit", "common_polite_lie": "We have a vessel going out next month, maybe we can test it then." },
+    "proptech": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "Our property managers are always complaining about that." },
+    "retail_ecommerce": { "minimum_score_to_pass_stage_0": 50, "gold_standard_signal": "cash_payment_or_deposit", "common_polite_lie": "I'd definitely add this to my store if the margins make sense." },
+    "saas": { "minimum_score_to_pass_stage_0": 30, "gold_standard_signal": "cash_payment_or_deposit", "common_polite_lie": "Sign me up for the beta when it launches." },
+    "sports_entertainment": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "reputation_capital_intro_to_boss", "common_polite_lie": "The fans would absolutely eat this up." },
+    "web3": { "minimum_score_to_pass_stage_0": 40, "gold_standard_signal": "cash_payment_or_deposit", "common_polite_lie": "The tokenomics make a lot of sense, great whitepaper." },
+    "other": { "minimum_score_to_pass_stage_0": 25, "gold_standard_signal": "cash_payment_or_deposit", "common_polite_lie": "I've never seen anything like this before, it's brilliant." }
+  }
+}
