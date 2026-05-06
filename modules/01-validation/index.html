@@ -18,6 +18,14 @@
         .badge-med { background: #FFFBEB; color: var(--im-amber); }
         .badge-high { background: #E6F9EF; color: var(--im-green); }
 
+        .industry-card { background: var(--paper); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .industry-card label { color: var(--im-navy-mid); }
+        .hurdle-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; font-size: 12px; border-top: 1px dashed var(--border-color); }
+        .hurdle-row:first-of-type { border-top: none; padding-top: 12px; margin-top: 8px; }
+        .hurdle-key { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-size: 10px; }
+        .hurdle-val { font-weight: 700; color: var(--im-navy); text-align: right; max-width: 60%; }
+        .lie-quote { font-style: italic; color: var(--im-red); font-size: 12px; margin-top: 12px; padding: 10px 12px; background: #FEF2F2; border-left: 3px solid var(--im-red); border-radius: 4px; }
+
         @media (max-width: 768px) {
             .dashboard-grid { grid-template-columns: 1fr; }
         }
@@ -79,15 +87,40 @@
         </div>
 
         <div>
+            <div class="industry-card no-print">
+                <label>Target Industry (sets the hurdle)</label>
+                <select id="industry-select" onchange="onIndustryChange()" style="margin-bottom: 4px;">
+                    <option value="" disabled selected>Loading industries...</option>
+                </select>
+                <p class="text-muted" style="font-size: 11px; margin-top: 4px;">Different sectors require different proof. Select yours to load the matching hurdle.</p>
+
+                <div id="hurdle-detail" style="display: none;">
+                    <div class="hurdle-row">
+                        <span class="hurdle-key">Min Score to Pass</span>
+                        <span class="hurdle-val" id="hurdle-min">&mdash;</span>
+                    </div>
+                    <div class="hurdle-row">
+                        <span class="hurdle-key">Gold-Standard Signal</span>
+                        <span class="hurdle-val" id="hurdle-signal">&mdash;</span>
+                    </div>
+                    <div id="hurdle-lie-wrap" style="display: none;">
+                        <div class="hurdle-row" style="border-top: none; padding-top: 12px;">
+                            <span class="hurdle-key">Common Polite Lie</span>
+                        </div>
+                        <div class="lie-quote" id="hurdle-lie">&mdash;</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="copath-card" style="background: var(--im-navy); color: white;">
                 <h2 style="color: white; font-size: 16px; text-transform: uppercase; letter-spacing: 0.05em;">Total Commitment Score</h2>
                 <div class="score-display" id="total-score" style="color: var(--im-green-lt);">0.0</div>
-                <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Target Threshold: <span id="target-threshold">25.0</span></p>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Target Threshold: <span id="target-threshold">25.0</span> <span id="target-industry-label" style="opacity: 0.6;"></span></p>
             </div>
 
             <div id="alert-polite-lie" class="alert-box alert-danger">
                 <strong>The "Polite Lie" Warning</strong><br>
-                Your total score is below the viability threshold. You have gathered compliments, but no hard evidence. You must ask for a specific commitment of time, reputation, or money in your next interview.
+                Your total score is below the viability threshold for this industry. You have gathered compliments, but no hard evidence. You must ask for a specific commitment of time, reputation, or money in your next interview.
             </div>
 
             <div id="alert-vitamin" class="alert-box alert-warning">
@@ -116,30 +149,116 @@
 <script src="../../shared/core.js"></script>
 <script>
     const MODULE_ID = '01_validation';
+    const DEFAULT_INDUSTRY = 'other';
+
     let hurdleData = null;
     let interactions = [];
+    let currentIndustry = DEFAULT_INDUSTRY;
 
     // Fallback weights match the v2 commitment_currency_weights gold standard.
     const fallbackData = {
         weights: { verbal: 0.0, time_meeting: 3.0, reputation_intro: 8.0, loi: 20.0, cash: 50.0 },
-        thresholds: { polite_lie_minimum: 25.0, vitamin_pain_threshold: 7.0 }
+        thresholds: { polite_lie_minimum: 25.0, vitamin_pain_threshold: 7.0 },
+        industry_hurdles: {
+            other: { minimum_score_to_pass_stage_0: 25, gold_standard_signal: 'cash_payment_or_deposit', common_polite_lie: "I've never seen anything like this before, it's brilliant." }
+        }
     };
+
+    // Map machine-key signals to human-readable labels.
+    const SIGNAL_LABELS = {
+        verbal_interest_compliment: 'Verbal interest / compliment',
+        passive_email_waitlist: 'Passive email waitlist',
+        active_time_commitment_workflow_audit: 'Active time / workflow audit',
+        reputation_capital_intro_to_boss: 'Reputation capital (intro to boss)',
+        compliance_or_data_share: 'Compliance review / data share',
+        binding_loi: 'Binding LOI',
+        cash_payment_or_deposit: 'Cash payment / deposit'
+    };
+
+    function prettyIndustry(key) {
+        return key.split('_').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+    }
 
     async function init() {
         hurdleData = await CoPathCore.fetchData('validation');
         if (!hurdleData) {
-            console.warn('Using fallback validation weights. Ensure validation.json is in your data path.');
+            console.warn('Using fallback validation data. Ensure validation.json is in your data path.');
             hurdleData = fallbackData;
         }
 
-        document.getElementById('target-threshold').innerText = hurdleData.thresholds.polite_lie_minimum;
+        // Populate the industry dropdown
+        const select = document.getElementById('industry-select');
+        select.innerHTML = '';
+        const industries = Object.keys(hurdleData.industry_hurdles || {}).sort();
+        industries.forEach(key => {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.text = prettyIndustry(key);
+            select.appendChild(opt);
+        });
 
+        // Load saved draft. Backwards-compatible: legacy drafts were a bare array.
         const draft = CoPathCore.loadDraft(MODULE_ID);
         if (draft && draft.data) {
-            interactions = draft.data;
+            if (Array.isArray(draft.data)) {
+                interactions = draft.data;
+                currentIndustry = DEFAULT_INDUSTRY;
+            } else {
+                interactions = draft.data.interactions || [];
+                currentIndustry = draft.data.industry || DEFAULT_INDUSTRY;
+            }
         }
+        if (!hurdleData.industry_hurdles[currentIndustry]) currentIndustry = DEFAULT_INDUSTRY;
+        select.value = currentIndustry;
 
+        renderHurdle();
         renderDashboard();
+    }
+
+    function persist() {
+        CoPathCore.saveDraft(MODULE_ID, { industry: currentIndustry, interactions });
+    }
+
+    function onIndustryChange() {
+        currentIndustry = document.getElementById('industry-select').value;
+        persist();
+        renderHurdle();
+        renderDashboard();
+    }
+
+    function activeThreshold() {
+        const ind = hurdleData.industry_hurdles[currentIndustry];
+        if (ind && typeof ind.minimum_score_to_pass_stage_0 === 'number') {
+            return ind.minimum_score_to_pass_stage_0;
+        }
+        return hurdleData.thresholds.polite_lie_minimum ?? 25.0;
+    }
+
+    function renderHurdle() {
+        const detail = document.getElementById('hurdle-detail');
+        const ind = hurdleData.industry_hurdles[currentIndustry];
+
+        if (!ind) {
+            detail.style.display = 'none';
+            return;
+        }
+        detail.style.display = 'block';
+
+        const threshold = activeThreshold();
+        document.getElementById('hurdle-min').innerText = threshold;
+        document.getElementById('target-threshold').innerText = Number(threshold).toFixed(1);
+        document.getElementById('target-industry-label').innerText = '· ' + prettyIndustry(currentIndustry);
+
+        const signalKey = ind.gold_standard_signal;
+        document.getElementById('hurdle-signal').innerText = SIGNAL_LABELS[signalKey] || signalKey || '—';
+
+        const lieWrap = document.getElementById('hurdle-lie-wrap');
+        if (ind.common_polite_lie) {
+            lieWrap.style.display = 'block';
+            document.getElementById('hurdle-lie').innerText = '"' + ind.common_polite_lie + '"';
+        } else {
+            lieWrap.style.display = 'none';
+        }
     }
 
     function logInteraction() {
@@ -164,7 +283,7 @@
         };
 
         interactions.push(entry);
-        CoPathCore.saveDraft(MODULE_ID, interactions);
+        persist();
 
         nameInput.value = '';
         painInput.value = '';
@@ -175,7 +294,7 @@
 
     function deleteInteraction(id) {
         interactions = interactions.filter(i => i.id !== id);
-        CoPathCore.saveDraft(MODULE_ID, interactions);
+        persist();
         renderDashboard();
     }
 
@@ -216,8 +335,9 @@
         if (interactions.length > 0) {
             const avgPain = totalPain / interactions.length;
             const painThreshold = hurdleData.thresholds.vitamin_pain_threshold ?? 7.0;
+            const threshold = activeThreshold();
 
-            if (totalScore < hurdleData.thresholds.polite_lie_minimum) {
+            if (totalScore < threshold) {
                 alertPolite.style.display = 'block';
             } else if (avgPain < painThreshold) {
                 alertVitamin.style.display = 'block';
