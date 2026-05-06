@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing & ACV Stress Test | CoPath</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/styles.css">
+    <style>
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+        .verdict-card { background: var(--im-navy); color: white; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .verdict-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.7; margin-bottom: 6px; }
+        .verdict-value { font-family: var(--font-display); font-size: 36px; font-weight: 800; color: var(--im-green-lt); line-height: 1.1; }
+        .verdict-sub { font-size: 13px; opacity: 0.75; margin-top: 8px; }
+        .verdict-card.amber .verdict-value { color: #FCD34D; }
+        .verdict-card.red .verdict-value { color: #FCA5A5; }
+
+        .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .metric-block { background: rgba(255,255,255,0.08); padding: 14px; border-radius: 8px; }
+        .metric-block .metric-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.7; }
+        .metric-block .metric-value { font-family: var(--font-mono); font-size: 18px; font-weight: 700; margin-top: 4px; }
+
+        .floor-bar { background: var(--paper); border: 1px solid var(--border-color); border-radius: 8px; padding: 18px; margin-bottom: 16px; }
+        .floor-bar .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font-size: 13px; }
+        .floor-bar .row .label { color: var(--text-muted); }
+        .floor-bar .row .val { font-family: var(--font-mono); font-weight: 700; color: var(--im-navy); }
+        .gauge { height: 10px; border-radius: 5px; background: var(--bg-color); margin-top: 12px; overflow: hidden; position: relative; }
+        .gauge-fill { height: 100%; transition: width 0.3s ease; }
+        .gauge-fill.green { background: var(--im-green); }
+        .gauge-fill.amber { background: var(--im-amber); }
+        .gauge-fill.red { background: var(--im-red); }
+        .gauge-marker { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--im-navy); }
+
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .metric-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="copath-wrapper">
+    <div class="copath-header no-print">
+        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <h1 style="margin-top: 12px;">Pricing & ACV Stress Test</h1>
+        <p class="text-muted">The "Unit Economics Auditor." Stress-test your price against industry venture floors and CAC reality.</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div>
+            <div class="copath-card no-print">
+                <h2>1. Industry Context</h2>
+                <p class="text-muted mb-4">Each industry has a venture-backable ACV floor. Below it, you're a lifestyle business.</p>
+
+                <label>Target Industry</label>
+                <select id="pricing-industry" style="margin-bottom: 16px;">
+                    <option value="" disabled selected>Loading industries...</option>
+                </select>
+
+                <hr style="border: none; border-top: 1px solid var(--border-color); margin: 24px 0;">
+
+                <h2>2. Your Numbers</h2>
+                <p class="text-muted mb-4">Use realistic estimates, not aspirational ones.</p>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Proposed ACV ($)</label>
+                        <input type="number" id="pricing-acv" min="0" step="100" placeholder="e.g., 12000">
+                    </div>
+                    <div>
+                        <label>Customer Acquisition Cost ($)</label>
+                        <input type="number" id="pricing-cac" min="0" step="100" placeholder="e.g., 1500">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div>
+                        <label>Annual Churn (%)</label>
+                        <input type="number" id="pricing-churn" min="1" max="100" step="1" placeholder="e.g., 15">
+                    </div>
+                    <div>
+                        <label>Gross Margin (%)</label>
+                        <input type="number" id="pricing-margin" min="0" max="100" step="1" placeholder="e.g., 75">
+                    </div>
+                </div>
+
+                <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="evaluate()">Run Stress Test</button>
+            </div>
+
+            <div class="copath-card no-print" style="padding: 24px; background: var(--im-navy); color: white;">
+                <h3 style="font-size: 14px; margin-bottom: 8px; color: white;">Consulting Guidance</h3>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 12px;"><strong>The 3:1 Rule.</strong> A venture-grade SaaS business needs LTV at least 3x CAC. Below that, you're spending more to acquire customers than you'll ever recoup.</p>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 12px;"><strong>The 33% CAC Ceiling.</strong> If CAC eats more than a third of your first year's revenue, your payback period is too long for VC math to work.</p>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.7);"><strong>Industry Floors.</strong> Different sectors have different floors. A $5k ACV is fine for retail e-commerce but a death sentence for biotech (where the floor is $100k+).</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="verdict-card" id="verdict-card">
+                <div class="verdict-label">Pricing Verdict</div>
+                <div class="verdict-value" id="verdict-value">Awaiting input</div>
+                <div class="verdict-sub" id="verdict-sub">Fill in your numbers to run the stress test.</div>
+
+                <div class="metric-grid" id="metric-grid" style="display: none;">
+                    <div class="metric-block">
+                        <div class="metric-label">LTV : CAC</div>
+                        <div class="metric-value" id="metric-ltv-cac">—</div>
+                    </div>
+                    <div class="metric-block">
+                        <div class="metric-label">CAC Payback (months)</div>
+                        <div class="metric-value" id="metric-payback">—</div>
+                    </div>
+                    <div class="metric-block">
+                        <div class="metric-label">CAC : ACV</div>
+                        <div class="metric-value" id="metric-cac-acv">—</div>
+                    </div>
+                    <div class="metric-block">
+                        <div class="metric-label">Lifetime Value</div>
+                        <div class="metric-value" id="metric-ltv">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="floor-bar">
+                <div class="row">
+                    <span class="label">Industry venture ACV floor</span>
+                    <span class="val" id="floor-value">—</span>
+                </div>
+                <div class="row">
+                    <span class="label">Your proposed ACV</span>
+                    <span class="val" id="acv-value">—</span>
+                </div>
+                <div class="gauge">
+                    <div class="gauge-fill green" id="gauge-fill" style="width: 0%;"></div>
+                    <div class="gauge-marker" id="gauge-marker" style="left: 50%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 6px;">
+                    <span>$0</span>
+                    <span id="floor-marker-label">Floor</span>
+                    <span id="gauge-cap-label">2x floor</span>
+                </div>
+            </div>
+
+            <div id="alert-below-floor" class="alert-box alert-danger">
+                <strong>Sub-Venture Pricing</strong><br>
+                Your ACV is below the venture-backable floor for this industry. Investors will pass — and the math probably won't sustain a team. Either increase your price, expand to higher-tier customers, or reposition to a sector with a lower floor.
+            </div>
+
+            <div id="alert-cac-danger" class="alert-box alert-danger">
+                <strong>CAC Danger Zone</strong><br>
+                Your CAC is more than 33% of your ACV. That's a long payback period and thin first-year margins. Find a cheaper acquisition channel or grow the contract size.
+            </div>
+
+            <div id="alert-broken-economics" class="alert-box alert-warning">
+                <strong>LTV : CAC Below 3:1</strong><br>
+                Even with this churn, every customer barely pays back their acquisition cost over their lifetime. You're running uphill: lower churn, lower CAC, or raise price.
+            </div>
+
+            <div id="alert-long-payback" class="alert-box alert-warning">
+                <strong>Long Payback</strong><br>
+                It takes more than 12 months to recoup CAC. You'll need significant runway between booking and break-even — VCs prefer payback under 12 months for SaaS.
+            </div>
+
+            <div id="alert-venture-grade" class="alert-box alert-success">
+                <strong>Venture-Grade Pricing</strong><br>
+                ACV is above the industry floor, CAC is healthy relative to ACV, and lifetime economics support reinvestment. Defensible pricing for a seed-stage raise.
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer no-print">
+    <div>Module 05: Pricing & ACV Stress Test</div>
+    <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
+</footer>
+
+<script src="../../shared/core.js"></script>
+<script>
+    const MODULE_ID = '05_pricing';
+    const DEFAULT_INDUSTRY = 'other';
+
+    let sizingData = null;
+    let currentIndustry = DEFAULT_INDUSTRY;
+
+    const fallbackSizing = {
+        benchmarks: {
+            other: { venture_acv_floor: 10000 },
+            saas: { venture_acv_floor: 12000 }
+        },
+        global_thresholds: {
+            danger_zone_cac_to_acv_ratio: 0.33
+        }
+    };
+
+    function prettyIndustry(key) {
+        return key.split('_').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+    }
+
+    const formatMoney = (n) => '$' + Math.round(n).toLocaleString();
+
+    async function init() {
+        sizingData = await CoPathCore.fetchData('sizing');
+        if (!sizingData || !sizingData.benchmarks) {
+            console.warn('Using fallback pricing benchmarks. Ensure sizing.json is in your data path.');
+            sizingData = fallbackSizing;
+        }
+
+        // Populate industry dropdown
+        const select = document.getElementById('pricing-industry');
+        select.innerHTML = '';
+        const industries = Object.keys(sizingData.benchmarks).sort();
+        industries.forEach(key => {
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.text = prettyIndustry(key);
+            select.appendChild(opt);
+        });
+
+        // Restore draft
+        const draft = CoPathCore.loadDraft(MODULE_ID);
+        if (draft && draft.data) {
+            currentIndustry = draft.data.industry || DEFAULT_INDUSTRY;
+            select.value = currentIndustry;
+            document.getElementById('pricing-acv').value = draft.data.acv || '';
+            document.getElementById('pricing-cac').value = draft.data.cac || '';
+            document.getElementById('pricing-churn').value = draft.data.churn || '';
+            document.getElementById('pricing-margin').value = draft.data.margin || '';
+            if (draft.data.acv) evaluate();
+        } else {
+            select.value = currentIndustry;
+        }
+
+        select.addEventListener('change', () => {
+            currentIndustry = select.value;
+            evaluate();
+        });
+
+        document.getElementById('pricing-acv').focus();
+        CoPathCore.enterToSubmit(['pricing-acv', 'pricing-cac', 'pricing-churn', 'pricing-margin'], evaluate);
+    }
+
+    function getFloor() {
+        const b = sizingData.benchmarks[currentIndustry];
+        if (b && typeof b.venture_acv_floor === 'number') return b.venture_acv_floor;
+        return sizingData.benchmarks.other ? sizingData.benchmarks.other.venture_acv_floor : 10000;
+    }
+
+    function evaluate() {
+        const acvInput = document.getElementById('pricing-acv');
+        const cacInput = document.getElementById('pricing-cac');
+        const churnInput = document.getElementById('pricing-churn');
+        const marginInput = document.getElementById('pricing-margin');
+
+        const acv = parseFloat(acvInput.value) || 0;
+        const cac = parseFloat(cacInput.value) || 0;
+        const churn = parseFloat(churnInput.value) || 0;
+        const margin = parseFloat(marginInput.value) || 0;
+
+        let bad = false;
+        if (acv === 0) { CoPathCore.markFieldError(acvInput, 'Enter your ACV.'); bad = true; }
+        if (cac === 0) { CoPathCore.markFieldError(cacInput, 'Enter CAC.'); bad = true; }
+        if (churn === 0) { CoPathCore.markFieldError(churnInput, 'Enter expected churn %.'); bad = true; }
+        if (margin === 0) { CoPathCore.markFieldError(marginInput, 'Enter gross margin %.'); bad = true; }
+        if (bad) return;
+
+        // Persist
+        CoPathCore.saveDraft(MODULE_ID, {
+            industry: currentIndustry, acv, cac, churn, margin
+        });
+
+        // Math
+        const floor = getFloor();
+        const ltv = (acv * (margin / 100)) / (churn / 100);  // Margin-adjusted LTV
+        const ltvCac = cac > 0 ? ltv / cac : Infinity;
+        const cacAcv = acv > 0 ? cac / acv : Infinity;
+        const monthlyMarginalRevenue = (acv * (margin / 100)) / 12;
+        const paybackMonths = monthlyMarginalRevenue > 0 ? cac / monthlyMarginalRevenue : Infinity;
+
+        // Render numeric metrics
+        document.getElementById('metric-grid').style.display = 'grid';
+        document.getElementById('metric-ltv-cac').innerText = isFinite(ltvCac) ? ltvCac.toFixed(1) + ':1' : '—';
+        document.getElementById('metric-payback').innerText = isFinite(paybackMonths) ? paybackMonths.toFixed(1) : '—';
+        document.getElementById('metric-cac-acv').innerText = (cacAcv * 100).toFixed(0) + '%';
+        document.getElementById('metric-ltv').innerText = formatMoney(ltv);
+
+        // Floor gauge — cap at 2x floor for visualization
+        document.getElementById('floor-value').innerText = formatMoney(floor);
+        document.getElementById('acv-value').innerText = formatMoney(acv);
+        document.getElementById('gauge-cap-label').innerText = formatMoney(floor * 2);
+        const cap = floor * 2;
+        const fillPct = Math.min(100, (acv / cap) * 100);
+        const fill = document.getElementById('gauge-fill');
+        fill.style.width = fillPct + '%';
+        fill.classList.remove('green', 'amber', 'red');
+        if (acv >= floor) fill.classList.add('green');
+        else if (acv >= floor * 0.5) fill.classList.add('amber');
+        else fill.classList.add('red');
+        // Marker at the floor (always at 50% of cap since cap = 2*floor)
+        document.getElementById('gauge-marker').style.left = '50%';
+
+        // Verdict
+        const verdictCard = document.getElementById('verdict-card');
+        const verdictValue = document.getElementById('verdict-value');
+        const verdictSub = document.getElementById('verdict-sub');
+
+        const cacDanger = sizingData.global_thresholds && sizingData.global_thresholds.danger_zone_cac_to_acv_ratio
+            ? sizingData.global_thresholds.danger_zone_cac_to_acv_ratio
+            : 0.33;
+
+        const belowFloor = acv < floor;
+        const cacBad = cacAcv > cacDanger;
+        const ltvBroken = ltvCac < 3;
+        const slowPayback = paybackMonths > 12;
+
+        verdictCard.classList.remove('amber', 'red');
+        if (belowFloor || cacBad) {
+            verdictCard.classList.add('red');
+            verdictValue.innerText = 'Sub-venture';
+            verdictSub.innerText = belowFloor
+                ? `Your ACV is below the ${prettyIndustry(currentIndustry)} venture floor.`
+                : 'Your CAC is too high relative to first-year revenue.';
+        } else if (ltvBroken || slowPayback) {
+            verdictCard.classList.add('amber');
+            verdictValue.innerText = 'Borderline';
+            verdictSub.innerText = ltvBroken
+                ? 'Lifetime value is below the 3x CAC rule.'
+                : 'Payback period is longer than 12 months.';
+        } else {
+            verdictValue.innerText = 'Venture-grade';
+            verdictSub.innerText = `Pricing clears the ${prettyIndustry(currentIndustry)} floor with healthy unit economics.`;
+        }
+
+        // Reality-check alerts
+        const alerts = ['alert-below-floor', 'alert-cac-danger', 'alert-broken-economics', 'alert-long-payback', 'alert-venture-grade'];
+        alerts.forEach(id => document.getElementById(id).style.display = 'none');
+
+        if (belowFloor) document.getElementById('alert-below-floor').style.display = 'block';
+        if (cacBad) document.getElementById('alert-cac-danger').style.display = 'block';
+        if (!belowFloor && !cacBad && ltvBroken) document.getElementById('alert-broken-economics').style.display = 'block';
+        if (!belowFloor && !cacBad && !ltvBroken && slowPayback) document.getElementById('alert-long-payback').style.display = 'block';
+        if (!belowFloor && !cacBad && !ltvBroken && !slowPayback) document.getElementById('alert-venture-grade').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

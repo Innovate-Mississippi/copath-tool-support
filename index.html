@@ -113,6 +113,13 @@
             <div class="mod-status" data-status></div>
         </a>
 
+        <a href="modules/05-pricing/index.html" class="copath-card module-card" data-mod="05_pricing">
+            <div class="text-kicker">Module 05</div>
+            <h3 style="font-size: 20px;">Pricing & ACV Stress Test</h3>
+            <p class="text-muted" style="margin-top: 8px;">The "Unit Economics Auditor." Stress-test your price against industry venture floors and CAC reality.</p>
+            <div class="mod-status" data-status></div>
+        </a>
+
         <a href="modules/06-competitive/index.html" class="copath-card module-card" data-mod="06_competitive">
             <div class="text-kicker">Module 06</div>
             <h3 style="font-size: 20px;">Competitive Analysis</h3>
@@ -128,7 +135,7 @@
         </a>
     </div>
 
-    <a href="modules/05-admin/index.html" class="admin-link">Innovate MS Staff: Access Admin Command Center</a>
+    <a href="admin/index.html" class="admin-link">Innovate MS Staff: Access Admin Command Center</a>
 </div>
 
 <footer class="global-footer no-print">
@@ -147,11 +154,12 @@
         '02_segmentation': 'Module 02 · Segmentation',
         '03_sizing': 'Module 03 · Sizing',
         '04_canvases': 'Module 04 · Canvases',
+        '05_pricing': 'Module 05 · Pricing',
         '06_competitive': 'Module 06 · Competitive',
         '07_discovery': 'Module 07 · Discovery'
     };
 
-    const INDUSTRY_MODULES = ['01_validation', '06_competitive'];
+    const INDUSTRY_MODULES = ['01_validation', '05_pricing', '06_competitive'];
 
     function prettyIndustry(key) {
         if (!key) return '';
@@ -215,6 +223,12 @@
                 if (!c || !c.texts) return false;
                 return Object.values(c.texts).some(t => t && t.trim().length > 0);
             }).length;
+        }
+
+        // Module 05 (pricing)
+        const m5 = drafts['05_pricing'];
+        if (m5 && m5.industry) {
+            summary.industries['05_pricing'] = m5.industry;
         }
 
         // Module 06
@@ -315,6 +329,16 @@
             set('04_canvases', '<span class="pill empty">Not started</span>');
         }
 
+        // 05 Pricing
+        const m5 = drafts['05_pricing'];
+        if (m5 && m5.acv) {
+            const indLabel = m5.industry ? `<span class="pill">${prettyIndustry(m5.industry)}</span>` : '';
+            set('05_pricing',
+                `<span class="mod-stat">ACV <strong>$${(m5.acv / 1000).toFixed(0)}k</strong> · CAC <strong>$${(m5.cac / 1000).toFixed(1)}k</strong></span>` + indLabel);
+        } else {
+            set('05_pricing', '<span class="pill empty">Not started</span>');
+        }
+
         // 06 Competitive
         const m6 = drafts['06_competitive'];
         if (m6 && (m6.industry || m6.comp1)) {
@@ -409,7 +433,7 @@
                     interactions = Array.isArray(existing.data) ? existing.data : (existing.data.interactions || []);
                 }
                 CoPathCore.saveDraft(modId, { industry: target, interactions });
-            } else if (modId === '06_competitive') {
+            } else if (modId === '05_pricing' || modId === '06_competitive') {
                 const data = (existing && existing.data && typeof existing.data === 'object') ? existing.data : {};
                 data.industry = target;
                 CoPathCore.saveDraft(modId, data);

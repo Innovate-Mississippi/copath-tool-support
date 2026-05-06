@@ -10,9 +10,9 @@ const CoPathCore = {
 
     // Auto-detect the data path based on folder depth.
     getDefaultDataPath: function () {
-        if (window.location.pathname.includes('/modules/')) {
-            return '../../data';
-        }
+        const p = window.location.pathname;
+        if (p.includes('/modules/')) return '../../data';
+        if (p.includes('/admin/')) return '../data';
         return './data';
     },
 

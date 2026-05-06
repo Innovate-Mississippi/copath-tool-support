@@ -8,13 +8,20 @@ device or browser.
 
 ## Modules
 
-- **01 Market Validation** — log discovery interviews, score Commitment Currency, detect "polite lies"
+- **01 Market Validation** — log discovery interviews, score Commitment Currency, detect "polite lies" (industry-aware hurdle)
 - **02 Attribute Segmentation** — rank segments by Urgency × Budget × Accessibility
 - **03 Bottom-Up Sizing** — funnel calculator using verified MS entity counts
 - **04 CoPath Canvases** — discovery / synthesis / value-prop / riskiest-assumption canvases
-- **05 Admin Command Center** — edit gold-standard hurdle rates, download updated JSON
-- **06 Competitive Analysis** — moat builder with status-quo inertia check
+- **05 Pricing & ACV Stress Test** — industry venture floor + CAC / LTV / payback unit-economics audit
+- **06 Competitive Analysis** — moat builder with status-quo inertia check (industry-driven friction)
 - **07 Discovery Kit** — Mom Test grader + printable interview script
+
+The launchpad shows a live rollup of every module's saved drafts plus a
+central "Industry alignment" panel that can broadcast a single industry
+across every industry-aware module.
+
+`/admin/` (off the modules tree) is the staff-only command center for
+editing the gold-standard JSON data files.
 
 ## Local Development
 
@@ -74,22 +81,23 @@ This is how users move work between devices without a backend account.
 
 ```
 /
-├── index.html              Launchpad
+├── index.html              Launchpad with rollup + industry broadcaster
 ├── _headers                Cloudflare Pages config
+├── admin/                  Staff command center (data editor)
 ├── shared/
-│   ├── styles.css          Brand tokens + components
-│   └── core.js             fetchData / saveDraft / session export-import
+│   ├── styles.css          Brand tokens + components + toasts + field errors
+│   └── core.js             fetchData / saveDraft / session export-import / toast / inline validation
 ├── data/
-│   ├── validation.json     Module 01
-│   ├── sizing.json         Module 03
-│   ├── competitive.json    Module 06
+│   ├── validation.json     Modules 01 (industry hurdles)
+│   ├── sizing.json         Modules 03 + 05 (MS nodes + ACV floors)
+│   ├── competitive.json    Module 06 (incumbents + friction modifiers + table stakes)
 │   └── canvases.json       Module 04
 └── modules/
     ├── 01-validation/
     ├── 02-segmentation/
     ├── 03-sizing/
     ├── 04-canvases/
-    ├── 05-admin/
+    ├── 05-pricing/
     ├── 06-competitive/
     └── 07-discovery/
 ```

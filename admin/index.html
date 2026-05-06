@@ -6,7 +6,7 @@
     <title>Admin Command Center | CoPath</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=Inter:wght@400;500;700&family=Martian+Mono:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../shared/styles.css">
+    <link rel="stylesheet" href="../shared/styles.css">
     <style>
         .admin-nav { display: flex; gap: 12px; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; flex-wrap: wrap; }
         .admin-nav button { background: none; border: none; font-family: var(--font-display); font-weight: 700; color: var(--text-muted); cursor: pointer; padding: 8px 16px; border-radius: 6px; }
@@ -23,7 +23,7 @@
 
 <div class="copath-wrapper">
     <div class="copath-header no-print">
-        <a href="../../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
+        <a href="../index.html" style="text-decoration: none; color: var(--im-navy-mid); font-size: 14px; font-weight: 700;">&larr; Back to Launchpad</a>
         <h1 style="margin-top: 12px;">Admin Command Center</h1>
         <p class="text-muted">Edit the gold-standard hurdle rates and benchmarks. Download and commit the JSON files to your <code>/data/</code> directory.</p>
     </div>
@@ -150,7 +150,7 @@
     <div>Powered by <a href="https://innovate.ms" target="_blank">Innovate Mississippi</a></div>
 </footer>
 
-<script src="../../shared/core.js"></script>
+<script src="../shared/core.js"></script>
 <script>
     function switchTab(ev, tabId) {
         document.querySelectorAll('.admin-section').forEach(el => el.classList.remove('active'));
