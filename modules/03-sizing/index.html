@@ -191,6 +191,11 @@
             }
             if (draft.data.acv) calculateFunnel();
         }
+
+        // Auto-focus the most likely first interaction.
+        const acvInput = document.getElementById('input-acv');
+        if (acvInput && !acvInput.value) acvInput.focus();
+        CoPathCore.enterToSubmit(['custom-node-count', 'input-acv', 'input-lead-rate', 'input-close-rate'], calculateFunnel);
     }
 
     function checkCustomNode() {
@@ -208,14 +213,23 @@
             totalNodes = parseInt(selectVal) || 0;
         }
 
-        const acv = parseFloat(document.getElementById('input-acv').value) || 0;
-        const leadRate = parseFloat(document.getElementById('input-lead-rate').value) || 0;
-        const closeRate = parseFloat(document.getElementById('input-close-rate').value) || 0;
+        const acvInput = document.getElementById('input-acv');
+        const leadInput = document.getElementById('input-lead-rate');
+        const closeInput = document.getElementById('input-close-rate');
+        const nodeSelect = document.getElementById('node-select');
+        const customInput = document.getElementById('custom-node-count');
 
-        if (totalNodes === 0 || acv === 0) {
-            alert('Please define the market nodes and ACV.');
-            return;
+        const acv = parseFloat(acvInput.value) || 0;
+        const leadRate = parseFloat(leadInput.value) || 0;
+        const closeRate = parseFloat(closeInput.value) || 0;
+
+        let bad = false;
+        if (totalNodes === 0) {
+            CoPathCore.markFieldError(selectVal === 'custom' ? customInput : nodeSelect, 'Pick a node type or enter a custom count.');
+            bad = true;
         }
+        if (acv === 0) { CoPathCore.markFieldError(acvInput, 'Enter your ACV.'); bad = true; }
+        if (bad) return;
 
         const leads = Math.floor(totalNodes * (leadRate / 100));
         const customers = Math.floor(leads * (closeRate / 100));

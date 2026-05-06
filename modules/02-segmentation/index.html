@@ -111,6 +111,10 @@
         const draft = CoPathCore.loadDraft(MODULE_ID);
         if (draft && draft.data) segments = draft.data;
         renderMatrix();
+
+        const nameInput = document.getElementById('seg-name');
+        if (nameInput) nameInput.focus();
+        CoPathCore.enterToSubmit(['seg-name', 'seg-func', 'seg-urgency', 'seg-budget', 'seg-access'], addSegment);
     }
 
     function addSegment() {
@@ -120,13 +124,15 @@
         const budInput = document.getElementById('seg-budget');
         const accInput = document.getElementById('seg-access');
 
-        if (!nameInput.value.trim() || !funcInput.value.trim() || !urgInput.value || !budInput.value) {
-            alert('Please complete all fields to properly define the segment.');
-            return;
-        }
-
+        let bad = false;
+        if (!nameInput.value.trim()) { CoPathCore.markFieldError(nameInput, 'Name your segment.'); bad = true; }
+        if (!funcInput.value.trim()) { CoPathCore.markFieldError(funcInput, 'Describe their job.'); bad = true; }
         const u = parseInt(urgInput.value);
         const b = parseInt(budInput.value);
+        if (isNaN(u) || u < 1 || u > 10) { CoPathCore.markFieldError(urgInput, 'Score 1-10.'); bad = true; }
+        if (isNaN(b) || b < 1 || b > 10) { CoPathCore.markFieldError(budInput, 'Score 1-10.'); bad = true; }
+        if (bad) return;
+
         const a = parseInt(accInput.value);
         const score = u * b * a;
 
@@ -144,7 +150,10 @@
         CoPathCore.saveDraft(MODULE_ID, segments);
 
         nameInput.value = ''; funcInput.value = ''; urgInput.value = ''; budInput.value = ''; accInput.value = '10';
+        nameInput.focus();
         renderMatrix();
+        const verdict = entry.isKilled ? 'Killed (low access)' : `Scored ${entry.score}`;
+        CoPathCore.toast(`${entry.name}: ${verdict}`, entry.isKilled ? 'error' : 'success');
     }
 
     function deleteSegment(id) {

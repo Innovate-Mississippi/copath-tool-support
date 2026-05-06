@@ -213,6 +213,11 @@
 
         renderHurdle();
         renderDashboard();
+
+        // UX niceties: auto-focus the first input and let Enter submit.
+        const nameInput = document.getElementById('log-name');
+        if (nameInput) nameInput.focus();
+        CoPathCore.enterToSubmit(['log-name', 'log-pain', 'log-commitment'], logInteraction);
     }
 
     function persist() {
@@ -266,10 +271,14 @@
         const painInput = document.getElementById('log-pain');
         const commitmentInput = document.getElementById('log-commitment');
 
-        if (!nameInput.value.trim() || !painInput.value) {
-            alert('Please provide a name and pain intensity.');
-            return;
+        let bad = false;
+        if (!nameInput.value.trim()) { CoPathCore.markFieldError(nameInput, 'Add the prospect name.'); bad = true; }
+        if (!painInput.value) { CoPathCore.markFieldError(painInput, 'Rate pain 1-10.'); bad = true; }
+        else {
+            const p = parseInt(painInput.value);
+            if (isNaN(p) || p < 1 || p > 10) { CoPathCore.markFieldError(painInput, 'Pain must be 1-10.'); bad = true; }
         }
+        if (bad) return;
 
         const commitKey = commitmentInput.value;
         const weight = hurdleData.weights[commitKey] ?? 0;
@@ -288,8 +297,10 @@
         nameInput.value = '';
         painInput.value = '';
         commitmentInput.value = 'verbal';
+        nameInput.focus();
 
         renderDashboard();
+        CoPathCore.toast(`Logged: ${entry.name} (+${entry.score.toFixed(1)})`, 'success');
     }
 
     function deleteInteraction(id) {
@@ -304,6 +315,12 @@
 
         let totalScore = 0;
         let totalPain = 0;
+
+        if (interactions.length === 0) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td colspan="5" style="padding: 24px; text-align: center; color: var(--text-muted); font-style: italic; font-size: 13px;">No interactions logged yet. Add one above to start measuring commitment.</td>`;
+            tbody.appendChild(tr);
+        }
 
         interactions.forEach(item => {
             totalScore += item.score;

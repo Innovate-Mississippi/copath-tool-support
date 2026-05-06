@@ -137,6 +137,9 @@
 
         currentCanvasId = canvasData[0].id;
         renderCanvas();
+
+        const firstTextarea = document.querySelector('.canvas-textarea');
+        if (firstTextarea) firstTextarea.focus();
     }
 
     function switchCanvas() {

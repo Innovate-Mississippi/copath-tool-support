@@ -176,6 +176,9 @@
 
             evaluateQuestions();
         }
+
+        const personaInput = document.getElementById('dk-persona');
+        if (personaInput && !personaInput.value) personaInput.focus();
     }
 
     function saveDraft() {

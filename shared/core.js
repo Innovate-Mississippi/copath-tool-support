@@ -139,6 +139,67 @@ const CoPathCore = {
         window.location.reload();
     },
 
+    // ── Toast notifications ───────────────────────────────────────
+    // Non-blocking replacement for alert(). kind: 'info' | 'success' | 'error'
+    toast: function (msg, kind = 'info', ms = 3500) {
+        let host = document.getElementById('copath-toast-host');
+        if (!host) {
+            host = document.createElement('div');
+            host.id = 'copath-toast-host';
+            document.body.appendChild(host);
+        }
+        const el = document.createElement('div');
+        el.className = `copath-toast ${kind}`;
+        el.innerText = msg;
+        host.appendChild(el);
+        // Animate in
+        requestAnimationFrame(() => el.classList.add('in'));
+        setTimeout(() => {
+            el.classList.remove('in');
+            setTimeout(() => el.remove(), 250);
+        }, ms);
+    },
+
+    // ── Inline field validation ──────────────────────────────────
+    markFieldError: function (input, msg) {
+        if (!input) return;
+        input.classList.add('copath-invalid');
+        let err = input.parentElement.querySelector('.copath-field-error');
+        if (!err) {
+            err = document.createElement('div');
+            err.className = 'copath-field-error';
+            input.parentElement.appendChild(err);
+        }
+        err.innerText = msg;
+        // Auto-clear when user edits.
+        const clear = () => this.clearFieldError(input);
+        input.addEventListener('input', clear, { once: true });
+        input.addEventListener('change', clear, { once: true });
+    },
+
+    clearFieldError: function (input) {
+        if (!input) return;
+        input.classList.remove('copath-invalid');
+        const err = input.parentElement.querySelector('.copath-field-error');
+        if (err) err.remove();
+    },
+
+    // Wires Enter-to-submit on a set of inputs by triggering a button click.
+    // Skips textareas (Enter inserts a newline there).
+    enterToSubmit: function (inputIds, primaryButtonOrFn) {
+        inputIds.forEach(id => {
+            const el = typeof id === 'string' ? document.getElementById(id) : id;
+            if (!el || el.tagName === 'TEXTAREA') return;
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (typeof primaryButtonOrFn === 'function') primaryButtonOrFn();
+                    else if (primaryButtonOrFn && primaryButtonOrFn.click) primaryButtonOrFn.click();
+                }
+            });
+        });
+    },
+
     // ── Persistent Settings UI (bottom-left toggle) ──────────────
     injectSettingsUI: function () {
         const currentPath = this.getBasePath();

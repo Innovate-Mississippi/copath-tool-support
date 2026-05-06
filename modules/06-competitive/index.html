@@ -208,6 +208,9 @@
         }
 
         updateMatrix();
+
+        const indSelect = document.getElementById('industry-select');
+        if (indSelect && !indSelect.value) indSelect.focus();
     }
 
     function loadIncumbents() {

@@ -47,6 +47,42 @@ input:focus, select:focus, textarea:focus { border-color: var(--im-green); backg
 button.btn-primary { background: var(--im-green); color: white; border: none; padding: 14px 24px; border-radius: 8px; font-family: var(--font-display); font-weight: 700; cursor: pointer; transition: transform 0.1s; }
 button.btn-primary:hover { background: var(--im-green-lt); transform: translateY(-1px); }
 
+/* ─── TOASTS (non-blocking notifications) ─── */
+#copath-toast-host {
+  position: fixed; top: 24px; right: 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  z-index: 10000; pointer-events: none;
+}
+.copath-toast {
+  background: var(--im-navy); color: white;
+  padding: 12px 18px; border-radius: 8px;
+  font-size: 14px; font-weight: 500;
+  box-shadow: 0 8px 24px rgba(13,31,64,0.18);
+  opacity: 0; transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  max-width: 320px; pointer-events: auto;
+}
+.copath-toast.in { opacity: 1; transform: translateY(0); }
+.copath-toast.success { background: var(--im-green); }
+.copath-toast.error { background: var(--im-red); }
+.copath-toast.info { background: var(--im-navy); }
+
+/* ─── INLINE FIELD VALIDATION ─── */
+input.copath-invalid, select.copath-invalid, textarea.copath-invalid {
+  border-color: var(--im-red) !important;
+  background: #FEF2F2;
+  box-shadow: 0 0 0 3px rgba(220,38,38,0.08);
+}
+.copath-field-error {
+  color: var(--im-red);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 4px;
+}
+.copath-field-error::before { content: '!'; display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; background: var(--im-red); color: white; font-size: 9px; font-weight: 700; }
+
 /* ─── REALITY CHECK ALERTS ─── */
 .alert-box { padding: 16px; border-radius: 8px; margin-top: 16px; font-size: 14px; font-weight: 500; display: none; border-left: 4px solid transparent; }
 .alert-danger { background: #FEF2F2; color: var(--im-red); border-left-color: var(--im-red); }
@@ -56,6 +92,19 @@ button.btn-primary:hover { background: var(--im-green-lt); transform: translateY
 /* ─── GLOBAL FOOTER ─── */
 .global-footer { background: var(--im-navy); color: white; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
 .global-footer a { color: var(--im-green-lt); text-decoration: none; font-weight: 600; }
+
+/* ─── MOBILE TIGHTENING ─── */
+@media (max-width: 600px) {
+  .copath-wrapper { padding: 24px 16px; }
+  .copath-card { padding: 20px; border-radius: 10px; }
+  .copath-header { padding-bottom: 8px; margin-bottom: 16px; }
+  h1 { font-size: 24px; }
+  .form-grid { grid-template-columns: 1fr; gap: 12px; }
+  .global-footer { padding: 12px 16px; flex-direction: column; gap: 4px; text-align: center; }
+  #copath-toast-host { top: 12px; right: 12px; left: 12px; }
+  .copath-toast { max-width: none; }
+  #copath-settings-panel { width: calc(100vw - 24px); left: 12px; right: 12px; }
+}
 
 /* ─── STRICT PRINT / MANUAL HYGIENE ─── */
 @media print {
