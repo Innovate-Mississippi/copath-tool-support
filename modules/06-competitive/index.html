@@ -15,6 +15,15 @@
         .matrix-table td:first-child { text-align: left; font-weight: 700; background: var(--paper); }
         .matrix-table .col-you { background: #E6F9EF; font-weight: 700; color: var(--im-green); border-left: 2px solid var(--im-green); border-right: 2px solid var(--im-green); }
         .feature-input-group { margin-bottom: 12px; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); }
+        .friction-badge { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 6px; background: var(--bg-color); border: 1px solid var(--border-color); margin-bottom: 12px; font-size: 12px; }
+        .friction-badge .label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; font-size: 10px; }
+        .friction-badge .value { font-family: var(--font-mono); font-weight: 700; color: var(--im-navy); }
+        .friction-badge.high { background: #FEF2F2; border-color: rgba(220,38,38,0.2); }
+        .friction-badge.high .value { color: var(--im-red); }
+        .friction-badge.med { background: #FFFBEB; border-color: rgba(245,158,11,0.2); }
+        .friction-badge.med .value { color: var(--im-amber); }
+        .friction-badge.low { background: #E6F9EF; border-color: rgba(0,166,81,0.2); }
+        .friction-badge.low .value { color: var(--im-green); }
 
         @media (max-width: 900px) {
             .dashboard-grid { grid-template-columns: 1fr; }
@@ -81,6 +90,15 @@
 
                 <h2>3. The Status Quo Cost</h2>
                 <p class="text-muted mb-4">If they don't buy anything, what does their current manual process cost them?</p>
+
+                <div class="friction-badge" id="friction-badge" style="display: none;">
+                    <div>
+                        <div class="label">Industry Switching Friction</div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;" id="friction-helper">Higher = the buyer needs more pain to switch.</div>
+                    </div>
+                    <div class="value" id="friction-value">&mdash;</div>
+                </div>
+
                 <div class="form-grid">
                     <div>
                         <label>Hours Wasted / Week</label>
@@ -198,7 +216,37 @@
             document.getElementById('comp-1').value = compData.incumbents[ind][0] || '';
             document.getElementById('comp-2').value = compData.incumbents[ind][1] || '';
         }
+        // Auto-fill table-stakes features ONLY if user hasn't typed anything yet.
+        // Don't trample the user's custom values.
+        const stakes = (compData.industries_full && compData.industries_full[ind] && compData.industries_full[ind].table_stakes_features) || [];
+        const f1 = document.getElementById('feat-1');
+        const f2 = document.getElementById('feat-2');
+        if (!f1.value.trim() && stakes[0]) f1.value = stakes[0];
+        if (!f2.value.trim() && stakes[1]) f2.value = stakes[1];
         updateMatrix();
+    }
+
+    // Returns the per-industry friction modifier (1-10) or the global default.
+    function getActiveFrictionModifier() {
+        const ind = document.getElementById('industry-select').value;
+        const fromIndustry = compData.industries_full
+            && compData.industries_full[ind]
+            && compData.industries_full[ind].friction_modifier_1_to_10;
+        if (typeof fromIndustry === 'number') return fromIndustry;
+        return compData.global_friction_modifier ?? 7.0;
+    }
+
+    function renderFrictionBadge() {
+        const friction = getActiveFrictionModifier();
+        const badge = document.getElementById('friction-badge');
+        const ind = document.getElementById('industry-select').value;
+        if (!ind || ind === '') { badge.style.display = 'none'; return; }
+        badge.style.display = 'flex';
+        badge.classList.remove('low', 'med', 'high');
+        if (friction >= 8.0) badge.classList.add('high');
+        else if (friction >= 6.0) badge.classList.add('med');
+        else badge.classList.add('low');
+        document.getElementById('friction-value').innerText = friction.toFixed(1) + ' / 10';
     }
 
     function getScoreSelect(id, defaultVal) {
@@ -282,11 +330,22 @@
         alertInertia.style.display = 'none';
         alertMoatStrong.style.display = 'none';
 
+        renderFrictionBadge();
+
         const youF1 = window.matrixScores['you_f1'] || 'Yes';
         const youF2 = window.matrixScores['you_f2'] || 'Yes';
 
+        // Inertia thresholds scale with industry friction. Defaults (5 hr, $500)
+        // are calibrated against a friction of 7.0; higher-friction industries
+        // require more demonstrated pain before the buyer will switch.
+        const friction = getActiveFrictionModifier();
+        const baseFriction = compData.global_friction_modifier ?? 7.0;
+        const scale = friction / baseFriction;
+        const hourThreshold = 5 * scale;
+        const costThreshold = 500 * scale;
+
         const isBelowParity = (youF1 === 'No' || youF2 === 'No');
-        const hasLowInertia = (sqHours < 5 && sqCost < 500);
+        const hasLowInertia = (sqHours < hourThreshold && sqCost < costThreshold);
         const hasDiff = (window.matrixScores['you_fd'] || 'Yes') === 'Yes';
 
         if (isBelowParity) {
