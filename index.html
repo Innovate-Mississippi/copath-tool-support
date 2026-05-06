@@ -9,10 +9,46 @@
     <link rel="stylesheet" href="shared/styles.css">
     <style>
         .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 32px; }
-        .module-card { border: 2px solid transparent; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .module-card { border: 2px solid transparent; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; display: block; position: relative; }
         .module-card:hover { border-color: var(--im-green); transform: translateY(-3px); }
+        .module-card .mod-status { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border-color); font-size: 11px; }
+        .module-card .mod-stat { color: var(--text-muted); }
+        .module-card .mod-stat strong { color: var(--im-navy); font-family: var(--font-mono); }
+        .module-card .pill { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; background: var(--bg-color); color: var(--text-muted); }
+        .module-card .pill.green { background: #E6F9EF; color: var(--im-green); }
+        .module-card .pill.amber { background: #FFFBEB; color: var(--im-amber); }
+        .module-card .pill.red { background: #FEF2F2; color: var(--im-red); }
+        .module-card .pill.empty { background: var(--bg-color); color: var(--text-muted); font-style: italic; }
         .admin-link { display: block; text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted); text-decoration: none; }
         .admin-link:hover { color: var(--im-navy); text-decoration: underline; }
+
+        /* Roll-up panel */
+        .rollup-card { background: linear-gradient(135deg, var(--im-navy) 0%, var(--im-navy-mid) 100%); color: white; border-radius: 12px; padding: 32px; margin-top: 32px; }
+        .rollup-card h2 { color: white; font-size: 18px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+        .rollup-card .rollup-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 24px; }
+        .rollup-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+        .stat-block { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; }
+        .stat-num { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--im-green-lt); line-height: 1.1; }
+        .stat-label { font-size: 11px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+        .stat-empty .stat-num { color: rgba(255,255,255,0.3); }
+
+        /* Industry alignment */
+        .industry-panel { margin-top: 24px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; }
+        .industry-panel summary { cursor: pointer; padding: 14px 18px; font-size: 13px; font-weight: 700; color: white; user-select: none; display: flex; justify-content: space-between; gap: 12px; }
+        .industry-panel summary::-webkit-details-marker { display: none; }
+        .industry-panel summary::after { content: '▾'; opacity: 0.5; }
+        .industry-panel[open] summary::after { content: '▴'; }
+        .industry-panel .industry-content { padding: 0 18px 18px; }
+        .broadcast-row { display: flex; gap: 8px; align-items: end; flex-wrap: wrap; padding: 16px; background: rgba(0,0,0,0.2); border-radius: 6px; margin-bottom: 12px; }
+        .broadcast-row label { color: rgba(255,255,255,0.7); font-size: 11px; flex-basis: 100%; }
+        .broadcast-row select { flex: 1 1 200px; padding: 8px 10px; background: white; color: var(--im-navy); border: none; border-radius: 4px; font-size: 13px; }
+        .broadcast-row button { padding: 8px 14px; background: var(--im-green); color: white; border: none; border-radius: 4px; font-weight: 700; font-family: var(--font-display); cursor: pointer; font-size: 12px; }
+        .broadcast-row button:hover { background: var(--im-green-lt); }
+        .industry-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .industry-table td { padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+        .industry-table td:first-child { color: rgba(255,255,255,0.6); width: 40%; }
+        .industry-table td:nth-child(2) { font-family: var(--font-mono); color: white; font-weight: 700; }
+        .industry-table tr:last-child td { border-bottom: none; }
     </style>
 </head>
 <body>
@@ -24,41 +60,71 @@
         <p class="text-muted">A suite of structured tools to validate markets, size opportunities, and build unshakeable business models.</p>
     </div>
 
+    <div class="rollup-card no-print" id="rollup-card">
+        <h2>Your Validation Status</h2>
+        <p class="rollup-sub">Live snapshot from your saved drafts in this browser. <span id="rollup-empty-hint" style="display: none;">Start with any module below to populate.</span></p>
+
+        <div class="rollup-stats" id="rollup-stats"></div>
+
+        <details class="industry-panel" id="industry-panel">
+            <summary>
+                <span>Industry alignment across modules</span>
+                <span id="industry-summary" style="opacity: 0.7;"></span>
+            </summary>
+            <div class="industry-content">
+                <div class="broadcast-row">
+                    <label>Broadcast a single industry to every module that uses one:</label>
+                    <select id="broadcast-industry"></select>
+                    <button onclick="broadcastIndustry()">Apply to All</button>
+                </div>
+                <table class="industry-table">
+                    <tbody id="industry-table-body"></tbody>
+                </table>
+            </div>
+        </details>
+    </div>
+
     <div class="module-grid">
-        <a href="modules/01-validation/index.html" class="copath-card module-card">
+        <a href="modules/01-validation/index.html" class="copath-card module-card" data-mod="01_validation">
             <div class="text-kicker">Module 01</div>
             <h3 style="font-size: 20px;">Market Validation</h3>
             <p class="text-muted" style="margin-top: 8px;">The "Truth Engine." Log customer discovery interactions and calculate your Weighted Commitment Score.</p>
+            <div class="mod-status" data-status></div>
         </a>
 
-        <a href="modules/02-segmentation/index.html" class="copath-card module-card">
+        <a href="modules/02-segmentation/index.html" class="copath-card module-card" data-mod="02_segmentation">
             <div class="text-kicker">Module 02</div>
             <h3 style="font-size: 20px;">Attribute Segmentation</h3>
             <p class="text-muted" style="margin-top: 8px;">The "Priority Matrix." Score potential customer segments based on Urgency, Budget, and Accessibility.</p>
+            <div class="mod-status" data-status></div>
         </a>
 
-        <a href="modules/03-sizing/index.html" class="copath-card module-card">
+        <a href="modules/03-sizing/index.html" class="copath-card module-card" data-mod="03_sizing">
             <div class="text-kicker">Module 03</div>
             <h3 style="font-size: 20px;">Bottom-Up Sizing</h3>
             <p class="text-muted" style="margin-top: 8px;">The "Reality Calculator." Use specific Mississippi entity counts to generate realistic SOM ranges.</p>
+            <div class="mod-status" data-status></div>
         </a>
 
-        <a href="modules/04-canvases/index.html" class="copath-card module-card">
+        <a href="modules/04-canvases/index.html" class="copath-card module-card" data-mod="04_canvases">
             <div class="text-kicker">Module 04</div>
             <h3 style="font-size: 20px;">CoPath Canvases</h3>
             <p class="text-muted" style="margin-top: 8px;">Pooled visual frameworks for discovery, synthesis, and follow-up. Includes stateful autosave.</p>
+            <div class="mod-status" data-status></div>
         </a>
 
-        <a href="modules/06-competitive/index.html" class="copath-card module-card">
+        <a href="modules/06-competitive/index.html" class="copath-card module-card" data-mod="06_competitive">
             <div class="text-kicker">Module 06</div>
             <h3 style="font-size: 20px;">Competitive Analysis</h3>
             <p class="text-muted" style="margin-top: 8px;">The "Moat Builder." Auto-fill industry incumbents and calculate the cost of the "Status Quo."</p>
+            <div class="mod-status" data-status></div>
         </a>
 
-        <a href="modules/07-discovery/index.html" class="copath-card module-card">
+        <a href="modules/07-discovery/index.html" class="copath-card module-card" data-mod="07_discovery">
             <div class="text-kicker">Module 07</div>
             <h3 style="font-size: 20px;">Discovery Kit</h3>
             <p class="text-muted" style="margin-top: 8px;">The "Field Manual." Draft unbiased questions and generate a printable interview script.</p>
+            <div class="mod-status" data-status></div>
         </a>
     </div>
 
@@ -71,5 +137,300 @@
 </footer>
 
 <script src="shared/core.js"></script>
+<script>
+    // ── Rollup data extraction ────────────────────────────────────
+    // Each entry tells the launchpad how to interpret a module's draft
+    // and what summary data to surface.
+
+    const MODULE_LABELS = {
+        '01_validation': 'Module 01 · Validation',
+        '02_segmentation': 'Module 02 · Segmentation',
+        '03_sizing': 'Module 03 · Sizing',
+        '04_canvases': 'Module 04 · Canvases',
+        '06_competitive': 'Module 06 · Competitive',
+        '07_discovery': 'Module 07 · Discovery'
+    };
+
+    const INDUSTRY_MODULES = ['01_validation', '06_competitive'];
+
+    function prettyIndustry(key) {
+        if (!key) return '';
+        return key.split('_').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+    }
+
+    function loadDrafts() {
+        const out = {};
+        Object.keys(MODULE_LABELS).forEach(id => {
+            const d = CoPathCore.loadDraft(id);
+            out[id] = d ? d.data : null;
+        });
+        return out;
+    }
+
+    function summarize(drafts) {
+        const summary = {
+            interactions: 0,
+            commitment: 0,
+            avgPain: 0,
+            viableSegments: 0,
+            topSegment: null,
+            projectedRevenue: 0,
+            canvasesWithContent: 0,
+            moduleStatuses: {},
+            industries: {}
+        };
+
+        // Module 01
+        const m1 = drafts['01_validation'];
+        if (m1) {
+            const list = Array.isArray(m1) ? m1 : (m1.interactions || []);
+            const ind = Array.isArray(m1) ? null : (m1.industry || null);
+            summary.interactions = list.length;
+            summary.commitment = list.reduce((s, i) => s + (i.score || 0), 0);
+            summary.avgPain = list.length ? list.reduce((s, i) => s + (i.pain || 0), 0) / list.length : 0;
+            summary.industries['01_validation'] = ind;
+        }
+
+        // Module 02
+        const m2 = drafts['02_segmentation'];
+        if (Array.isArray(m2) && m2.length) {
+            const viable = m2.filter(s => !s.isKilled);
+            summary.viableSegments = viable.length;
+            summary.topSegment = viable[0] || null;
+        }
+
+        // Module 03
+        const m3 = drafts['03_sizing'];
+        if (m3 && m3.acv) {
+            const totalNodes = m3.customCount || parseInt(m3.nodeValue) || 0;
+            const leads = Math.floor(totalNodes * ((m3.leadRate || 0) / 100));
+            const customers = Math.floor(leads * ((m3.closeRate || 0) / 100));
+            summary.projectedRevenue = customers * (m3.acv || 0);
+        }
+
+        // Module 04
+        const m4 = drafts['04_canvases'];
+        if (m4 && typeof m4 === 'object') {
+            summary.canvasesWithContent = Object.values(m4).filter(c => {
+                if (!c || !c.texts) return false;
+                return Object.values(c.texts).some(t => t && t.trim().length > 0);
+            }).length;
+        }
+
+        // Module 06
+        const m6 = drafts['06_competitive'];
+        if (m6) {
+            summary.industries['06_competitive'] = m6.industry || null;
+        }
+
+        return summary;
+    }
+
+    // ── Render: top stat blocks ────────────────────────────────────
+    function renderStats(s) {
+        const stats = [
+            {
+                num: s.interactions ? s.interactions : '0',
+                label: 'Interactions logged',
+                empty: !s.interactions
+            },
+            {
+                num: s.commitment ? s.commitment.toFixed(1) : '0.0',
+                label: 'Commitment score',
+                empty: !s.commitment
+            },
+            {
+                num: s.viableSegments ? s.viableSegments : '0',
+                label: 'Viable segments',
+                empty: !s.viableSegments
+            },
+            {
+                num: s.canvasesWithContent ? s.canvasesWithContent : '0',
+                label: 'Canvases drafted',
+                empty: !s.canvasesWithContent
+            },
+            {
+                num: s.projectedRevenue ? '$' + Math.round(s.projectedRevenue / 1000) + 'k' : '$0',
+                label: 'Projected Y1 revenue',
+                empty: !s.projectedRevenue
+            }
+        ];
+
+        const container = document.getElementById('rollup-stats');
+        container.innerHTML = stats.map(stat => `
+            <div class="stat-block ${stat.empty ? 'stat-empty' : ''}">
+                <div class="stat-num">${stat.num}</div>
+                <div class="stat-label">${stat.label}</div>
+            </div>
+        `).join('');
+
+        const hasAny = stats.some(s => !s.empty);
+        document.getElementById('rollup-empty-hint').style.display = hasAny ? 'none' : 'inline';
+    }
+
+    // ── Render: per-card status badges ────────────────────────────
+    function renderModuleBadges(drafts, s) {
+        function set(modId, html) {
+            const card = document.querySelector(`[data-mod="${modId}"] [data-status]`);
+            if (card) card.innerHTML = html;
+        }
+
+        // 01 Validation
+        if (s.interactions) {
+            const ind = s.industries['01_validation'];
+            const indLabel = ind ? `<span class="pill">${prettyIndustry(ind)}</span>` : '';
+            set('01_validation',
+                `<span class="mod-stat"><strong>${s.interactions}</strong> interactions · score <strong>${s.commitment.toFixed(1)}</strong></span>` + indLabel);
+        } else {
+            set('01_validation', '<span class="pill empty">Not started</span>');
+        }
+
+        // 02 Segmentation
+        if (s.topSegment) {
+            set('02_segmentation',
+                `<span class="mod-stat">Top: <strong>${s.topSegment.name}</strong> (score ${s.topSegment.score})</span>` +
+                `<span class="pill green">${s.viableSegments} viable</span>`);
+        } else {
+            set('02_segmentation', '<span class="pill empty">Not started</span>');
+        }
+
+        // 03 Sizing
+        const m3 = drafts['03_sizing'];
+        if (s.projectedRevenue > 0) {
+            const isLifestyle = s.projectedRevenue < 150000;
+            const isDelusion = m3 && m3.closeRate > 15;
+            const pill = isDelusion ? 'red' : (isLifestyle ? 'amber' : 'green');
+            const label = isDelusion ? 'Delusion' : (isLifestyle ? 'Lifestyle' : 'Venture-scale');
+            set('03_sizing',
+                `<span class="mod-stat">Y1 <strong>$${(s.projectedRevenue / 1000).toFixed(0)}k</strong></span>` +
+                `<span class="pill ${pill}">${label}</span>`);
+        } else {
+            set('03_sizing', '<span class="pill empty">Not started</span>');
+        }
+
+        // 04 Canvases
+        if (s.canvasesWithContent) {
+            set('04_canvases', `<span class="mod-stat"><strong>${s.canvasesWithContent}</strong> canvas(es) with content</span>`);
+        } else {
+            set('04_canvases', '<span class="pill empty">Not started</span>');
+        }
+
+        // 06 Competitive
+        const m6 = drafts['06_competitive'];
+        if (m6 && (m6.industry || m6.comp1)) {
+            const indLabel = m6.industry ? `<span class="pill">${prettyIndustry(m6.industry)}</span>` : '';
+            const comps = [m6.comp1, m6.comp2].filter(Boolean).join(' · ');
+            set('06_competitive',
+                `<span class="mod-stat">${comps || 'Started'}</span>` + indLabel);
+        } else {
+            set('06_competitive', '<span class="pill empty">Not started</span>');
+        }
+
+        // 07 Discovery
+        const m7 = drafts['07_discovery'];
+        if (m7 && (m7.persona || m7.q1 || m7.q2 || m7.q3)) {
+            const drafted = [m7.q1, m7.q2, m7.q3].filter(q => q && q.trim().length > 5).length;
+            set('07_discovery',
+                `<span class="mod-stat">${m7.persona ? '<strong>' + m7.persona + '</strong> · ' : ''}${drafted}/3 questions</span>`);
+        } else {
+            set('07_discovery', '<span class="pill empty">Not started</span>');
+        }
+    }
+
+    // ── Render: industry alignment table + broadcast ──────────────
+    let allIndustryKeys = [];
+
+    async function loadIndustryList() {
+        // Pull from validation.json — has the canonical industry list
+        const v = await CoPathCore.fetchData('validation');
+        if (v && v.industry_hurdles) {
+            allIndustryKeys = Object.keys(v.industry_hurdles).sort();
+        } else {
+            allIndustryKeys = ['agtech', 'fintech', 'healthtech', 'saas', 'other'];
+        }
+        const sel = document.getElementById('broadcast-industry');
+        sel.innerHTML = '<option value="" disabled selected>Choose an industry...</option>';
+        allIndustryKeys.forEach(k => {
+            const o = document.createElement('option');
+            o.value = k;
+            o.text = prettyIndustry(k);
+            sel.appendChild(o);
+        });
+    }
+
+    function renderIndustryTable(drafts) {
+        const tbody = document.getElementById('industry-table-body');
+        const summary = document.getElementById('industry-summary');
+
+        const rows = INDUSTRY_MODULES.map(modId => {
+            const draft = drafts[modId];
+            let industry = null;
+            if (draft) {
+                industry = (Array.isArray(draft) ? null : draft.industry) || null;
+            }
+            return { modId, industry, label: MODULE_LABELS[modId] };
+        });
+
+        tbody.innerHTML = rows.map(r => `
+            <tr>
+                <td>${r.label}</td>
+                <td>${r.industry ? prettyIndustry(r.industry) : '—'}</td>
+            </tr>
+        `).join('');
+
+        // Inline summary in the <summary> element
+        const distinct = new Set(rows.map(r => r.industry).filter(Boolean));
+        if (distinct.size === 0) {
+            summary.innerText = 'none set yet';
+        } else if (distinct.size === 1) {
+            summary.innerText = 'aligned: ' + prettyIndustry([...distinct][0]);
+        } else {
+            summary.innerText = `${distinct.size} different — click to align`;
+            // Auto-open the panel when there's drift
+            const panel = document.getElementById('industry-panel');
+            if (!panel.open) panel.open = true;
+        }
+    }
+
+    // Broadcast: write the chosen industry into every industry-aware module's
+    // draft, preserving all other fields. Modules pick up the change on their
+    // next visit via loadDraft.
+    function broadcastIndustry() {
+        const target = document.getElementById('broadcast-industry').value;
+        if (!target) { alert('Pick an industry first.'); return; }
+        if (!confirm(`Set every module's industry to "${prettyIndustry(target)}"? This overwrites the current per-module values.`)) return;
+
+        INDUSTRY_MODULES.forEach(modId => {
+            const existing = CoPathCore.loadDraft(modId);
+            // Build a draft data shape the module will accept.
+            if (modId === '01_validation') {
+                let interactions = [];
+                if (existing && existing.data) {
+                    interactions = Array.isArray(existing.data) ? existing.data : (existing.data.interactions || []);
+                }
+                CoPathCore.saveDraft(modId, { industry: target, interactions });
+            } else if (modId === '06_competitive') {
+                const data = (existing && existing.data && typeof existing.data === 'object') ? existing.data : {};
+                data.industry = target;
+                CoPathCore.saveDraft(modId, data);
+            }
+        });
+
+        renderAll();
+    }
+
+    function renderAll() {
+        const drafts = loadDrafts();
+        const s = summarize(drafts);
+        renderStats(s);
+        renderModuleBadges(drafts, s);
+        renderIndustryTable(drafts);
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadIndustryList();
+        renderAll();
+    });
+</script>
 </body>
 </html>
