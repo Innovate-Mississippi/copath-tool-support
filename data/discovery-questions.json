@@ -1,0 +1,252 @@
+[
+  {
+    "id": "dq_last_time_tried",
+    "question_text": "Walk me through the last time you tried to solve this problem. What did you actually do, step by step, and what did it end up costing you in time or money?",
+    "elicits": "latent need",
+    "bad_version_to_avoid": "Do you have this problem?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "What made you stop trying that approach? Was it the cost, the result, or something else?",
+    "follow_up_if_no": "When you noticed the problem and didn't act, what did you do instead, even if it was just living with it?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_someone_paid_real_money",
+    "question_text": "Tell me about the last time someone like you paid real money to solve a problem in this area. What were they buying, and how did they decide it was worth it?",
+    "elicits": "true willingness-to-pay",
+    "bad_version_to_avoid": "Would you pay $50 a month for something like this?",
+    "when_to_ask": "before pricing region",
+    "follow_up_if_yes": "Who signed the check, and what did they have to justify to make that purchase happen?",
+    "follow_up_if_no": "What's stopped people from spending on this so far, in your view?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_whose_desk_budget",
+    "question_text": "If a budget for this showed up tomorrow, whose desk would the request land on, and what would they need to see before approving it?",
+    "elicits": "decision authority",
+    "bad_version_to_avoid": "Are you the decision maker?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "Has that person ever approved something similar? What was different about the ones that got through versus the ones that didn't?",
+    "follow_up_if_no": "Who has gotten budget approved for something adjacent recently? What did they do differently?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_using_today_duct_tape",
+    "question_text": "What are you using today, even if it's a spreadsheet, an intern, or duct tape, to handle this? Walk me through it.",
+    "elicits": "switching cost",
+    "bad_version_to_avoid": "Are you happy with your current solution?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "What would have to be true about a replacement before you'd unplug what you have today?",
+    "follow_up_if_no": "If nothing exists, why hasn't somebody jury-rigged something? What's blocking even the duct-tape version?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_show_me_your_math",
+    "question_text": "Of the customers who look like the ones you've described, how many actually exist in a region where you can reach them and they can pay U.S. prices? Show me your math.",
+    "elicits": "market-size grounding",
+    "bad_version_to_avoid": "How big do you think this market is?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "What's your source for that count, and how stale is it?",
+    "follow_up_if_no": "If you can't size it, what's the smallest beachhead you could name, address, and email this quarter?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_first_hundred_human_path",
+    "question_text": "Walk me through how the first hundred customers actually find out you exist. Not the channel name, the human path.",
+    "elicits": "distribution viability",
+    "bad_version_to_avoid": "What's your go-to-market strategy?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "Have you done that path even once, end to end? What happened?",
+    "follow_up_if_no": "Whose introduction or trust would make that path possible, and what would they need from you to make it?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_two_three_skills",
+    "question_text": "Name the two or three skills this company will live or die on in the next eighteen months. Which of those does the founding team not have today?",
+    "elicits": "team capability gap",
+    "bad_version_to_avoid": "Do you think your team can execute on this?",
+    "when_to_ask": "after team region answered",
+    "follow_up_if_yes": "Who on the team has done that thing before, and at what scale? Walk me through it.",
+    "follow_up_if_no": "What's your plan to close that gap, and on what timeline? Have you talked to anyone who'd fill it?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_well_funded_copycat",
+    "question_text": "Imagine a well-funded competitor copies your product feature for feature in twelve months. What would still be true about your business that they couldn't replicate?",
+    "elicits": "moat durability",
+    "bad_version_to_avoid": "What's your competitive advantage?",
+    "when_to_ask": "before pricing region",
+    "follow_up_if_yes": "How long did that asset take you to build, and what did it cost? Could a check shortcut it?",
+    "follow_up_if_no": "If the answer is 'nothing,' what's the strategy for getting to scale before someone with deeper pockets notices?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_loved_it_no_check",
+    "question_text": "Tell me about the people who said they loved the idea but never wrote a check or set a meeting. What did they have in common?",
+    "elicits": "false-positive disambiguation",
+    "bad_version_to_avoid": "Have you gotten positive feedback on the idea?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "What were you doing or saying in those conversations that you've stopped doing in the ones that converted?",
+    "follow_up_if_no": "Have you been in enough conversations to even see that pattern yet? How many real ones, not friends?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_last_month_adjacent_spend",
+    "question_text": "What did you spend money on last month that's adjacent to this problem? Tools, services, contractors, anything.",
+    "elicits": "true willingness-to-pay",
+    "bad_version_to_avoid": "How much would you be willing to spend on a solution like this?",
+    "when_to_ask": "before pricing region",
+    "follow_up_if_yes": "How did each of those purchases get approved? Card swipe, PO, or something heavier?",
+    "follow_up_if_no": "If nothing in this category is in your budget today, what budget do you think it would come out of, and who controls it?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_who_got_woken_up",
+    "question_text": "When this problem flared up most recently, who got woken up, who got blamed, and what changed afterward?",
+    "elicits": "latent need",
+    "bad_version_to_avoid": "How painful is this problem on a scale of 1 to 10?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "How often does that flare-up happen? Once a year, once a quarter, once a week?",
+    "follow_up_if_no": "If nobody got woken up or blamed, who actually feels this problem in their job today?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_last_vendor_ripped_out",
+    "question_text": "Tell me about the last vendor you ripped out and replaced. What was the breaking point, and how long did the switch actually take?",
+    "elicits": "switching cost",
+    "bad_version_to_avoid": "Would you switch from your current tool to ours?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "What did the switch cost you in hidden ways that you didn't see coming?",
+    "follow_up_if_no": "If you've never replaced a vendor in this category, what does that tell you about the gravity of the incumbents?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_else_has_to_say_yes",
+    "question_text": "Walk me through who else has to say yes for this purchase to happen. Procurement, security, IT, the person who got burned by the last vendor — who's on the list?",
+    "elicits": "decision authority",
+    "bad_version_to_avoid": "Who else needs to be involved in the decision?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "Which of those people has killed a deal recently, and over what?",
+    "follow_up_if_no": "If nobody else has to weigh in, that's unusual at this price point. What am I missing about how purchases happen here?",
+    "industry_specificity": ["enterprise SaaS", "healthtech", "fintech", "govtech"]
+  },
+  {
+    "id": "dq_first_last_name_billable",
+    "question_text": "Of the customers you can name today by first and last name, how many would let you bill them within ninety days if the product worked?",
+    "elicits": "market-size grounding",
+    "bad_version_to_avoid": "Who's in your target market?",
+    "when_to_ask": "when evidence-strength on 'customers will pay' < 4",
+    "follow_up_if_yes": "Have you asked any of them that question out loud? What did they say?",
+    "follow_up_if_no": "What does your list of named, reachable buyers look like today, and what's your plan to triple it this quarter?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_tom_called_bobby",
+    "question_text": "In a market where deals close because Tom called Bobby, what's your honest standing in the rooms where this problem gets discussed?",
+    "elicits": "distribution viability",
+    "bad_version_to_avoid": "Do you have any industry connections?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "Who would vouch for you on a cold call, and have you asked them to?",
+    "follow_up_if_no": "Who, in this state or the next one over, could open those doors, and what would they want in return?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_eighteen_months_never_done",
+    "question_text": "What does this company need to be able to do in eighteen months that nobody on the team has ever done before? Be honest with yourself.",
+    "elicits": "team capability gap",
+    "bad_version_to_avoid": "Are you missing any key hires?",
+    "when_to_ask": "after team region answered",
+    "follow_up_if_yes": "What's your plan for the first time the company has to do that thing? Hire it, learn it, or buy it?",
+    "follow_up_if_no": "If you've genuinely done all of it before, why hasn't this been built yet? What changed?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_loyal_customer_churned",
+    "question_text": "If your most loyal customer churned tomorrow, what story would they tell about why? Not the polite reason — the real one.",
+    "elicits": "moat durability",
+    "bad_version_to_avoid": "Why do customers stay with you?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "What are you actively doing to make that story less likely to come true?",
+    "follow_up_if_no": "Have you ever asked a churned or near-churn customer that question? What did you hear?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_send_me_link_came_back",
+    "question_text": "Of the people who told you 'this is great, send me the link,' how many actually used it? How many of those came back a second time?",
+    "elicits": "false-positive disambiguation",
+    "bad_version_to_avoid": "Are people excited about your product?",
+    "when_to_ask": "when evidence-strength on 'customers will pay' < 4",
+    "follow_up_if_yes": "What were the ones who came back doing differently from the ones who didn't?",
+    "follow_up_if_no": "If 'send me the link' isn't predicting use, what signal in the conversation actually does?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_excited_didnt_go_anywhere",
+    "question_text": "Tell me about a time you got really excited about a customer conversation, and it didn't go anywhere. What were the early tells you ignored?",
+    "elicits": "false-positive disambiguation",
+    "bad_version_to_avoid": "Have you been getting good signal from customer conversations?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "What questions are you asking now that would have caught that earlier?",
+    "follow_up_if_no": "If every conversation has felt like signal, that itself is worth examining. How are you stress-testing that?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_monday_pulled_friday",
+    "question_text": "If we shipped you a working version Monday and pulled it back Friday, what would break in your week, and what would you do instead?",
+    "elicits": "latent need",
+    "bad_version_to_avoid": "How important is this to you?",
+    "when_to_ask": "before pricing region",
+    "follow_up_if_yes": "How many hours, dollars, or relationships does that 'instead' actually cost you?",
+    "follow_up_if_no": "If nothing would really break, where does this rank against the other things on your list this quarter?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_purchase_killed_last_minute",
+    "question_text": "Walk me through a recent purchase in this category that got killed at the last minute. What killed it, and who killed it?",
+    "elicits": "decision authority",
+    "bad_version_to_avoid": "What's your buying process?",
+    "when_to_ask": "before pricing region",
+    "follow_up_if_yes": "What would the vendor have had to do differently, and at what stage, to keep that deal alive?",
+    "follow_up_if_no": "If no purchase has ever been killed, either you have very short cycles or very few cycles. Which is it?",
+    "industry_specificity": ["enterprise SaaS", "healthtech", "industrial", "govtech"]
+  },
+  {
+    "id": "dq_cac_doubles",
+    "question_text": "What would have to be true about your distribution path for it to still work when your CAC doubles? Because it will.",
+    "elicits": "distribution viability",
+    "bad_version_to_avoid": "Is your channel scalable?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "What have you measured that gives you that confidence, and over what sample size?",
+    "follow_up_if_no": "If the channel breaks at 2x CAC, what's the second channel, and have you tested any signal in it yet?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_ten_times_funding",
+    "question_text": "What's the first thing a competitor with ten times your funding would do in the next ninety days, and what's your honest answer to it?",
+    "elicits": "moat durability",
+    "bad_version_to_avoid": "Are you worried about competition?",
+    "when_to_ask": "after first contradiction",
+    "follow_up_if_yes": "Have you written that answer down anywhere your team can see it?",
+    "follow_up_if_no": "If you're not worried, walk me through why. I want to make sure you've actually looked, not just hoped.",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_real_customers_addressable_slice",
+    "question_text": "How many real customers — not pilots, not LOIs — are in the addressable slice you can reach from where you sit today?",
+    "elicits": "market-size grounding",
+    "bad_version_to_avoid": "Is the market big enough to support a venture-scale outcome?",
+    "when_to_ask": "early discovery",
+    "follow_up_if_yes": "What's your conversion assumption from that slice, and what's it based on?",
+    "follow_up_if_no": "If the reachable slice is small, what has to happen geographically or relationally to make it bigger? On what timeline?",
+    "industry_specificity": "universal"
+  },
+  {
+    "id": "dq_team_motion",
+    "question_text": "What does the team know how to sell, and what does the team need to learn how to sell? Be specific about the motion: founder-led, inside, field, channel, or product-led.",
+    "elicits": "team capability gap",
+    "bad_version_to_avoid": "Do you have sales experience on the team?",
+    "when_to_ask": "after team region answered",
+    "follow_up_if_yes": "Who has run that exact motion at this stage, and what did they learn that's relevant here?",
+    "follow_up_if_no": "What's your plan to test the motion before you hire for it, so you don't hire the wrong shape of person?",
+    "industry_specificity": "universal"
+  }
+]

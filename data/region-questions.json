@@ -1,0 +1,214 @@
+{
+  "regions": [
+    {
+      "region_id": "idea",
+      "label": "Idea",
+      "intent": "Pin down what you're building, for whom, and why now. The questions below shape every other region.",
+      "questions": [
+        {
+          "id": "one_liner_check",
+          "prompt": "Can you state in one sentence what the product does and who it's for, without using the words 'platform', 'AI', or 'solution'?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.3
+        },
+        {
+          "id": "why_now",
+          "prompt": "Why is this idea fundable in 2026 and not in 2018 or 2032? What changed that makes the window open now?",
+          "type": "text",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.5
+        },
+        {
+          "id": "incumbent_named",
+          "prompt": "Who is the incumbent your customer pays today, even if it's a spreadsheet, an intern, or duct tape? Name them.",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.4
+        },
+        {
+          "id": "outcome_promise",
+          "prompt": "What measurable outcome does the customer get? (e.g., '8 hours/week saved per attorney', not 'increased efficiency')",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.6
+        }
+      ]
+    },
+    {
+      "region_id": "customer",
+      "label": "Customer",
+      "intent": "Get specific about who you're building for. 'Everyone' is not a customer. Names are customers.",
+      "questions": [
+        {
+          "id": "named_buyers",
+          "prompt": "Can you list at least 10 named real people (first and last) who fit your buyer description?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.7
+        },
+        {
+          "id": "buyer_role_specific",
+          "prompt": "What is the specific job title and seniority of the person who would write the check? Not 'enterprise', the actual role.",
+          "type": "text",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.4
+        },
+        {
+          "id": "user_vs_buyer",
+          "prompt": "Is the person who uses the product the same person who pays for it? If not, who else has to say yes?",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.5
+        },
+        {
+          "id": "first_ten_path",
+          "prompt": "Can you name the first 10 customers by name AND describe how each one will hear about you, end-to-end?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.8
+        }
+      ]
+    },
+    {
+      "region_id": "evidence",
+      "label": "Evidence",
+      "intent": "What can you prove with real behavior — not statements of interest, not 'I'd definitely use that', but actual money or actual time spent?",
+      "questions": [
+        {
+          "id": "first_paying_customer",
+          "prompt": "Has anyone paid you (in money) for this, even once?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 1.0
+        },
+        {
+          "id": "interview_count_real",
+          "prompt": "How many real customer-discovery conversations have you done with people you didn't already know? (Friends and supporters don't count.)",
+          "type": "scale",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.5
+        },
+        {
+          "id": "behavioral_evidence",
+          "prompt": "What is the strongest piece of behavioral evidence you have — something a customer DID, not something they said?",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.7
+        },
+        {
+          "id": "objection_logged",
+          "prompt": "Can you name the top 3 objections you've heard repeatedly from prospects who chose not to engage?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.4
+        }
+      ]
+    },
+    {
+      "region_id": "pricing",
+      "label": "Pricing",
+      "intent": "Pricing is fiction until someone has flinched, negotiated, or paid. Get out of the model and into the conversation.",
+      "questions": [
+        {
+          "id": "named_price_to_real_prospect",
+          "prompt": "Have you named a specific dollar number to at least 3 real prospects and watched their reaction?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.7
+        },
+        {
+          "id": "budget_line_known",
+          "prompt": "Do you know which budget line your purchase comes out of, and who controls it?",
+          "type": "yes_no_evidence",
+          "contributes_to_score": "they_will_keep_paying",
+          "score_weight": 0.5
+        },
+        {
+          "id": "price_to_value_anchor",
+          "prompt": "What's the dollar value of the outcome you produce for the customer? Show your math.",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.6
+        },
+        {
+          "id": "current_alternative_cost",
+          "prompt": "What is the customer paying today (in money OR time) to live with the problem? Be specific.",
+          "type": "text",
+          "contributes_to_score": "customers_will_pay",
+          "score_weight": 0.5
+        }
+      ]
+    },
+    {
+      "region_id": "distribution",
+      "label": "Distribution",
+      "intent": "Most products that fail had better tech than the ones that won. Distribution is the product. Pick one channel and prove it.",
+      "questions": [
+        {
+          "id": "single_best_channel",
+          "prompt": "If you could only use ONE channel to reach customers, which would it be — and have you proven you can get even one customer through it?",
+          "type": "text",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.7
+        },
+        {
+          "id": "cac_grounded",
+          "prompt": "What does it cost (in dollars or hours) to acquire one paying customer today? Show the actual math, not a model.",
+          "type": "text",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.6
+        },
+        {
+          "id": "trust_introductions",
+          "prompt": "Who in your network can introduce you to your first 10 customers without you having to cold-pitch them?",
+          "type": "scale",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.4
+        },
+        {
+          "id": "channel_at_2x_cac",
+          "prompt": "If your CAC doubles tomorrow (it will), does this channel still work? What's the back-up?",
+          "type": "text",
+          "contributes_to_score": "we_can_reach_them",
+          "score_weight": 0.5
+        }
+      ]
+    },
+    {
+      "region_id": "team",
+      "label": "Team",
+      "intent": "Founder-team composition is the strongest predictor of which products get built well — and which never get sold.",
+      "questions": [
+        {
+          "id": "founder_can_close",
+          "prompt": "Which founder is going to make the next 20 sales calls personally?",
+          "type": "text",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.5
+        },
+        {
+          "id": "missing_skill_named",
+          "prompt": "What does this company need to do well in the next 18 months that nobody on the team has done before?",
+          "type": "text",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.5
+        },
+        {
+          "id": "advisor_density",
+          "prompt": "Name 3 people who would tell you the truth about your business if you asked, and when you last sat down with each.",
+          "type": "scale",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.3
+        },
+        {
+          "id": "runway_honest",
+          "prompt": "How many months of personal runway do you have, and what's your plan when it runs out?",
+          "type": "text",
+          "contributes_to_score": "we_can_build_it",
+          "score_weight": 0.4
+        }
+      ]
+    }
+  ]
+}

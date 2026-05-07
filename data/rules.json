@@ -1,0 +1,168 @@
+{
+  "rules": [
+    {
+      "id": "rule_industry_dq_when_archetype_set",
+      "when": {
+        "all": [
+          { "answered": "orienting.industry_archetype" },
+          { "not": { "industry_archetype": "other" } }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "industry_archetypes",
+          "shape_preference": "question"
+        },
+        "weight": 8
+      }
+    },
+    {
+      "id": "rule_industry_self_deception_after_3_answers",
+      "when": {
+        "all": [
+          { "flag": "any_answer_given" },
+          { "answered": "orienting.industry_archetype" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "industry_archetypes",
+          "shape_preference": "reframe"
+        },
+        "weight": 6
+      }
+    },
+    {
+      "id": "rule_dq_universal_baseline",
+      "when": { "always": true },
+      "then": {
+        "surface": {
+          "table": "discovery_questions",
+          "shape_preference": "question"
+        },
+        "weight": 5
+      }
+    },
+    {
+      "id": "rule_anti_pattern_low_customers_will_pay",
+      "when": {
+        "all": [
+          { "score": "customers_will_pay", "lt": 4 },
+          { "flag": "any_answer_given" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "next_step_paired"
+        },
+        "weight": 9
+      }
+    },
+    {
+      "id": "rule_anti_pattern_low_we_can_reach_them",
+      "when": {
+        "all": [
+          { "score": "we_can_reach_them", "lt": 4 },
+          { "region_touched": "distribution" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "reframe",
+          "region_specific": "distribution"
+        },
+        "weight": 8
+      }
+    },
+    {
+      "id": "rule_anti_pattern_team_region",
+      "when": {
+        "all": [
+          { "region_touched": "team" },
+          { "score": "we_can_build_it", "lt": 5 }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "next_step_paired",
+          "region_specific": "team"
+        },
+        "weight": 7
+      }
+    },
+    {
+      "id": "rule_pricing_when_pricing_region_active",
+      "when": { "region_touched": "pricing" },
+      "then": {
+        "surface": {
+          "table": "discovery_questions",
+          "shape_preference": "question",
+          "region_specific": "pricing"
+        },
+        "weight": 6
+      }
+    },
+    {
+      "id": "rule_evidence_when_evidence_region_active",
+      "when": { "region_touched": "evidence" },
+      "then": {
+        "surface": {
+          "table": "discovery_questions",
+          "shape_preference": "question",
+          "region_specific": "evidence"
+        },
+        "weight": 6
+      }
+    },
+    {
+      "id": "rule_mississippi_context_after_industry_set",
+      "when": {
+        "all": [
+          { "answered": "orienting.industry_archetype" },
+          { "not": { "industry_archetype": "other" } },
+          { "flag": "any_answer_given" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "industry_archetypes",
+          "shape_preference": "case_paired"
+        },
+        "weight": 4
+      }
+    },
+    {
+      "id": "rule_open_market_extra_pressure",
+      "when": {
+        "all": [
+          { "mode": "open-market" },
+          { "flag": "any_answer_given" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "reframe"
+        },
+        "weight": 7
+      }
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "contradiction_paid_vs_pricing",
+      "between": ["evidence.first_paying_customer", "pricing.named_price_to_real_prospect"],
+      "condition": "yes_then_no",
+      "message": "You said someone has paid you, and also that you've never named a specific price to a real prospect. Worth reconciling — what was the price the paying customer paid, and how was it set?"
+    },
+    {
+      "id": "contradiction_named_buyers_vs_first_ten",
+      "between": ["customer.named_buyers", "customer.first_ten_path"],
+      "condition": "yes_then_no",
+      "message": "You said you can name 10 buyers but can't describe how each will hear about you. The list and the path need to match — which side is closer to true today?"
+    }
+  ]
+}

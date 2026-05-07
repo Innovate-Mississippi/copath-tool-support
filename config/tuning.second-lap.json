@@ -1,0 +1,17 @@
+{
+  "mode": "second-lap",
+  "label": "Second Lap — to $1M",
+  "audience_note": "Founder with prior experience. Sharper thresholds, less hand-holding, assumes vocabulary, surfaces challenges to assumptions earlier.",
+  "score_harshness": 1.0,
+  "novelty_multiplier": 1.0,
+  "max_surfaces_per_render": 3,
+  "contradiction_sensitivity": 1.0,
+  "anti_pattern_severity_floor": 0.4,
+  "_dial_docs": {
+    "score_harshness": "1.0 = baseline. Evidence converted to score with no leniency or extra harshness.",
+    "novelty_multiplier": "1.0 = baseline novelty.",
+    "max_surfaces_per_render": "3 = standard cognitive load.",
+    "contradiction_sensitivity": "1.0 = standard contradiction flagging.",
+    "anti_pattern_severity_floor": "0.4 = surface most patterns including the medium-severity ones; experienced founder can handle nuance."
+  }
+}

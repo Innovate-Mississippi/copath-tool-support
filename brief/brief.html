@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CoPath Brief — Innovate Mississippi</title>
+  <link rel="stylesheet" href="../styles/chrome.css" />
+  <style>
+    body { padding: 0; background: #ffffff; }
+    .brief {
+      max-width: 720px;
+      margin: 24px auto;
+      padding: 32px;
+      background: #ffffff;
+      border: 1px solid #888;
+      box-shadow: 1px 1px 0 #404040;
+    }
+    .brief h1 { color: var(--brand-deep); margin: 0 0 4px 0; font-size: 22px; letter-spacing: 0.02em; }
+    .brief .brief-subtitle { color: var(--text-muted); margin: 0 0 24px 0; font-size: 13px; }
+    .brief h2 { color: var(--brand-deep); margin: 24px 0 8px 0; font-size: 15px; border-bottom: 1px solid var(--border-dark); padding-bottom: 4px; }
+    .brief .idea-line { background: #f4f2e8; border-left: 4px solid var(--brand-mid); padding: 12px 16px; font-style: italic; margin: 12px 0; line-height: 1.5; }
+    .brief ul { margin: 8px 0; padding-left: 24px; }
+    .brief li { margin-bottom: 8px; line-height: 1.5; }
+    .brief .empty { color: var(--text-muted); font-style: italic; }
+    .brief .next-step { background: #fefcf4; border: 1px solid #c8a04a; padding: 10px 14px; margin: 8px 0; }
+    .brief .next-step strong { color: #6a4020; }
+    .brief .angel-question { background: #f4f2e8; border-left: 4px solid var(--shape-question); padding: 10px 14px; margin: 8px 0; line-height: 1.5; }
+    .brief .where-next { background: var(--bg-panel); border: 1px solid var(--border-dark); padding: 12px 16px; margin: 12px 0; line-height: 1.5; }
+    .brief .footer-note { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border-dark); color: var(--text-muted); font-size: 11px; line-height: 1.5; }
+    .brief .meta { color: var(--text-muted); font-size: 11px; margin-bottom: 16px; }
+    .brief .print-controls { text-align: right; margin-bottom: 12px; }
+    @media print {
+      body { background: #fff; }
+      .brief { border: none; box-shadow: none; padding: 0; max-width: none; }
+      .print-controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="brief" id="brief">
+    <div class="print-controls">
+      <button onclick="window.print()" class="btn-secondary">Print or Save as PDF</button>
+    </div>
+    <h1>Founder Brief</h1>
+    <div class="brief-subtitle">Generated from your CoPath session — for your own use, not for funding decisions.</div>
+    <div class="meta" id="brief-meta"></div>
+
+    <h2>Idea, in one sentence</h2>
+    <div class="idea-line" id="brief-idea">(no idea statement on file yet)</div>
+
+    <h2>What you've established with real evidence</h2>
+    <ul id="brief-established"></ul>
+
+    <h2>What you've assumed but not yet tested</h2>
+    <ul id="brief-assumed"></ul>
+
+    <h2>The three highest-leverage next things to do</h2>
+    <div id="brief-next-steps"></div>
+
+    <h2>Two questions a Mississippi angel will ask that you currently can't answer</h2>
+    <div id="brief-angel-questions"></div>
+
+    <h2>Where to go next</h2>
+    <div class="where-next">
+      <strong>Innovate Mississippi:</strong> office hours, peer cohorts, mentor introductions for high-tech equity-track founders.<br/><br/>
+      <strong>SBDC partnership:</strong> if your idea evolves toward a brick-and-mortar, lifestyle, or services shape.<br/><br/>
+      <strong>Save your state file</strong> — bring it to a mentor, refine it after more discovery, come back to this tool in a month with new evidence.
+    </div>
+
+    <div class="footer-note">
+      This brief is generated from your own answers. It is not a verdict on you or your idea, and completing this brief implies nothing about funding, programs, or endorsement. The North Star: make things people want; PMF as the only signal that matters; relationships and evidence over decks.
+    </div>
+  </div>
+
+  <script type="module">
+    const stateRaw = sessionStorage.getItem("copath-brief-state");
+    const derivedRaw = sessionStorage.getItem("copath-brief-derived");
+    if (!stateRaw) {
+      document.getElementById("brief").innerHTML = "<p>No session data. Open <a href=\"../index.html\">the tool</a> first, then click Brief.</p>";
+    } else {
+      renderBrief(JSON.parse(stateRaw), JSON.parse(derivedRaw || "{}"));
+    }
+
+    function renderBrief(state, derived) {
+      // Meta
+      const created = state.created_at ? new Date(state.created_at).toLocaleDateString() : "—";
+      const updated = state.updated_at ? new Date(state.updated_at).toLocaleDateString() : "—";
+      const mode = ({ "first-run": "First Run (to $100K)", "second-lap": "Second Lap (to $1M)", "open-market": "Open Market" })[state.mode] || state.mode;
+      document.getElementById("brief-meta").textContent = `Mode: ${mode} · Started ${created} · Last updated ${updated}`;
+
+      // Idea
+      if (state.orienting?.idea_one_liner) {
+        document.getElementById("brief-idea").textContent = state.orienting.idea_one_liner;
+      }
+
+      // Established (lived/evidenced answers with substantive value)
+      const established = [];
+      const assumed = [];
+      const regions = derived.regions || [];
+      for (const region of regions) {
+        for (const q of region.questions) {
+          const ans = state.answers?.[`${region.region_id}.${q.id}`];
+          if (!ans || !ans.value || ans.value === "no" || ans.value === "unknown") continue;
+          const item = `<strong>${region.label}:</strong> ${q.prompt} <em>${describeAnswer(ans)}</em>`;
+          if (ans.confidence === "lived" || ans.confidence === "evidenced") {
+            established.push(item);
+          } else if (ans.confidence === "stated" || ans.confidence === "hypothesis") {
+            assumed.push(item);
+          }
+        }
+      }
+      document.getElementById("brief-established").innerHTML = established.length
+        ? established.map((i) => `<li>${i}</li>`).join("")
+        : `<li class="empty">Nothing yet at the "lived" or "evidenced" confidence level. The fastest way to populate this section is one real customer conversation this week.</li>`;
+      document.getElementById("brief-assumed").innerHTML = assumed.length
+        ? assumed.map((i) => `<li>${i}</li>`).join("")
+        : `<li class="empty">No stated/hypothesis answers on file. If this is accurate, fantastic. If not, revisit the regions and answer honestly — assumptions hidden from this brief don't go away, they just stay invisible.</li>`;
+
+      // Next steps — derived from lowest scores
+      const scores = derived.scores || state.scores || {};
+      const lowest = Object.entries(scores).sort((a, b) => a[1] - b[1]).slice(0, 3);
+      const nextStepsContainer = document.getElementById("brief-next-steps");
+      const SCORE_TO_ACTION = {
+        customers_will_pay: {
+          label: "Strengthen 'customers will pay'",
+          action: "Have one real money conversation with a real prospect this week. Name a price out loud, watch the reaction, write down what they actually said. Hypothetical interest doesn't count toward this score.",
+        },
+        we_can_reach_them: {
+          label: "Strengthen 'we can reach them'",
+          action: "Pick one channel and prove it works for one customer this month, end-to-end. Document who, how they heard about you, what made them say yes. The first ten customers' acquisition path is the real GTM document.",
+        },
+        they_will_keep_paying: {
+          label: "Strengthen 'they'll keep paying'",
+          action: "If you have any paying customers, schedule the renewal conversation now — before the renewal is due. The conversation itself surfaces what's actually driving stickiness vs. what you assume is.",
+        },
+        we_can_build_it: {
+          label: "Strengthen 'we can build it'",
+          action: "Name the one capability the team will need in 18 months that nobody has done before, and decide this week whether to hire it, learn it, or buy it. Vagueness here compounds expensively.",
+        },
+      };
+      nextStepsContainer.innerHTML = lowest.map(([k, v]) => {
+        const m = SCORE_TO_ACTION[k];
+        if (!m) return "";
+        return `<div class="next-step"><strong>${m.label}</strong> (current strength ${v.toFixed(1)}/10)<br/>${m.action}</div>`;
+      }).join("");
+
+      // Angel questions — generated from the two lowest scores
+      const angelContainer = document.getElementById("brief-angel-questions");
+      const ANGEL_QUESTIONS = {
+        customers_will_pay: "Walk me through your last paying customer's decision — who signed the check, what convinced them, and what would have killed the deal at the last minute?",
+        we_can_reach_them: "If I gave you $50K tomorrow, what's the single specific thing you'd spend it on to get to your next 10 customers — and what's your evidence that it would work?",
+        they_will_keep_paying: "Of the customers you have, which one would you bet against renewing — and what would you do this quarter to make sure they do?",
+        we_can_build_it: "What's the one thing about your team that, if I were investing, would give me the most pause — and how are you addressing it?",
+      };
+      const angelTwo = lowest.slice(0, 2).map(([k]) => ANGEL_QUESTIONS[k]).filter(Boolean);
+      angelContainer.innerHTML = angelTwo.map((q) => `<div class="angel-question">${q}</div>`).join("");
+    }
+
+    function describeAnswer(ans) {
+      const valueStr = typeof ans.value === "string" ? ans.value : JSON.stringify(ans.value);
+      const conf = ans.confidence ? ` (${ans.confidence})` : "";
+      return `→ ${valueStr}${conf}${ans.notes ? ` — ${ans.notes}` : ""}`;
+    }
+  </script>
+</body>
+</html>

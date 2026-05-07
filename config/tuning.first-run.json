@@ -1,0 +1,17 @@
+{
+  "mode": "first-run",
+  "label": "First Run — to $100K",
+  "audience_note": "First-time founder. Gentler thresholds, more coaching surfaces, more context on why a question is being asked. Case studies skew to early-stage Southeastern founders.",
+  "score_harshness": 0.7,
+  "novelty_multiplier": 1.0,
+  "max_surfaces_per_render": 2,
+  "contradiction_sensitivity": 0.5,
+  "anti_pattern_severity_floor": 0.6,
+  "_dial_docs": {
+    "score_harshness": "How strictly raw evidence is converted to score. 0.7 = First Run gentler (scores rise faster, fall slower).",
+    "novelty_multiplier": "How strongly the engine avoids repeating content. 1.0 = baseline novelty bias.",
+    "max_surfaces_per_render": "Cap on coaching cards shown at once. Lower = less overwhelming.",
+    "contradiction_sensitivity": "Threshold for flagging contradictions. 0.5 = only the most clear-cut.",
+    "anti_pattern_severity_floor": "Minimum severity_weight for an anti-pattern to surface. 0.6 = surface only the more important patterns; spare First Run founders the corner-case warnings."
+  }
+}

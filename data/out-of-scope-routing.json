@@ -1,0 +1,20 @@
+{
+  "out_of_scope_types": ["brick-and-mortar", "consulting", "lifestyle", "nonprofit", "social-enterprise"],
+  "heading": "This tool isn't quite the right fit",
+  "body": "This tool is built for high-tech, scale-oriented, equity-track startups — and based on what you've described, that's not the best fit for what you're building, which is a real and valuable thing on its own. We don't want to waste your time, so here's where to go next:",
+  "referrals": [
+    {
+      "name": "SBDC (Small Business Development Center)",
+      "note": "Innovate Mississippi has a deep partnership with the SBDC for debt-based and traditional small-business paths. Better fit for brick-and-mortar, lifestyle, and consulting/services businesses. They have a structured process and they're good at it."
+    },
+    {
+      "name": "Mission-driven / social-venture pathway",
+      "note": "If you're building a nonprofit or social enterprise, the pathway has been moving as our partner alliance restructures. Reach out to Innovate Mississippi directly for the current handoff — the principle is the same as the SBDC connection: get you to the right people, faster."
+    },
+    {
+      "name": "Stay in touch anyway",
+      "note": "If your idea evolves toward a high-growth equity-track shape later, this tool will be here. None of this is a permanent verdict on you or your work."
+    }
+  ],
+  "footer": "Completing or skipping this tool implies nothing about funding, programs, or endorsement either way. The connections above are real and useful regardless."
+}

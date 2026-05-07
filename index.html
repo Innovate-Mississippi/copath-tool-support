@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CoPath Teaching Tool — Innovate Mississippi</title>
+  <link rel="stylesheet" href="styles/chrome.css" />
+</head>
+<body>
+  <!-- Outer window chrome -->
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">CoPath Teaching Tool — <span id="mode-indicator">choose a mode</span></div>
+      <div class="title-bar-controls">
+        <button id="save-btn" title="Download save file">Save</button>
+        <button id="load-btn" title="Load save file">Load</button>
+        <button id="brief-btn" title="Generate exit brief">Brief</button>
+        <input type="file" id="file-input" accept="application/json" style="display:none" />
+      </div>
+    </div>
+
+    <!-- Mode picker (initial screen) -->
+    <div id="mode-picker" class="mode-picker">
+      <div class="picker-card">
+        <h2>Pick how this session runs</h2>
+        <p class="picker-intent">Each mode runs the same engine with different dials. You're picking how hard the tool pushes back, not what it covers. You can change modes later by saving and reloading with a different mode chosen.</p>
+        <div class="mode-buttons">
+          <button data-mode="first-run" class="mode-btn">
+            <strong>First Run</strong>
+            <small>Getting to $100K. First-time founder. Gentler thresholds, more context.</small>
+          </button>
+          <button data-mode="second-lap" class="mode-btn">
+            <strong>Second Lap</strong>
+            <small>Getting to $1M. Prior experience. Standard pace, sharper challenges.</small>
+          </button>
+          <button data-mode="open-market" class="mode-btn">
+            <strong>Open Market</strong>
+            <small>No holds barred. Evidence demands at market standard. The hard one.</small>
+          </button>
+        </div>
+        <button id="load-saved-btn" class="link-btn">Or load a saved session...</button>
+      </div>
+    </div>
+
+    <!-- Orienting questions (after mode picked) -->
+    <div id="orienting" class="orienting" style="display:none"></div>
+
+    <!-- Main work surface -->
+    <div id="main" class="main" style="display:none">
+      <!-- Top status bar -->
+      <div class="status-bar">
+        <div class="status-idea">Idea: <span id="idea-line">(none yet)</span></div>
+        <div id="contradictions" class="status-contradictions"></div>
+      </div>
+
+      <!-- Region tabs -->
+      <div id="regions" class="regions"></div>
+
+      <!-- Three-column workspace: meters | active region | trace -->
+      <div class="workspace">
+        <aside class="meters-panel panel">
+          <div class="panel-title">Evidence strength</div>
+          <div id="meters" class="meters"></div>
+          <div class="meter-help">
+            Each meter reads from your answers in the relevant region. Confidence levels matter:
+            <em>lived</em> &gt; <em>evidenced</em> &gt; <em>stated</em> &gt; <em>hypothesis</em> &gt; <em>I don't know</em>.
+          </div>
+        </aside>
+
+        <main id="active-region" class="active-region panel"></main>
+
+        <aside class="trace-panel panel">
+          <div class="panel-title">Why the tool is saying this</div>
+          <div id="trace" class="trace"></div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Status footer -->
+    <div class="status-footer">
+      <span>Session is local to your browser. <strong>Save</strong> to download your state file. Nothing leaves this page.</span>
+    </div>
+  </div>
+
+  <script type="module" src="engine/main.js"></script>
+</body>
+</html>

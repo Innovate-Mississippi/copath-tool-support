@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ia_legaltech",
+    "archetype_name": "Legal-tech vertical SaaS",
+    "representative_companies": ["EvenUp", "Clio", "Atrium"],
+    "typical_sales_cycle": "90-270",
+    "evidence_demands_at_pmf": [
+      "Net revenue retention above 115% inside multi-attorney firms after 12 months (not solos who churn on bar-renewal cycles)",
+      "Documented matter-throughput lift per associate, signed off by a managing partner — billable-hour math, not seat counts",
+      "At least one state bar or malpractice carrier willing to put the tool in writing as 'compatible with duty of competence' (post-ABA Formal Op. 512)"
+    ],
+    "common_self_deception": "'Lawyers love the demo, they just need to finish their trial calendar before they sign.' Translation: you are mistaking partner politeness for procurement intent, and the managing partner has no incentive to disrupt realization rates mid-fiscal-year.",
+    "discovery_question_that_unlocks_truth": "Walk me through the last time your firm changed a tool that touched the billable hour — who lost compensation, and how did you make them whole?",
+    "mississippi_relevance_note": "Mississippi has ~6,500 active attorneys and a heavy plaintiffs' bar (Jackson, Gulfport) — a viable design-partner pool for personal-injury or mass-tort workflow tools, but enterprise AmLaw deals require travel to NYC/Chicago.",
+    "citation": "Bob Ambrogi, 'LawNext' podcast Ep. 245 with EvenUp founder Rami Karabibar (2024); Atrium post-mortem in The Information, March 2020."
+  },
+  {
+    "id": "ia_constructiontech",
+    "archetype_name": "Construction-tech vertical SaaS",
+    "representative_companies": ["Trunk Tools", "Procore", "Katerra"],
+    "typical_sales_cycle": "180-540",
+    "evidence_demands_at_pmf": [
+      "Adoption by the field superintendent — not just the VP of Operations who bought it — measured by daily active use on a job trailer iPad",
+      "Integration live with at least one of Procore, Autodesk Build, or Sage 300 CRE before any GC will sign an enterprise deal",
+      "A general contractor willing to write the tool into a subcontractor flow-down clause on a real project"
+    ],
+    "common_self_deception": "'Construction is a $13 trillion industry that's still on paper — we just need to show them the ROI.' The industry has seen forty years of ROI decks; what kills you is that the foreman who actually has to use it gets paid the same whether he opens your app or not.",
+    "discovery_question_that_unlocks_truth": "On your last project, when the schedule slipped, did anyone get fired or did the GC just eat the liquidated damages — and which of those outcomes does my software actually prevent?",
+    "mississippi_relevance_note": "Strong fit: Mississippi has major industrial construction (Nissan Canton, Steel Dynamics Columbus, Ingalls Shipbuilding) and a Gulf Coast disaster-rebuild cycle. Local GCs (Yates, Roy Anderson) are realistic design partners without coastal travel.",
+    "citation": "Brian Potter, 'Construction Physics' Substack, 'Why Construction Software is Hard' (2023); Katerra collapse coverage, Wall Street Journal, June 2021."
+  },
+  {
+    "id": "ia_agtech",
+    "archetype_name": "Ag-tech vertical SaaS / data",
+    "representative_companies": ["Leaf Agriculture", "Granular (acq. Corteva)", "Farmers Business Network (down-round saga)"],
+    "typical_sales_cycle": "270-540",
+    "evidence_demands_at_pmf": [
+      "Renewal through a full crop year with measurable yield or input-cost delta the grower will repeat to his neighbor at the co-op",
+      "Buy-in from the crop consultant or retail agronomist — the trusted intermediary — not just the grower",
+      "Data pipeline working with John Deere Operations Center AND Climate FieldView, because growers run mixed fleets"
+    ],
+    "common_self_deception": "'Farmers are slow to adopt but once one does, the whole county follows.' The county follows the guy who's been farming 40 years and is risk-averse by survival; your early adopter is often the one who'll try anything because his operation is already in trouble.",
+    "discovery_question_that_unlocks_truth": "If this software told you to plant 10 days later than your neighbor, and you were wrong, how would you explain it to your banker at the operating-loan renewal?",
+    "mississippi_relevance_note": "Strong fit for row-crop (cotton, soybeans, rice in the Delta) and aquaculture (catfish). Mississippi State's Delta Research and Extension Center in Stoneville is a serious applied-research partner — a genuine local edge most ag-tech founders don't have.",
+    "citation": "Shane Thomas, 'Upstream Ag Insights' newsletter, ongoing coverage 2022-2025; Reuters, 'Farmers Business Network cuts staff, valuation' (Feb 2024)."
+  },
+  {
+    "id": "ia_horizontal_collab",
+    "archetype_name": "Horizontal productivity / collaboration SaaS",
+    "representative_companies": ["Linear", "Notion", "Quibb"],
+    "typical_sales_cycle": "0-30",
+    "evidence_demands_at_pmf": [
+      "Organic team-to-team viral coefficient — the second team in a company adopts without sales touching them, traceable in domain-level signup data",
+      "Weekly active user / monthly active user ratio above 0.6 sustained past month three (not the new-toy spike)",
+      "Unprompted Twitter/LinkedIn screenshots from non-influencer users showing the product mid-workflow"
+    ],
+    "common_self_deception": "'Our NPS is 70 and our champions love us — we just need to figure out distribution.' Distribution IS the product in horizontal SaaS; if you don't have a built-in viral or PLG loop already firing, no growth team will save you against Notion's free tier.",
+    "discovery_question_that_unlocks_truth": "When you adopted us, who else on your team did you tell within 48 hours, and what did you say in the actual Slack message — can I see it?",
+    "mississippi_relevance_note": "Hard here without coastal gravity. Horizontal SaaS lives or dies on developer/designer Twitter, hackathons, and YC-style network effects that don't exist in Jackson or Oxford. Founders should expect to relocate or run remote-first with a coastal go-to-market hire.",
+    "citation": "Lenny Rachitsky, 'How Linear builds product' (Lenny's Newsletter, 2022); Sandy Kory, 'What killed Quibb' Medium post-mortem (2017)."
+  },
+  {
+    "id": "ia_data_infra",
+    "archetype_name": "Data infrastructure / dev tools horizontal SaaS",
+    "representative_companies": ["Turbopuffer", "Snowflake", "Trifacta (sold low to Alteryx)"],
+    "typical_sales_cycle": "60-180",
+    "evidence_demands_at_pmf": [
+      "Production workloads (not POCs) running for 90+ days with paying usage growing month-over-month on the same account",
+      "Inbound from a senior engineer at a company you've never heard of, with a specific technical question that proves they read the docs",
+      "Benchmark numbers a hostile competitor cites — even to attack — because that means the category sees you as the reference"
+    ],
+    "common_self_deception": "'We're 10x faster/cheaper than Postgres/Snowflake/Kafka on this benchmark.' Buyers don't switch infrastructure for 10x on a benchmark; they switch when their current vendor causes a Saturday-night incident and your migration path is obviously safer.",
+    "discovery_question_that_unlocks_truth": "Walk me through the last time your team ripped out a piece of infrastructure in production — who championed it, how long did the parallel-run take, and what broke that you didn't predict?",
+    "mississippi_relevance_note": "Very hard locally. Buyers are platform/infra engineers concentrated in SF, NYC, Seattle, and remote-distributed staff-engineer Slack communities. Mississippi-based founders can build it here, but design partners and first commercial wins require sustained presence in those communities.",
+    "citation": "Jamin Ball, 'Clouded Judgement' Substack, infrastructure SaaS benchmarks 2023-2024; The Information, 'Trifacta's struggle to monetize' (Jan 2022)."
+  },
+  {
+    "id": "ia_healthtech",
+    "archetype_name": "Healthtech (clinical SaaS / RPM)",
+    "representative_companies": ["Abridge", "Epic (private benchmark)", "Pear Therapeutics"],
+    "typical_sales_cycle": "365-720",
+    "evidence_demands_at_pmf": [
+      "A signed health-system contract where the buyer is the CMIO or CFO, not an innovation-lab budget that sunsets in 18 months",
+      "CPT/HCPCS reimbursement pathway with documented payer coverage policies — not 'we expect coverage' deck slides",
+      "Clinical evidence published in a peer-reviewed journal, or active enrollment in a study a real KOL signed onto"
+    ],
+    "common_self_deception": "'The pilot at [academic medical center] went amazingly — they're going to roll us out system-wide next quarter.' Innovation pilots almost never convert; the budget came from a different P&L than the one that would fund the rollout, and the operational owner you need to win has not yet been introduced to you.",
+    "discovery_question_that_unlocks_truth": "Which CPT code or value-based contract line does this tool move, and can I see the spreadsheet your CFO would build to justify renewal in year two?",
+    "mississippi_relevance_note": "Mixed. UMMC in Jackson runs the state's largest telehealth program (Center for Telehealth) and is a serious design partner for rural-care RPM. Reimbursement realities of a heavily Medicaid state must be modeled honestly — payer mix is not California's.",
+    "citation": "Christina Farr, 'Second Opinion' newsletter, ongoing 2023-2025; Pear Therapeutics Chapter 11 filing coverage, STAT News (April 2023)."
+  },
+  {
+    "id": "ia_fintech",
+    "archetype_name": "Fintech (B2B / embedded finance)",
+    "representative_companies": ["Mercury", "Stripe", "Synapse"],
+    "typical_sales_cycle": "60-180",
+    "evidence_demands_at_pmf": [
+      "Transaction-level take-rate economics that survive a real fraud and chargeback cohort, not pre-fraud unit economics",
+      "A sponsor bank or BIN sponsor that has done diligence on your compliance program and stayed past the first regulatory exam",
+      "Customer cohort data showing wallet share growth — primary-account behavior — not just account openings"
+    ],
+    "common_self_deception": "'We'll figure out compliance once we have product-market fit.' Compliance IS the product in fintech; the Synapse collapse, the Evolve consent order, and every BaaS sponsor pulling back in 2024 prove that 'move fast' founders are now the ones explaining to customers why their funds are frozen.",
+    "discovery_question_that_unlocks_truth": "Show me your BSA/AML program document and the resume of the person who owns it — and tell me what your sponsor bank's last MRA or MRIA was about.",
+    "mississippi_relevance_note": "Workable but capital-constrained. Mississippi has community-bank density (BancorpSouth/Cadence, Trustmark) that could anchor a B2B fintech relationship. State regulator (DBCF) is reachable in a way California's DFPI is not — a real advantage if you build trust early.",
+    "citation": "Jason Mikula, 'Fintech Business Weekly' Substack, Synapse coverage 2024; Patrick McKenzie ('patio11'), 'Bits about Money' on sponsor banking (multiple 2023-2024)."
+  },
+  {
+    "id": "ia_govtech",
+    "archetype_name": "Govtech / public-sector SaaS",
+    "representative_companies": ["Polimorphic", "Tyler Technologies", "Mark43 (down-round 2023)"],
+    "typical_sales_cycle": "270-720",
+    "evidence_demands_at_pmf": [
+      "A municipality or agency that renewed at year two AND expanded scope — first contracts in govtech are loss-leaders, year two is the truth",
+      "Presence on at least one cooperative purchasing vehicle (Sourcewell, GSA, NASPO ValuePoint) so other agencies can buy without re-RFP",
+      "A reference customer willing to take cold calls from peer agencies — public-sector buying is a peer-validation network"
+    ],
+    "common_self_deception": "'Government is slow but sticky — once we land, we never lose them.' Stickiness cuts both ways: incumbents like Tyler and Granicus are 30 years sticky, and you are the one trying to displace them with a procurement officer who will not be blamed for picking the safe choice.",
+    "discovery_question_that_unlocks_truth": "What's the name of the procurement officer, and has your champion ever successfully pushed a sole-source justification through her office before?",
+    "mississippi_relevance_note": "Genuine opportunity. Mississippi has 82 counties and 298 municipalities, most underserved by modern software, and the state CIO's office has been receptive to in-state vendors. Slow ACVs but real beachhead market and a defensible 'made-in-Mississippi' procurement narrative.",
+    "citation": "Luke Norris, 'GovTech Biz' podcast, multiple 2023-2024 episodes; StateScoop, 'Mark43 layoffs and CEO transition' (Feb 2023)."
+  },
+  {
+    "id": "ia_climate",
+    "archetype_name": "Climate / energy deep tech",
+    "representative_companies": ["Antora Energy", "First Solar", "Sunfolding (shut down 2023)"],
+    "typical_sales_cycle": "365-1095",
+    "evidence_demands_at_pmf": [
+      "A bankable third-party engineering report (independent engineer like DNV or Black & Veatch) on the technology",
+      "An off-take agreement, LOI from a utility or hyperscaler, or a tax-equity partner doing real diligence — not just an MOU",
+      "Cost curve data from your own pilot showing the slope, not just a single-point LCOE that requires 100x scale to be true"
+    ],
+    "common_self_deception": "'IRA tax credits make our economics work today.' The IRA stack is real but is being actively renegotiated, and projects penciled at full ITC + bonus adders are one election or one Treasury guidance change from being underwater. Investors now stress-test without the bonus.",
+    "discovery_question_that_unlocks_truth": "Show me your project finance model with the IRA bonus adders zeroed out — does the unit still pencil for the off-taker, and who eats the delta if interconnection slips 18 months?",
+    "mississippi_relevance_note": "Real but specific fit. Mississippi has solar-belt irradiance, a TVA/Entergy footprint, and the Stennis/NASA technical workforce on the Gulf Coast for hard-engineering hires. Project capital still flows from coastal climate funds — founders should expect to fly often.",
+    "citation": "Shayle Kann, 'Catalyst' podcast (Latitude Media), Antora episode 2023; Canary Media, 'Sunfolding shutdown coverage' (Aug 2023)."
+  },
+  {
+    "id": "ia_robotics",
+    "archetype_name": "Robotics / industrial automation deep tech",
+    "representative_companies": ["Chef Robotics", "Symbotic", "Zume Pizza"],
+    "typical_sales_cycle": "180-540",
+    "evidence_demands_at_pmf": [
+      "A paying customer running the robot in production for 6+ months with documented uptime above 95% and a service-level agreement",
+      "Unit economics where robot-as-a-service or capex payback is under 36 months in the customer's actual labor market — not a national average",
+      "Reorder from the same customer for a second site, which is the only honest signal that the integration pain was worth it"
+    ],
+    "common_self_deception": "'The pilot worked, we just need to harden it for production.' The gap between a demo-day pilot and 24/7 production is usually 18-36 months and twice your remaining runway, and customers will not pay during the hardening phase.",
+    "discovery_question_that_unlocks_truth": "When the robot goes down at 2am on a Saturday, who on your customer's payroll fixes it, and what is their hourly rate plus the cost of the line being stopped?",
+    "mississippi_relevance_note": "Strong industrial fit in theory: Nissan, Toyota (Blue Springs), Ingalls, and a growing aerospace cluster need automation. In practice, robotics talent (perception, controls, ML) clusters in Pittsburgh, Boston, Bay Area — early team build is the bottleneck, not customers.",
+    "citation": "Liam Patrick Walsh, 'The Robot Report' coverage of Chef Robotics, 2024; The Verge / Bloomberg post-mortems on Zume Pizza pivot and shutdown (2020, 2023)."
+  },
+  {
+    "id": "ia_b2b_marketplace",
+    "archetype_name": "B2B vertical marketplace",
+    "representative_companies": ["Faire", "Convoy (shut down 2022)", "Flexport"],
+    "typical_sales_cycle": "30-120",
+    "evidence_demands_at_pmf": [
+      "Repeat purchase rate by buyers within 90 days above 50% — marketplaces with one-time transactions are lead-gen sites with a worse model",
+      "Take rate that holds after both sides know they could go direct — disintermediation rate measured, not assumed",
+      "GMV concentration: top 10% of buyers should not be more than 40% of GMV by month 18, or you're a sales team pretending to be a marketplace"
+    ],
+    "common_self_deception": "'We have liquidity in our beachhead category — now we just expand horizontally.' Marketplace liquidity does not transfer across categories the way founders model; each new vertical is effectively a new company with new chicken-and-egg, as Flexport's freight-forwarding-to-everything expansion painfully demonstrated.",
+    "discovery_question_that_unlocks_truth": "After a buyer and seller transact on us three times, what stops them from exchanging numbers and going direct — and have you measured how many already do?",
+    "mississippi_relevance_note": "Workable in industrial / agricultural verticals where Mississippi has supplier density (forestry products, poultry, marine). Buyer side often coastal, supplier side often local — the founder's relationship Rolodex on the supply side is a real edge.",
+    "citation": "Andrew Chen, 'The Cold Start Problem' (Harper Business, 2021); The Information, 'Flexport's reckoning' (Oct 2023); Convoy shutdown coverage, TechCrunch (Oct 2022)."
+  },
+  {
+    "id": "ia_hardware_software",
+    "archetype_name": "Hardware-with-software (connected device)",
+    "representative_companies": ["Eight Sleep", "Peloton", "Juicero"],
+    "typical_sales_cycle": "0-30",
+    "evidence_demands_at_pmf": [
+      "Software attach revenue that is growing as a percentage of customer LTV — proves the recurring story is real and not a margin band-aid",
+      "Sub-2% RMA rate after 12 months of field deployment, and a warranty-cost accrual that doesn't blow up gross margin",
+      "Organic referral / repurchase cohort behavior — Peloton's flywheel was real until it wasn't, and the leading indicator was workout frequency per cohort, not unit sales"
+    ],
+    "common_self_deception": "'Our hardware is loss-leader, the real business is the subscription.' Investors stopped believing this story after Peloton — you must show the subscription is sticky AND that the hardware doesn't kill you on inventory, returns, and tariffs first.",
+    "discovery_question_that_unlocks_truth": "What's your gross margin AFTER returns, warranty accruals, freight, tariffs, and the cohort that cancels the subscription within 90 days — and can I see the model with last quarter's actuals plugged in?",
+    "mississippi_relevance_note": "Industrial design and prototyping talent scarce locally; Mississippi State and Ole Miss engineering can support late-stage prototyping but contract manufacturing relationships are in Shenzhen, Mexico, or Texas. Founders should plan a manufacturing-ops hire who lives near the contract manufacturer, not in Jackson.",
+    "citation": "Ben Einstein, 'Bolt VC' essays on hardware unit economics (2018-2021); 'The Juicero Lessons,' Bloomberg (April 2017); Peloton Q3 FY22 earnings call (May 2022)."
+  },
+  {
+    "id": "ia_ai_infra",
+    "archetype_name": "AI infrastructure / model tooling",
+    "representative_companies": ["Modal Labs", "Databricks", "Stability AI"],
+    "typical_sales_cycle": "30-120",
+    "evidence_demands_at_pmf": [
+      "Inference or training spend per customer growing month-over-month on production workloads — not credits, not POCs",
+      "A defensible reason a customer wouldn't just use OpenAI / Anthropic / AWS Bedrock directly, validated by a real customer in their own words",
+      "Gross margin holding above 50% after GPU costs at current contract pricing — the 'we'll get margin when GPUs are cheaper' story is not investable in 2026"
+    ],
+    "common_self_deception": "'We're 10x cheaper than OpenAI for this use case, so the market is ours.' Cost is rarely the deciding factor for production AI buyers — model quality, latency variance, observability, and the buyer's fear of being the engineer who picked the startup that disappeared all matter more.",
+    "discovery_question_that_unlocks_truth": "If OpenAI or Anthropic shipped your exact feature in their next quarterly release, what would your customer do on Monday morning — and have you actually asked them that question out loud?",
+    "mississippi_relevance_note": "Hard locally for go-to-market and senior ML talent. However, MSU's high-performance computing and the broader Gulf-South research-university footprint can support a research-heavy founding team. Realistic plan: build in Mississippi, sell from a coastal sales hire.",
+    "citation": "Sarah Wang & Shangda Xu (a16z), 'Who Owns the Generative AI Platform?' (2023, updated 2024); Forbes, 'Inside the collapse of Stability AI' (March 2024)."
+  },
+  {
+    "id": "ia_dental_practice",
+    "archetype_name": "Dental / specialty medical practice SaaS",
+    "representative_companies": ["Pearl", "Weave", "Smile Direct Club (Ch. 11, 2023)"],
+    "typical_sales_cycle": "60-180",
+    "evidence_demands_at_pmf": [
+      "DSO (dental service organization) signed contracts, not just independent practice wins — DSO consolidation is the channel that scales",
+      "Documented revenue lift per chair or per provider per month, signed off by the practice's actual office manager",
+      "Integration certified with at least Dentrix, Eaglesoft, or Open Dental — practices will not switch PMS, so you must meet them where they are"
+    ],
+    "common_self_deception": "'Dentists are entrepreneurs and tech-forward — they'll buy on ROI.' Dentists are entrepreneurs about their own clinical work and notoriously skeptical of software vendors after a decade of being oversold; the office manager is the real buyer and she has been burned before.",
+    "discovery_question_that_unlocks_truth": "Who in this practice will I lose if I get this wrong — the doctor, the office manager, or the hygienist — and which of them has veto power on the renewal call?",
+    "mississippi_relevance_note": "Plausible. Mississippi has ~1,800 dentists and a growing DSO presence in the Southeast (Heartland, MB2). Initial design partners reachable via state dental association, but DSO buying decisions sit in Dallas, Atlanta, Nashville — travel required.",
+    "citation": "Nikhil Krishnan, 'Out-of-Pocket' newsletter, dental-tech deep dives 2023-2024; Smile Direct Club Chapter 11 coverage, Reuters (Sept 2023)."
+  },
+  {
+    "id": "ia_prosumer_creator",
+    "archetype_name": "Prosumer / creator tools",
+    "representative_companies": ["Descript", "Figma", "Quibi"],
+    "typical_sales_cycle": "0-14",
+    "evidence_demands_at_pmf": [
+      "Free-to-paid conversion above 3% sustained over 90+ days — under 1% is vanity-traffic in disguise",
+      "Annual plan attach rate above 30% by month six (creators commit annually when the tool replaces a workflow, not when they're just exploring)",
+      "Organic creator-to-creator referrals visible in attribution — 'how did you hear about us' answers naming specific creators or YouTube channels"
+    ],
+    "common_self_deception": "'Our user love is incredible, we just need to figure out monetization.' Creator-tool monetization is not a separate problem from product; if users won't upgrade for the obvious feature gates you've already shipped, no pricing-page redesign will fix that.",
+    "discovery_question_that_unlocks_truth": "Of the people who use the free tier weekly, what specifically have they hit a ceiling on that the paid tier removes — and how many of them have explicitly told you that, in writing?",
+    "mississippi_relevance_note": "Workable for niche creator economies but lacks the influencer concentration of LA / Austin / Brooklyn. Mississippi-based founders should focus on creator verticals where the audience is geographically distributed (faith, country music, outdoor, education) rather than urban-trend-driven.",
+    "citation": "Li Jin, 'The Creator Economy' essays (2020-2022); 'Quibi: How Did a Startup With $1.75 Billion Vanish So Quickly?' Vanity Fair (Oct 2020)."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "mode": "open-market",
+  "label": "Open Market — no holds barred",
+  "audience_note": "Hard mode. Evidence demands at market standard. The tool will tell you your conversion-rate assumption is delusional if it is. No softening. The values-layer rules in SPEC §7 still apply — Open Market does not get to call the baby ugly; it gets to demand more evidence faster.",
+  "score_harshness": 1.4,
+  "novelty_multiplier": 1.5,
+  "max_surfaces_per_render": 4,
+  "contradiction_sensitivity": 1.5,
+  "anti_pattern_severity_floor": 0.3,
+  "_dial_docs": {
+    "score_harshness": "1.4 = scores fall faster, require stronger evidence to rise. Stated/hypothesis confidence get weighted lower than usual.",
+    "novelty_multiplier": "1.5 = push variety hard. Don't repeat content; hammer the founder with diverse angles.",
+    "max_surfaces_per_render": "4 = high cognitive load. Open Market founders signed up for the firehose.",
+    "contradiction_sensitivity": "1.5 = flag even minor inconsistencies. Hold the founder to their own logic.",
+    "anti_pattern_severity_floor": "0.3 = surface every pattern that has even moderate severity. The full library is in play."
+  }
+}

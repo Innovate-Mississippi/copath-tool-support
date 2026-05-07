@@ -1,0 +1,60 @@
+{
+  "intent": "Four quick orienting questions so the rest of the session is shaped for what you're actually building. None of this is binding — you can change any answer later from inside the tool.",
+  "questions": [
+    {
+      "id": "venture_type",
+      "prompt": "Which best describes what you're building?",
+      "type": "select",
+      "options": [
+        { "value": "high-tech-saas", "label": "High-tech software / SaaS (vertical or horizontal)" },
+        { "value": "deep-tech", "label": "Deep tech (climate, bio, robotics, hardware, AI infrastructure)" },
+        { "value": "marketplace", "label": "Marketplace (multi-sided)" },
+        { "value": "brick-and-mortar", "label": "Brick-and-mortar / physical retail" },
+        { "value": "consulting", "label": "Consulting / agency / professional services" },
+        { "value": "lifestyle", "label": "Lifestyle business (small recurring income, no scale ambition)" },
+        { "value": "nonprofit", "label": "Nonprofit / mission-driven organization" },
+        { "value": "social-enterprise", "label": "Social enterprise (mission-first with revenue)" }
+      ]
+    },
+    {
+      "id": "stage",
+      "prompt": "Where are you today, honestly?",
+      "type": "select",
+      "options": [
+        { "value": "pre-product", "label": "Pre-product — figuring out the idea, no MVP yet" },
+        { "value": "mvp", "label": "Building or piloting an MVP, no paying customers yet" },
+        { "value": "early-traction", "label": "Early traction — at least one paying customer, less than $100K ARR" },
+        { "value": "scaling", "label": "Scaling — past $100K ARR, working on growth levers" }
+      ]
+    },
+    {
+      "id": "industry_archetype",
+      "prompt": "Which industry archetype is closest to what you're building? (Optional — but the closer the match, the sharper the coaching gets.)",
+      "type": "select",
+      "options": [
+        { "value": "ia_legaltech", "label": "Legal-tech vertical SaaS" },
+        { "value": "ia_constructiontech", "label": "Construction-tech vertical SaaS" },
+        { "value": "ia_agtech", "label": "Ag-tech vertical SaaS / data" },
+        { "value": "ia_horizontal_collab", "label": "Horizontal productivity / collaboration SaaS" },
+        { "value": "ia_data_infra", "label": "Data infrastructure / dev tools" },
+        { "value": "ia_healthtech", "label": "Healthtech (clinical SaaS / RPM)" },
+        { "value": "ia_fintech", "label": "Fintech (B2B / embedded finance)" },
+        { "value": "ia_govtech", "label": "Govtech / public-sector SaaS" },
+        { "value": "ia_climate", "label": "Climate / energy deep tech" },
+        { "value": "ia_robotics", "label": "Robotics / industrial automation" },
+        { "value": "ia_b2b_marketplace", "label": "B2B vertical marketplace" },
+        { "value": "ia_hardware_software", "label": "Hardware-with-software (connected device)" },
+        { "value": "ia_ai_infra", "label": "AI infrastructure / model tooling" },
+        { "value": "ia_dental_practice", "label": "Dental / specialty medical practice SaaS" },
+        { "value": "ia_prosumer_creator", "label": "Prosumer / creator tools" },
+        { "value": "other", "label": "None of these — closest fit isn't here" }
+      ]
+    },
+    {
+      "id": "idea_one_liner",
+      "prompt": "In one sentence, what does it do and who is it for?",
+      "type": "text",
+      "placeholder": "e.g., Software that helps small construction firms track jobsite hours so foremen get paid correctly."
+    }
+  ]
+}

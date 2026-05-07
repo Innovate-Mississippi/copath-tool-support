@@ -1,0 +1,64 @@
+{
+  "templates": [
+    {
+      "id": "tpl_q_industry_dq",
+      "shape": "question",
+      "text": "Industry-specific question worth sitting with: <em>{row.discovery_question_that_unlocks_truth}</em>"
+    },
+    {
+      "id": "tpl_q_dq_universal",
+      "shape": "question",
+      "text": "<em>{row.question_text}</em><br/><small>(If yes: {row.follow_up_if_yes} If no: {row.follow_up_if_no})</small>"
+    },
+    {
+      "id": "tpl_q_dq_with_bad",
+      "shape": "question",
+      "text": "Try this: <em>{row.question_text}</em><br/><small>The lazier version of this is &ldquo;{row.bad_version_to_avoid}&rdquo; — which sounds reasonable and gets you nothing.</small>"
+    },
+    {
+      "id": "tpl_case_industry",
+      "shape": "case_paired",
+      "text": "Founders in {row.archetype_name} that scaled — like {row.representative_companies} — got past one specific lie they were tempted to believe: <em>{row.common_self_deception}</em>"
+    },
+    {
+      "id": "tpl_case_anti_pattern",
+      "shape": "case_paired",
+      "text": "<strong>{row.pattern_name}</strong> shows up like this: {row.how_it_shows_up}<br/><br/>{row.case_study_of_someone_who_navigated_past_it}"
+    },
+    {
+      "id": "tpl_next_step_industry",
+      "shape": "next_step_paired",
+      "text": "For {row.archetype_name}, the bar for PMF is concrete. Three signals to watch for:<ul>{row.evidence_demands_at_pmf:list}</ul>"
+    },
+    {
+      "id": "tpl_next_step_anti_pattern",
+      "shape": "next_step_paired",
+      "text": "<strong>{row.pattern_name}.</strong> {row.constructive_reframe}"
+    },
+    {
+      "id": "tpl_reframe_anti_pattern",
+      "shape": "reframe",
+      "text": "Worth naming: this is what's actually happening — <em>{row.whats_actually_happening}</em><br/><br/>{row.constructive_reframe}"
+    },
+    {
+      "id": "tpl_reframe_industry_self_deception",
+      "shape": "reframe",
+      "text": "A common pattern in {row.archetype_name}: <em>{row.common_self_deception}</em>"
+    },
+    {
+      "id": "tpl_reframe_mississippi",
+      "shape": "reframe",
+      "text": "Mississippi context for {row.archetype_name}: {row.mississippi_relevance_note}"
+    },
+    {
+      "id": "tpl_q_anti_pattern_naked",
+      "shape": "question",
+      "text": "{row.constructive_reframe}"
+    },
+    {
+      "id": "tpl_case_industry_companies",
+      "shape": "case_paired",
+      "text": "Reference points for {row.archetype_name}: {row.representative_companies}. The first scaled, the second is the cautionary tale. Worth studying both before you raise."
+    }
+  ]
+}
