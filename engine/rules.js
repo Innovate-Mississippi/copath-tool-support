@@ -58,6 +58,10 @@ function matchesCondition(cond, state, scores) {
   if (cond.mode != null) {
     return state.mode === cond.mode;
   }
+  if (cond.stage != null) {
+    if (Array.isArray(cond.stage)) return cond.stage.includes(state.orienting?.stage);
+    return state.orienting?.stage === cond.stage;
+  }
   if (cond.always === true) return true;
   return false;
 }
@@ -82,5 +86,6 @@ function describeTrigger(cond, state, scores) {
   if (cond.region_untouched) return `region_untouched:${cond.region_untouched}`;
   if (cond.industry_archetype) return `industry:${cond.industry_archetype}`;
   if (cond.mode) return `mode:${cond.mode}`;
+  if (cond.stage) return `stage:${Array.isArray(cond.stage) ? cond.stage.join("|") : cond.stage}`;
   return "?";
 }

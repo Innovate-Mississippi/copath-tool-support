@@ -59,6 +59,26 @@
       "id": "tpl_case_industry_companies",
       "shape": "case_paired",
       "text": "Reference points for {row.archetype_name}: {row.representative_companies}. The first scaled, the second is the cautionary tale. Worth studying both before you raise."
+    },
+    {
+      "id": "tpl_q_dq_with_followups",
+      "shape": "question",
+      "text": "<em>{row.question_text}</em><br/><small>If they answer yes, follow with: &ldquo;{row.follow_up_if_yes}&rdquo;<br/>If they answer no, follow with: &ldquo;{row.follow_up_if_no}&rdquo;</small>"
+    },
+    {
+      "id": "tpl_reframe_anti_pattern_pure",
+      "shape": "reframe",
+      "text": "{row.constructive_reframe}<br/><br/><small>Pattern named: <strong>{row.pattern_name}</strong>. Why we're surfacing it: {row.whats_actually_happening}</small>"
+    },
+    {
+      "id": "tpl_next_step_anti_pattern_with_case",
+      "shape": "next_step_paired",
+      "text": "<strong>{row.pattern_name}.</strong> {row.constructive_reframe}<br/><br/><small>Someone who navigated this: {row.case_study_of_someone_who_navigated_past_it}</small>"
+    },
+    {
+      "id": "tpl_case_anti_pattern_minimal",
+      "shape": "case_paired",
+      "text": "{row.case_study_of_someone_who_navigated_past_it}<br/><br/><small>Pattern this addresses: <strong>{row.pattern_name}</strong></small>"
     }
   ]
 }

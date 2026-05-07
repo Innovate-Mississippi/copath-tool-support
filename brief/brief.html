@@ -72,15 +72,29 @@
   </div>
 
   <script type="module">
+    (async () => {
     const stateRaw = sessionStorage.getItem("copath-brief-state");
     const derivedRaw = sessionStorage.getItem("copath-brief-derived");
     if (!stateRaw) {
       document.getElementById("brief").innerHTML = "<p>No session data. Open <a href=\"../index.html\">the tool</a> first, then click Brief.</p>";
     } else {
-      renderBrief(JSON.parse(stateRaw), JSON.parse(derivedRaw || "{}"));
+      const state = JSON.parse(stateRaw);
+      const derived = JSON.parse(derivedRaw || "{}");
+      const archetypeId = state.orienting?.industry_archetype;
+      let archetypeRow = null;
+      if (archetypeId && archetypeId !== "other") {
+        try {
+          const r = await fetch("../data/industry-archetypes.json");
+          if (r.ok) {
+            const archetypes = await r.json();
+            archetypeRow = archetypes.find((a) => a.id === archetypeId) || null;
+          }
+        } catch (e) { /* offline / missing — proceed without */ }
+      }
+      renderBrief(state, derived, archetypeRow);
     }
 
-    function renderBrief(state, derived) {
+    function renderBrief(state, derived, archetypeRow) {
       // Meta
       const created = state.created_at ? new Date(state.created_at).toLocaleDateString() : "—";
       const updated = state.updated_at ? new Date(state.updated_at).toLocaleDateString() : "—";
@@ -152,7 +166,10 @@
         we_can_build_it: "What's the one thing about your team that, if I were investing, would give me the most pause — and how are you addressing it?",
       };
       const angelTwo = lowest.slice(0, 2).map(([k]) => ANGEL_QUESTIONS[k]).filter(Boolean);
-      angelContainer.innerHTML = angelTwo.map((q) => `<div class="angel-question">${q}</div>`).join("");
+      const allAngels = archetypeRow
+        ? [archetypeRow.discovery_question_that_unlocks_truth, ...angelTwo].slice(0, 2)
+        : angelTwo;
+      angelContainer.innerHTML = allAngels.map((q) => `<div class="angel-question">${q}</div>`).join("");
     }
 
     function describeAnswer(ans) {
@@ -160,6 +177,7 @@
       const conf = ans.confidence ? ` (${ans.confidence})` : "";
       return `→ ${valueStr}${conf}${ans.notes ? ` — ${ans.notes}` : ""}`;
     }
+    })();
   </script>
 </body>
 </html>

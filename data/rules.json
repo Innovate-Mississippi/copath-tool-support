@@ -149,6 +149,69 @@
         },
         "weight": 7
       }
+    },
+    {
+      "id": "rule_pre_product_validation_focus",
+      "when": {
+        "all": [
+          { "stage": "pre-product" },
+          { "flag": "any_answer_given" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "question"
+        },
+        "weight": 8
+      }
+    },
+    {
+      "id": "rule_early_traction_concentration_check",
+      "when": {
+        "all": [
+          { "stage": "early-traction" },
+          { "score": "customers_will_pay", "gte": 4 }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "case_paired"
+        },
+        "weight": 7
+      }
+    },
+    {
+      "id": "rule_scaling_moat_pressure",
+      "when": {
+        "stage": ["scaling", "early-traction"]
+      },
+      "then": {
+        "surface": {
+          "table": "anti_patterns",
+          "shape_preference": "next_step_paired"
+        },
+        "weight": 6
+      }
+    },
+    {
+      "id": "rule_industry_evidence_bar",
+      "when": {
+        "all": [
+          { "answered": "orienting.industry_archetype" },
+          { "not": { "industry_archetype": "other" } },
+          { "region_touched": "evidence" }
+        ]
+      },
+      "then": {
+        "surface": {
+          "table": "industry_archetypes",
+          "shape_preference": "next_step_paired",
+          "region_specific": "evidence"
+        },
+        "weight": 8
+      }
     }
   ],
   "contradictions": [
